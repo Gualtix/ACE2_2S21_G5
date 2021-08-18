@@ -2,9 +2,6 @@
 un color será mostrado en el círculo*/
 
 void temperatura() {
-  float temperatura = random(19, 24); // opcion temporal a falta de datos reales
-  delay(100);
-  //println(temperatura);// temperature simulation
   drawCircle(temperatura); // dibuja el circulo y maneja temperatura
 }
 

@@ -8,7 +8,7 @@ GENERAL DOCUMENTATION OF COMPASS:
 
 
 
-void compass(boolean n, boolean s, boolean e, boolean o) {
+void compass(String dir) {
   compss = loadImage("compass2.png"); // carga la imagen
   imageMode(CORNER); // la coloca en posicion de esquina
   compss.resize(380, 370); // cambia el tamaño
@@ -16,46 +16,46 @@ void compass(boolean n, boolean s, boolean e, boolean o) {
 
 /* ifs son para poder determinar que sensor está activo, dependiendo 
 del que haya sido detectado, su respectiva dirección será marcada*/
-  if (n == true && s == false && e == false && o == false) {
+  if (dir.equals("\"N\"")) {
     textFont(font, 38);
     fill(194, 30, 86);
     text(nor, 887, 480);
-    drawArrow(n, s, e, o);
-  } else if (n== false && s == true && e==false && o == false) {
+    drawArrow(dir);
+  } else if (dir.equals("\"S\"")) {
     textFont(font, 38);
     fill(255);
     text(sur, 887, 890);
-    drawArrow(n, s, e, o);
-  } else if (n== false && s == false && e==true && o == false) {
+    drawArrow(dir);
+  } else if (dir.equals("\"E\"")) {
     textFont(font, 38);
     fill(231, 243, 36);
     text(est, 1095, 693);
-    drawArrow(n, s, e, o);
-  } else if (n== false && s == false && e==false && o == true) {
+    drawArrow(dir);
+  } else if (dir.equals("\"O\"")) {
     textFont(font, 38);
     fill(36, 105, 243);
     text(oes, 690, 693);
-    drawArrow(n, s, e, o);
-  } else if (n== true && s == false && e==true && o == false) {
+    drawArrow(dir);
+  } else if (dir.equals("\"NE\"")) {
     textFont(font, 38);
     fill(241, 159, 19);
     text(nor+est, 1010, 540);
-    drawArrow(n, s, e, o);
-  } else if (n== true && s == false && e==false && o == true) {
+    drawArrow(dir);
+  } else if (dir.equals("\"NO\"")) {
     textFont(font, 38);
     fill(36, 243, 114);
     text(nor+oes, 730, 540);
-    drawArrow(n, s, e, o);
-  } else if (n== false && s == true && e==true && o == false) {
+    drawArrow(dir);
+  } else if (dir.equals("\"SE\"")) {
     textFont(font, 38);
     fill(248, 250, 159);
     text(sur+est, 1020, 800);
-    drawArrow(n, s, e, o);
-  } else if (n== false && s == true && e==false && o == true) {
+    drawArrow(dir);
+  } else if (dir.equals("\"SO\"")) {
     textFont(font, 38);
     fill(180, 217, 251);
     text(sur+oes, 720, 800);
-    drawArrow(n, s, e, o);
+    drawArrow(dir);
   } else { // en caso que ningun sensor sea activado, las posiciones serán mostradas
     textFont(font, 38);
     text(nor, 887, 480);
@@ -66,13 +66,13 @@ del que haya sido detectado, su respectiva dirección será marcada*/
     text(nor+oes, 730, 540);
     text(sur+est, 1020, 800);
     text(sur+oes, 720, 800);
-    drawArrow(n, s, e, o);
+    drawArrow(dir);
   }
 }
 
 
 /* Draw arrow carga la imagen de la flecha y la posiciona segun los sensores activos*/
-void drawArrow(boolean n, boolean s, boolean e, boolean w ) {
+void drawArrow(String dir ) {
 
   arrow = loadImage("arrow.png"); // carga la imagen
  
@@ -80,32 +80,32 @@ void drawArrow(boolean n, boolean s, boolean e, boolean w ) {
   arrow.resize(100, 100); //cambia tamaño
   translate(900, 670); // la mueve a esta posicion respecto a la esquina superior izquierda (0,0)
 
-  if (n == true && s == false && e == false && w == false) { // north
+  if (dir.equals("\"N\"")) { // north
     image(arrow, 0, 0);
-  } else if (n== false && s == true && e==false && w == false) {//south
+  } else if (dir.equals("\"S\"")) {//south
     rotate(3.21239);
     image(arrow, 0, 0);
-  } else if (n== false && s == false && e==true && w == false) {//east
+  } else if (dir.equals("\"E\"")) {//east
     rotate(1.61239);
     image(arrow, 0, 0);
-  } else if (n== false && s == false && e==false && w == true) { //west
+  } else if (dir.equals("\"O\"")) { //west
     rotate(4.71239);
     image(arrow, 0, 0);
-  } else if (n== true && s == false && e==false && w == true) { //north-west
+  } else if (dir.equals("\"NO\"")) { //north-west
     rotate(5.41239);
     image(arrow, 0, 0);
-  } else if (n== true && s == false && e==true && w == false) { //north-east
+  } else if (dir.equals("\"NE\"")) { //north-east
     rotate(0.71239);
     image(arrow, 0, 0);
-  } else if (n== false && s == true && e==true && w == false) { //south-east
+  } else if (dir.equals("\"SE\"")) { //south-east
     rotate(2.51239);
     image(arrow, 0, 0);
-  } else if (n== false && s == true && e==false && w == true) { //south-west
+  } else if (dir.equals("\"SO\"")) { //south-west
     rotate(3.81239);
     image(arrow, 0, 0);
   } else {
     rotate(angle);
     image(arrow, 0, 0);
-    angle = angle +0.01;
+    angle = angle +0.05;
   }
 }

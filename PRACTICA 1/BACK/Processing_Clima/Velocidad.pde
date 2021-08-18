@@ -1,4 +1,4 @@
-
+// similar a la flecha de la brujula
 float velocidadViento(float vel) {
   String texto = str(vel);
   textFont(fontTemp, 28); // fuente para mostrar la temperatura

@@ -1,3 +1,4 @@
+
 void humedad(){
   
   for(int i=0; i<perHumedad;i++){
@@ -14,7 +15,7 @@ void drawHumedad(){
   fill(255); // el color de letra -> blanco
   text("La Humedad es: ",1050,70 );
   text(texto + " %", 1100, 100);
-  
+  // hace que las particulas puedan atravesar el circulo, desaparecer y reaparecer en el
   for (int i =0; i<perHumedad;i++){
     posX[i] += (noise(frameCount*0.01+i)-0.5)*15;
     posY[i] += (noise(frameCount*0.01+i+2)-0.5)*15;
@@ -29,7 +30,7 @@ void drawHumedad(){
     ellipse(posX[i], posY[i], 10, 10);
   }
   noFill();
-  stroke(200);
-  ellipse(centX,centY, r*2,r*2);
+  stroke(200); //le da color blanco
+  ellipse(centX,centY, r*2,r*2); // dibuja la elipse con la posicion y radios dados
   
 }
