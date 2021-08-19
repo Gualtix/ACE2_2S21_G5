@@ -1,0 +1,17 @@
+{
+  "name": "local-server",
+  "version": "1.0.0",
+  "description": "Practica 1 - Arqui 2",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Mdmata y JoWan1998",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "http": "*",
+    "serialport": "^9.2.0"
+  }
+}
