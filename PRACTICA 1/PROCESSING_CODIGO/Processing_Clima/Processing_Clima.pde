@@ -39,7 +39,7 @@ void setup() {
   smooth();
 
   //================================================
-   port = new Serial(this, "puerto",9600); // segundo parametro es el puerto que usa Arduino
+   port = new Serial(this, "COM3",9600); // segundo parametro es el puerto que usa Arduino
    port.bufferUntil('\n'); // mantiene datos hasta encontrar salto de linea. en caso que no sirva cambiar por }
   //-------- FONTS ---------------------------------
 
