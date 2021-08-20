@@ -1,6 +1,6 @@
+//*********************************************************************************************IMPORTACION DE LIBRERIA
 #include <DHT.h>
-
-//DEFINICION DE PINES
+//*********************************************************************************************DEFINICION DE PINES 
 //*****************************************PINES TEMPERATURA Y HUMEDAD
 #define DHTPIN 7
 #define DHTTYPE DHT11
@@ -13,10 +13,10 @@
 #define A_SouthWest A4
 #define A_West A5
 #define A_NorthWest A6
-//*****************************************PINES DIRECCION
+//*****************************************PINES VELOCIDAD
 #define anemometer 50
 
-//DEFINICION DE VARIABLES
+//*********************************************************************************************DEFINICION DE VARIABLES
 //*****************************************INFORMACION
 String data;
 bool temperature;
@@ -36,6 +36,8 @@ long cnt = 0 ;
 //TRUE = HIGH
 int tmp_old_value = HIGH;
 
+
+//*********************************************************************************************SETUP
 void setup() {
   //*****************************************INICIALIZACION SERIAL
   Serial.begin(9600);
@@ -48,12 +50,13 @@ void setup() {
   velocidad = false;
 }
 
+//*********************************************************************************************LOOP
 void loop() {
-
   data.concat("{");
   //*****************************************TEMPERATURA Y HUMEDAD
   Temperatura_Humedad();
   //*****************************************VELOCIDAD
+  if(temperature)Velocity();
   //*****************************************DIRECCION
   if(temperature && velocidad) getWindDirection();
   data.concat("}");
@@ -65,6 +68,8 @@ void loop() {
   velocidad = false;
 }
 
+
+//*********************************************************************************************TEMPERATURA Y HUMEDAD
 void Temperatura_Humedad()
 {
   float h = dht.readHumidity();
@@ -83,6 +88,7 @@ void Temperatura_Humedad()
 }
 
 
+//*********************************************************************************************DIRECCION DEL VIENTO
 void getWindDirection() 
 {
   //*****************************************DIRECCION
@@ -129,11 +135,33 @@ void getWindDirection()
   }
 }
 
+
+//*********************************************************************************************VELOCIDAD DEL VIENTO
 void Velocity() 
 {
   //*****************************************VELOCIDAD
-  int ajuste = frequency / 4;
-  int rpm = (ajuste * 60);
-  int diameter = 15;
-  int kmph = (diameter) * (rpm) * (0.001885);
+  tmp_time = millis();
+  while(1){
+    int tmp_gap = millis() - tmp_time;
+    if(tmp_gap <= 1000){
+      int tmp = digitalRead(anemometer);
+      if(tmp_old_value != tmp){
+        frequency++;
+        tmp_old_value = tmp;
+      }
+    }
+    if(tmp_gap >= 1000){
+      int ajuste = frequency / 4;
+      int rpm = (ajuste * 60);
+      int diameter = 15;
+      int kmph = (diameter) * (rpm) * (0.001885);
+      data.concat(",");
+      data.concat("\"Velocidad\":");
+      data.concat(String(kmph,4));
+      velocidad = true;
+      frequency = 0;
+      cnt = 0;
+      break;
+    }
+  }
 }
