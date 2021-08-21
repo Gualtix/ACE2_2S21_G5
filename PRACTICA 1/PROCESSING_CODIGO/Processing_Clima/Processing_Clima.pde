@@ -129,7 +129,7 @@ void serialCom() {
         while ((responseLine = br.readLine()) != null) {
           response.append(responseLine.trim());
         }
-        System.out.println(response.toString());
+        //System.out.println(response.toString());
         inBuffer = inBuffer.replace("{", ""); // elimina los caracteres {} 
         inBuffer = inBuffer.replace("}", ""); 
         inBuffer = inBuffer.replace("\"", "");

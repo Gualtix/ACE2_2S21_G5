@@ -19,17 +19,17 @@ void drawCircle(float temperatura) { // float ya que el método rándom da valor
   String temp = str(auxiliar); // convierte de int a string para poder imprimir con text()
 
 
-  if (int(prevTemp) < int(temperatura)) { 
+  if (int(prevTemp) < temperatura) { 
     /* si la temperatura anterior es < que la actual esto significa que la temperatura
     va en aumento*/
     termostatoAlto(temperatura); // subiran los valores de color del círculo
     
-  } else if (int(prevTemp) > int(temperatura)) {
+  } else if (int(prevTemp) > temperatura) {
     /*si la temperatura anterior es  > a la actual esto significa que la temperatura
     va disminuyendo*/
     termostatoBajo(temperatura); // bajarán los valores de color del círculo
     
-  } else if (int(prevTemp) == int(temperatura)) {
+  } else if (int(prevTemp) == temperatura) {
     // temperatura constante, no es necesaria una acción
     termostatoNormal(temperatura);
   } 
@@ -51,61 +51,62 @@ en la que este esté*/
 
 void termostatoNormal(float temperatura) {
   // CELESTE
-  if (int(temperatura) > 10 && int(temperatura) <= 18) {
+  if (temperatura > 10 && temperatura <= 18) {
     // r = 2 b = 255 green cambia
     green = 20; // aumenta el verde para mostrar un gradiente en azúl
-    fill(2, green, 255);
+    fill( 5, 253, 20);
     //VERDE
-  } else if (int(temperatura) > 18 && int(temperatura) <= 23) {
+  } else if (temperatura > 18 && temperatura <= 23) {
     // r = 5 g = 253 blue cambi
     blue = 20; // aumenta en azúl para mostrar un gradiente en verde
-    fill(5, 253, blue);
+    fill( 5, 253, 255 );
     //NARANJA
-  } else if (int(temperatura) > 23 && int(temperatura) <= 27) {
+  } else if (temperatura > 23 && temperatura <= 27) {
     // g 253 b = 5 red cambia
     red = 20;  // aumenta el rojo para mostrar un gradiente en amarillo o naranja
-    fill(red, 253, 255);
+    fill(red, 169, 20);
     //ROJO
-  } else if (int(temperatura) > 27 && int(temperatura) <= 35) {
+  } else if (temperatura > 27 && temperatura <= 35) {
     // r = 253, b = 5, green cambia
     green = 20; // aumenta en verde para mostrar un gradiente en rojo vibrante
     fill(253, green, 5);
-  } else if (int(temperatura) > 35) {
+  } else if (temperatura > 35) {
     // r = 253 b = 5 green < 19
     hot = 20; // si la temperatura excede los 35 grados el rojo baja para mostrar un rojo intenso
     fill(253, hot, 5);
-  } else if (int(temperatura) < 10) {
+  } else if (temperatura < 10) {
     fill(138, 255, 255); // si la temperatura es muy baja se mantiene en celeste
   }
 }
 
 
 void termostatoAlto(float temperatura) {
+  println(temperatura);
   // CELESTE
-  if (int(temperatura) > 10 && int(temperatura) <= 18) {
+  if (temperatura > 10 && temperatura <= 18) {
     // r = 2 b = 255 green cambia
     green += 20; // aumenta el verde para mostrar un gradiente en azúl
     fill(2, green, 255);
     //VERDE
-  } else if (int(temperatura) > 18 && int(temperatura) <= 23) {
+  } else if (temperatura > 18 && temperatura <= 23) {
     // r = 5 g = 253 blue cambi
     blue += 20; // aumenta en azúl para mostrar un gradiente en verde
     fill(5, 253, blue);
     //NARANJA
-  } else if (int(temperatura) > 23 && int(temperatura) <= 27) {
+  } else if (temperatura > 23 && temperatura <= 27) {
     // g 253 b = 5 red cambia
     red += 20;  // aumenta el rojo para mostrar un gradiente en amarillo o naranja
-    fill(red, 253, 255);
+    fill(red, 169, 20);
     //ROJO
-  } else if (int(temperatura) > 27 && int(temperatura) <= 35) {
+  } else if (temperatura > 27 && temperatura <= 35) {
     // r = 253, b = 5, green cambia
     green += 20; // aumenta en verde para mostrar un gradiente en rojo vibrante
     fill(253, green, 5);
-  } else if (int(temperatura) > 35) {
+  } else if (temperatura > 35) {
     // r = 253 b = 5 green < 19
     hot -= 20; // si la temperatura excede los 35 grados el rojo baja para mostrar un rojo intenso
     fill(253, hot, 5);
-  } else if (int(temperatura) < 10) {
+  } else if (temperatura < 10) {
     fill(138, 255, 255); // si la temperatura es muy baja se mantiene en celeste
   }
 }
@@ -114,27 +115,27 @@ void termostatoAlto(float temperatura) {
 /* como el método anterior, este disminuirá  los respectivos valores para poder 
 mostrar un gradiente en disminución*/
 void termostatoBajo(float temperatura) {
-  if (int(temperatura) > 10 && int(temperatura) <= 18) {
+  if (temperatura > 10 && temperatura <= 18) {
     // r = 2 b = 255 green cambia
     green -= 20;
     fill(2, green, 255);
-  } else if (int(temperatura) > 18 && int(temperatura) <= 23) {
+  } else if (temperatura > 18 && temperatura <= 23) {
     // r = 5 g = 253 blue cambi
     blue -= 20;
     fill(5, 253, blue);
-  } else if (int(temperatura) > 23 && int(temperatura) <= 27) {
+  } else if (temperatura > 23 && temperatura <= 27) {
     // g 253 b = 5 red cambia
     red -= 20;
-    fill(red, 253, 255);
-  } else if (int(temperatura) > 27 && int(temperatura) <= 35) {
+    fill(red, 169, 20);
+  } else if (temperatura > 27 && temperatura <= 35) {
     // r = 253, b = 5, green cambia
     green -= 20;
     fill(253, green, 5);
-  } else if (int(temperatura) > 35) {
+  } else if (temperatura > 35) {
     // r = 253 b = 5 green < 19
     hot += 20;
     fill(253, hot, 5);
-  } else if (int(temperatura) < 10) {
+  } else if (temperatura < 10) {
     fill(138, 255, 255);
   }
 }
