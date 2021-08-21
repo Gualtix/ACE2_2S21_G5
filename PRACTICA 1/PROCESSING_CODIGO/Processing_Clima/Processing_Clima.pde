@@ -98,39 +98,38 @@ void serialCom() {
   {
     while (port.available() >0) {
       String inBuffer = port.readString().replace("\n", ""); // guarda en una string la cadena enviada
-      
-      URL url = new URL(post);
-      HttpURLConnection con = (HttpURLConnection)url.openConnection();
-      con.setRequestMethod("POST");
-      con.setRequestProperty("Content-Type", "application/json; utf-8");
-      con.setRequestProperty("Accept", "application/json");
-      con.setDoOutput(true);
-      byte[] out = inBuffer.getBytes("utf-8");
-      int length = out.length;
-      con.setFixedLengthStreamingMode(length);
-      con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-      con.connect();
-      OutputStream os = con.getOutputStream();
-      os.write(out);
-      os.flush();
-      os.close();
-
-      //int responseCode = con.getResponseCode();
-      //System.out.println("POST Response Code :: " + responseCode);
-
-
-      //RESPUESTA
-      BufferedReader br = new BufferedReader(
-        new InputStreamReader(con.getInputStream(), "utf-8"));
-      StringBuilder response = new StringBuilder();
-      String responseLine = null;
-      while ((responseLine = br.readLine()) != null) {
-        response.append(responseLine.trim());
-      }
-      System.out.println(response.toString());
 
       if (inBuffer.charAt(0) == '{' && inBuffer.charAt(inBuffer.length()-2) == '}')
       {
+        URL url = new URL(post);
+        HttpURLConnection con = (HttpURLConnection)url.openConnection();
+        con.setRequestMethod("POST");
+        con.setRequestProperty("Content-Type", "application/json; utf-8");
+        con.setRequestProperty("Accept", "application/json");
+        con.setDoOutput(true);
+        byte[] out = inBuffer.getBytes("utf-8");
+        int length = out.length;
+        con.setFixedLengthStreamingMode(length);
+        con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+        con.connect();
+        OutputStream os = con.getOutputStream();
+        os.write(out);
+        os.flush();
+        os.close();
+
+        //int responseCode = con.getResponseCode();
+        //System.out.println("POST Response Code :: " + responseCode);
+
+
+        //RESPUESTA
+        BufferedReader br = new BufferedReader(
+          new InputStreamReader(con.getInputStream(), "utf-8"));
+        StringBuilder response = new StringBuilder();
+        String responseLine = null;
+        while ((responseLine = br.readLine()) != null) {
+          response.append(responseLine.trim());
+        }
+        System.out.println(response.toString());
         inBuffer = inBuffer.replace("{", ""); // elimina los caracteres {} 
         inBuffer = inBuffer.replace("}", ""); 
         inBuffer = inBuffer.replace("\"", "");
