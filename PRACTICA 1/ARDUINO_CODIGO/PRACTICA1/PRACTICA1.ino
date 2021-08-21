@@ -61,7 +61,6 @@ void loop() {
   if(temperature && velocidad) getWindDirection();
   data.concat("}");
   Serial.println(data);
-  delayMicroseconds(500);
   //*****************************************REINICIO DE DATA
   data = "";
   temperature = false;
@@ -74,7 +73,7 @@ void Temperatura_Humedad()
 {
   float h = dht.readHumidity();
   float t = dht.readTemperature();
-  if (!isnan(h) && !isnan(t)) {
+  if (isnan(h) || isnan(t)) {
     return;
   }
   //*****************************************HUMEDAD
@@ -156,7 +155,7 @@ void Velocity()
       int diameter = 15;
       int kmph = (diameter) * (rpm) * (0.001885);
       data.concat(",");
-      data.concat("\"Velocidad\":");
+      data.concat("\"Viento\":");
       data.concat(String(kmph,4));
       velocidad = true;
       frequency = 0;

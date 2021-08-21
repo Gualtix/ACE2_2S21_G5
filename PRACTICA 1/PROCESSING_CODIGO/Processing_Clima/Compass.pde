@@ -16,42 +16,42 @@ void compass(String dir) {
 
 /* ifs son para poder determinar que sensor está activo, dependiendo 
 del que haya sido detectado, su respectiva dirección será marcada*/
-  if (dir.equals("\"N\"")) {
+  if (dir.equals("N")) {
     textFont(font, 38);
     fill(194, 30, 86);
     text(nor, 887, 480);
     drawArrow(dir);
-  } else if (dir.equals("\"S\"")) {
+  } else if (dir.equals("S")) {
     textFont(font, 38);
     fill(255);
     text(sur, 887, 890);
     drawArrow(dir);
-  } else if (dir.equals("\"E\"")) {
+  } else if (dir.equals("E")) {
     textFont(font, 38);
     fill(231, 243, 36);
     text(est, 1095, 693);
     drawArrow(dir);
-  } else if (dir.equals("\"O\"")) {
+  } else if (dir.equals("O")) {
     textFont(font, 38);
     fill(36, 105, 243);
     text(oes, 690, 693);
     drawArrow(dir);
-  } else if (dir.equals("\"NE\"")) {
+  } else if (dir.equals("NE")) {
     textFont(font, 38);
     fill(241, 159, 19);
     text(nor+est, 1010, 540);
     drawArrow(dir);
-  } else if (dir.equals("\"NO\"")) {
+  } else if (dir.equals("NO")) {
     textFont(font, 38);
     fill(36, 243, 114);
     text(nor+oes, 730, 540);
     drawArrow(dir);
-  } else if (dir.equals("\"SE\"")) {
+  } else if (dir.equals("SE")) {
     textFont(font, 38);
     fill(248, 250, 159);
     text(sur+est, 1020, 800);
     drawArrow(dir);
-  } else if (dir.equals("\"SO\"")) {
+  } else if (dir.equals("SO")) {
     textFont(font, 38);
     fill(180, 217, 251);
     text(sur+oes, 720, 800);
@@ -80,27 +80,27 @@ void drawArrow(String dir ) {
   arrow.resize(100, 100); //cambia tamaño
   translate(900, 670); // la mueve a esta posicion respecto a la esquina superior izquierda (0,0)
 
-  if (dir.equals("\"N\"")) { // north
+  if (dir.equals("N")) { // north
     image(arrow, 0, 0);
-  } else if (dir.equals("\"S\"")) {//south
+  } else if (dir.equals("S")) {//south
     rotate(3.21239);
     image(arrow, 0, 0);
-  } else if (dir.equals("\"E\"")) {//east
+  } else if (dir.equals("E")) {//east
     rotate(1.61239);
     image(arrow, 0, 0);
-  } else if (dir.equals("\"O\"")) { //west
+  } else if (dir.equals("O")) { //west
     rotate(4.71239);
     image(arrow, 0, 0);
-  } else if (dir.equals("\"NO\"")) { //north-west
+  } else if (dir.equals("NO")) { //north-west
     rotate(5.41239);
     image(arrow, 0, 0);
-  } else if (dir.equals("\"NE\"")) { //north-east
+  } else if (dir.equals("NE")) { //north-east
     rotate(0.71239);
     image(arrow, 0, 0);
-  } else if (dir.equals("\"SE\"")) { //south-east
+  } else if (dir.equals("SE")) { //south-east
     rotate(2.51239);
     image(arrow, 0, 0);
-  } else if (dir.equals("\"SO\"")) { //south-west
+  } else if (dir.equals("SO")) { //south-west
     rotate(3.81239);
     image(arrow, 0, 0);
   } else {

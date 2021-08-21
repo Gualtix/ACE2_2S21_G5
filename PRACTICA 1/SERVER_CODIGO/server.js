@@ -1,14 +1,21 @@
 const express = require('express');
 const app = express();
-var SerialPort = require("serialport");
-var Delimiter = require('@serialport/parser-delimiter');
+const cors = require('cors');
+//var SerialPort = require("serialport");
+//var Delimiter = require('@serialport/parser-delimiter');
+//var port = 3000;
+//var arduinoCOMPort = "\\\\.\\COM3";
 var mongoClient = require('mongodb').MongoClient;
-
-var port = 3000;
-var arduinoCOMPort = "\\\\.\\COM3";
 const urlMongo = "mongodb://34.67.81.164:27017/"
 var nameDB = "arqui2";
+const port = 8990;
 
+app.use(cors());
+app.use(express.json());
+app.use(express.json({ limit: '5mb', extended: true }));
+
+
+/*
 var arduinoSerialPort = new SerialPort(arduinoCOMPort, {  
  baudRate: 9600
 });
@@ -43,3 +50,55 @@ parser.on('data', function(data){
 	}
 
 });
+*/
+
+
+
+
+mongoClient.connect(urlMongo, { useUnifiedTopology: true })
+.then(client => {
+    console.log("Conectado a la base de datos!")
+    const db = client.db(nameDB)
+    const coleccion = db.collection('netflix')
+    const coleccion1 = db.collection('actualizacion')
+
+
+    app.get('/', (req, res) => {
+        res.send('API ARQUI 2 :D');
+    });
+	
+    app.post('/inforClimate', (req, res)=>{
+		console.log(req);
+		var dato_send = JSON.parse(JSON.stringify(req.body));
+		if(dato_send.Temperatura != undefined)
+		{
+			mongoClient.connect(urlMongo, { useUnifiedTopology: true })
+			.then(client => {
+				const db = client.db(nameDB)
+				const coleccion = db.collection('data')
+				var count_data = coleccion.countDocuments({});
+				count_data = count_data + 1;
+				var climate = {
+					"Id": count_data,
+					"Temperatura": dato_send.Temperatura,
+					"Humedad": dato_send.Humedad,
+					"Viento": dato_send.Viento,
+					"Direccion": dato_send.Direccion
+				}
+				console.log(climate);
+				coleccion.insertOne(climate);
+				res.send(climate);
+			}).catch(console.error);
+		}
+		else{
+			res.send("no data parseada");
+		}
+
+	});
+
+
+
+    app.listen(port, () => {console.log(`Server corriendo en puerto ${port}!`) });
+    
+})
+.catch(console.error)

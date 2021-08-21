@@ -12,7 +12,7 @@ se mantendrá, si sube el color cambiará ligeramente, al igual que cuando baje
 
 void drawCircle(float temperatura) { // float ya que el método rándom da valores con punto decimal de entre 5 y 6 decimales
   // descomentar si se tiene curiosidad de la temperatura anterior vs la actual
-  println("Anterior: "+prevTemp + "    Temperatura Actual: " + temperatura );
+  //println("Anterior: "+prevTemp + "    Temperatura Actual: " + temperatura );
 
 
   int auxiliar = int(temperatura); // convierte de float a int la temperatura
@@ -31,6 +31,7 @@ void drawCircle(float temperatura) { // float ya que el método rándom da valor
     
   } else if (int(prevTemp) == int(temperatura)) {
     // temperatura constante, no es necesaria una acción
+    termostatoNormal(temperatura);
   } 
 
 
@@ -47,6 +48,37 @@ void drawCircle(float temperatura) { // float ya que el método rándom da valor
 
 /* Sube los valores de temperatura dependiendo del color y rango de temperatura
 en la que este esté*/
+
+void termostatoNormal(float temperatura) {
+  // CELESTE
+  if (int(temperatura) > 10 && int(temperatura) <= 18) {
+    // r = 2 b = 255 green cambia
+    green = 20; // aumenta el verde para mostrar un gradiente en azúl
+    fill(2, green, 255);
+    //VERDE
+  } else if (int(temperatura) > 18 && int(temperatura) <= 23) {
+    // r = 5 g = 253 blue cambi
+    blue = 20; // aumenta en azúl para mostrar un gradiente en verde
+    fill(5, 253, blue);
+    //NARANJA
+  } else if (int(temperatura) > 23 && int(temperatura) <= 27) {
+    // g 253 b = 5 red cambia
+    red = 20;  // aumenta el rojo para mostrar un gradiente en amarillo o naranja
+    fill(red, 253, 255);
+    //ROJO
+  } else if (int(temperatura) > 27 && int(temperatura) <= 35) {
+    // r = 253, b = 5, green cambia
+    green = 20; // aumenta en verde para mostrar un gradiente en rojo vibrante
+    fill(253, green, 5);
+  } else if (int(temperatura) > 35) {
+    // r = 253 b = 5 green < 19
+    hot = 20; // si la temperatura excede los 35 grados el rojo baja para mostrar un rojo intenso
+    fill(253, hot, 5);
+  } else if (int(temperatura) < 10) {
+    fill(138, 255, 255); // si la temperatura es muy baja se mantiene en celeste
+  }
+}
+
 
 void termostatoAlto(float temperatura) {
   // CELESTE

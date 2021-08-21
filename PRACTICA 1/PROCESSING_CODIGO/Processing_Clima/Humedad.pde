@@ -10,7 +10,8 @@ void humedad(){
 }
 
 void drawHumedad(){
-  String texto = str(perHumedad);
+  int perH = int(humedadDec);
+  String texto = str(perH);
   textFont(fontTemp, 28); // fuente para mostrar la temperatura
   fill(255); // el color de letra -> blanco
   text("La Humedad es: ",1050,70 );
