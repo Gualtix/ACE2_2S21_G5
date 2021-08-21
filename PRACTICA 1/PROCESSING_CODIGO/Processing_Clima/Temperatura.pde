@@ -14,7 +14,7 @@ void drawCircle(float temperatura) { // float ya que el método rándom da valor
   // descomentar si se tiene curiosidad de la temperatura anterior vs la actual
   //println("Anterior: "+prevTemp + "    Temperatura Actual: " + temperatura );
 
-
+  if(temperatura == 0) return;
   int auxiliar = int(temperatura); // convierte de float a int la temperatura
   String temp = str(auxiliar); // convierte de int a string para poder imprimir con text()
 

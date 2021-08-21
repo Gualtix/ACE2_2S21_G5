@@ -58,9 +58,8 @@ parser.on('data', function(data){
 mongoClient.connect(urlMongo, { useUnifiedTopology: true })
 .then(client => {
     console.log("Conectado a la base de datos!")
-    const db = client.db(nameDB)
-    const coleccion = db.collection('netflix')
-    const coleccion1 = db.collection('actualizacion')
+	const db = client.db(nameDB)
+	const coleccion = db.collection('data')
 
 
     app.get('/', (req, res) => {
@@ -68,15 +67,11 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
     });
 	
     app.post('/inforClimate', (req, res)=>{
-		console.log(req);
+		console.log(req.body);
 		var dato_send = JSON.parse(JSON.stringify(req.body));
 		if(dato_send.Temperatura != undefined)
 		{
-			mongoClient.connect(urlMongo, { useUnifiedTopology: true })
-			.then(client => {
-				const db = client.db(nameDB)
-				const coleccion = db.collection('data')
-				var count_data = coleccion.countDocuments({});
+			var count_data = coleccion.countDocuments({});
 				count_data = count_data + 1;
 				var climate = {
 					"Id": count_data,
@@ -88,7 +83,6 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
 				console.log(climate);
 				coleccion.insertOne(climate);
 				res.send(climate);
-			}).catch(console.error);
 		}
 		else{
 			res.send("no data parseada");
