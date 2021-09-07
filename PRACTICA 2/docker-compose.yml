@@ -3,7 +3,7 @@ services:
   apinode:
     container_name: apinode
     restart: always
-    build: ./nodejs
+    build: ./SERVER_APIREST
     ports:
       - "3000:3000"
     links:
