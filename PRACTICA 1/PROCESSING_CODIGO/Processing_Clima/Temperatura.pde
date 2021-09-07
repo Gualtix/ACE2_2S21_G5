@@ -81,7 +81,7 @@ void termostatoNormal(float temperatura) {
 
 
 void termostatoAlto(float temperatura) {
-  println(temperatura);
+  //println(temperatura);
   // CELESTE
   if (temperatura > 10 && temperatura <= 18) {
     // r = 2 b = 255 green cambia

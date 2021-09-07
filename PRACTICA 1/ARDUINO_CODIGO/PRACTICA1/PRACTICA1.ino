@@ -7,12 +7,13 @@
 //*****************************************PINES DIRECCION
 #define A_North A0
 //#define A_NorthEast A1 SE QUEMÓ :(
-#define A_East A1
-#define A_SouthEast A2
-#define A_South A3
-#define A_SouthWest A4
-#define A_West A5
-#define A_NorthWest A6
+#define A_East A2
+//#define A_SouthEast A2
+#define A_South A1
+//#define A_SouthWest A4
+#define A_West A3
+//#define A_NorthWest A6
+
 //*****************************************PINES VELOCIDAD
 #define anemometer 50
 
@@ -52,6 +53,7 @@ void setup() {
 
 //*********************************************************************************************LOOP
 void loop() {
+  /*
   data.concat("{");
   //*****************************************TEMPERATURA Y HUMEDAD
   Temperatura_Humedad();
@@ -65,6 +67,9 @@ void loop() {
   data = "";
   temperature = false;
   velocidad = false;
+  */
+  getWindDirection();
+  delay(5000);
 }
 
 
@@ -91,47 +96,36 @@ void Temperatura_Humedad()
 void getWindDirection() 
 {
   //*****************************************DIRECCION
-  data.concat(",");
-  data.concat("\"Direccion\":");
-  if (analogRead(A_North) <= 525) {
-    last_windDir = current_windDir;
-    current_windDir = 1;
-    data.concat("\"N\"");
-  } else if (analogRead(A_East) <= 500) {
-    last_windDir = current_windDir;
-    current_windDir = 3;
-    data.concat("\"E\"");
-  } else if (analogRead(A_SouthEast) < 510) {
-    last_windDir = current_windDir;
-    current_windDir = 4;
-    data.concat("\"SE\"");
-  } else if (analogRead(A_South) <= 523) {
+  //data.concat(",");
+  //data.concat("\"Direccion\":");
+
+  Serial.println(analogRead(A_South));
+  Serial.println(analogRead(A_West));
+  Serial.println(analogRead(A_East));
+
+    if (analogRead(A_South) <= 510) {
     last_windDir = current_windDir;
     current_windDir = 5;
     data.concat("\"S\"");
-  } else if (analogRead(A_SouthWest) < 526) {
+  }
+  
+  else if (analogRead(A_West) <= 510) {
     last_windDir = current_windDir;
-    current_windDir = 6;
-    data.concat("\"SO\"");
-  } else if (analogRead(A_West) <= 510) {
+    current_windDir = 1;
+    data.concat("\"O\"");
+  } 
+  else if (analogRead(A_East) <= 510) {
+    last_windDir = current_windDir;
+    current_windDir = 3;
+    data.concat("\"E\"");
+  } 
+  else {
     last_windDir = current_windDir;
     current_windDir = 7;
-    data.concat("\"O\"");
-  } else if (analogRead(A_NorthWest) < 510) {
-    last_windDir = current_windDir;
-    current_windDir = 8;
-    data.concat("\"NO\"");
-  } else {
-    if (last_windDir == 8 && current_windDir == 1) {
-      last_windDir = current_windDir;
-      current_windDir = 2;
-      data.concat("\"NE\"");
-    } else if (current_windDir == 4 && last_windDir == 3) {
-      last_windDir = current_windDir;
-      current_windDir = 2;
-      data.concat("\"NE\"");
-    }
+    data.concat("\"N\"");
   }
+  
+  
 }
 
 

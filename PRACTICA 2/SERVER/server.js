@@ -1,10 +1,10 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-//var SerialPort = require("serialport");
-//var Delimiter = require('@serialport/parser-delimiter');
-//var port = 3000;
-//var arduinoCOMPort = "\\\\.\\COM3";
+var SerialPort = require("serialport");
+var Delimiter = require('@serialport/parser-delimiter');
+var port = 3000;
+var arduinoCOMPort = "\\\\.\\COM3";
 var mongoClient = require('mongodb').MongoClient;
 const urlMongo = "mongodb://34.67.81.164:27017/"
 var nameDB = "arqui2";
@@ -14,8 +14,16 @@ app.use(cors());
 app.use(express.json());
 app.use(express.json({ limit: '5mb', extended: true }));
 
-
 /*
+
+Modelo de datos
+
+
+
+*/
+
+
+
 var arduinoSerialPort = new SerialPort(arduinoCOMPort, {  
  baudRate: 9600
 });
@@ -50,10 +58,6 @@ parser.on('data', function(data){
 	}
 
 });
-*/
-
-
-
 
 mongoClient.connect(urlMongo, { useUnifiedTopology: true })
 .then(client => {

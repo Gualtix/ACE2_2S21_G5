@@ -20,7 +20,7 @@ float angle =0; // angle of the arrow
 float spin = 0; // spin of the windmill
 float vel;
 float prevTemp = 0; // comparison variable
-String dir;
+char dir;
 String nor = "N";
 String sur = "S";
 String oes = "O";
@@ -60,7 +60,6 @@ void setup() {
   //============================================
   humedadDec = float(0); // guarda en las variables la informacion
   vel =float(0);
-  dir = "N";
 
   centX = 900;
   centY = 225;
@@ -78,7 +77,8 @@ void drawGraphics() {
   temperatura();
   drawHumedad();
   pushMatrix(); // guarda la tabla de posiciones 
-  compass(dir); // north, south,east, west
+  compass(); // north, south,east, west
+  drawArrow();
   popMatrix(); // reestablece la tabla
   pushMatrix();
   velocidadViento(vel);
@@ -98,7 +98,6 @@ void serialCom() {
   {
     while (port.available() >0) {
       String inBuffer = port.readString().replace("\n", ""); // guarda en una string la cadena enviada
-
       if (inBuffer.charAt(0) == '{' && inBuffer.charAt(inBuffer.length()-2) == '}')
       {
         URL url = new URL(post);
@@ -120,7 +119,6 @@ void serialCom() {
         //int responseCode = con.getResponseCode();
         //System.out.println("POST Response Code :: " + responseCode);
 
-
         //RESPUESTA
         BufferedReader br = new BufferedReader(
           new InputStreamReader(con.getInputStream(), "utf-8"));
@@ -130,6 +128,7 @@ void serialCom() {
           response.append(responseLine.trim());
         }
         //System.out.println(response.toString());
+        inBuffer = inBuffer.replace(" ","");
         inBuffer = inBuffer.replace("{", ""); // elimina los caracteres {} 
         inBuffer = inBuffer.replace("}", ""); 
         inBuffer = inBuffer.replace("\"", "");
@@ -139,22 +138,10 @@ void serialCom() {
           {
             if (information[0].equals("Humedad") && information[2].equals("Temperatura") && information[4].equals("Viento") && information[6].equals("Direccion")) {
               humedadDec = float(information[1]); // guarda en las variables la informacion
-              temperatura = float(information[3]);
+              temperatura = float(information[3]); //<>//
               vel = float(information[5]);
-              dir = information[7];
-            } else {
-              //Do Nothing
-              humedadDec = float(0); // guarda en las variables la informacion
-              humedad();
-              vel =float(0);
-              dir = "N";
+              dir = information[7].toUpperCase().charAt(0);
             }
-          } else
-          {
-            humedadDec = float(0); // guarda en las variables la informacion
-            temperatura = float(0);
-            vel =float(0);
-            dir = "N";
           }
         }
       }
