@@ -2,7 +2,7 @@ FROM node:latest
 WORKDIR /usr/src/nodejs
 COPY package*.json ./
 COPY . .
-RUN npm install
+RUN npm install --save
 EXPOSE 3000
 RUN mkdir -p /elements/procs
 
