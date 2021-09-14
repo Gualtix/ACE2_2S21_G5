@@ -6,6 +6,7 @@ const app = express();
 var mongoClient = require('mongodb').MongoClient;
 const urlMongo = "mongodb://db:27017/"
 const nameDB = 'arqui2';
+const port = 3000;
 
 app.use(cookieParser());
 app.use(cors());
