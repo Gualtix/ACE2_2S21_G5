@@ -5,14 +5,13 @@ var cookieParser = require('cookie-parser');
 var cors = require('cors')
 const app = express();
 const port = 3000;
-const hostname = '34.125.201.133';
+const hostname = '34.67.114.165';
 var axios = require('axios');
 
 //SERIAL
 var SerialPort = require("serialport");
 var Delimiter = require('@serialport/parser-delimiter');
-var port = 3000;
-var arduinoCOMPort = "\\\\.\\COM3";
+var arduinoCOMPort = "\\\\.\\COM8";
 
 app.use(cookieParser());
 app.use(cors());
@@ -40,10 +39,15 @@ parser.on('data', function(data){
 	var dato = data.toString();
 	if(dato.includes('{') && dato.includes('}'))
 	{
-		var datos = JSON.parse(JSON.stringify(dato));
 		var fecha_envio = Date.now();
-		datos["fecha"]= fecha_envio.toString();
-		//envio de data
+		var n_date = new Date(fecha_envio).toISOString();
+		var datos = JSON.parse(JSON.parse(JSON.stringify(dato)));
+		datos.fecha = n_date.toString();
+		/*
+		console.log(datos.fecha);
+		var time_millis = new Date(n_date).getTime() - (1000 * 60 * 60)
+		console.log(new Date(time_millis));
+		*/
 		console.log(datos);
 		sendData(datos);
 	}
@@ -54,7 +58,7 @@ sendData = function(body) {
 	var config = {
 		method: 'post',
 		host: hostname,
-		port: port_usuarios,
+		port: port,
 		path: '/insertData',
 		url: 'http://'+hostname+':'+port+'/insertData',
 		headers: {
@@ -64,6 +68,6 @@ sendData = function(body) {
 	};
 
 	axios(config)
-	.then(function (response) { console.log(response); })
+	.then(function (response) { console.log(response.status, response.data); })
 	.catch(function (error) {});
 }
