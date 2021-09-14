@@ -30,6 +30,45 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
     app.get('/', (req, res) => {
         res.send('API ARQUI 2 :D');
     });
+
+    app.post('/insertData',(req, res)=>{
+        const data = req.body;
+        
+		if(data.en_silla == null || data.peso == null || data.fecha == null)
+		{
+			res.status(404).send('No se han insertado datos');
+		}else{
+
+            const informacion = {
+				"en_silla": data.en_silla,
+				"peso": data.peso,
+				"fecha": data.fecha
+			}
+
+			coleccion.insertOne(informacion)
+			.then(result => {
+				console.log("Registro Insertado!");
+				res.status(200).send('Registro Insertado!');
+			})
+			.catch(error => console.error("Error al insertar un registro: ", error));
+		}
+    });
+
+    app.get('/getAll', async (req, res) => {
+        coleccion.find().toArray()
+        .then(results => {
+            console.log("Obtener datos!");
+            res.status(200).json(results)
+        })
+        .catch(error => console.error(error))
+    });
+
+    app.get('/deleteAll', (req, res) => {
+        coleccion.drop().then(result => {
+            console.log("Eliminado!")
+            res.status(200).send("Eliminado!")
+        }).catch(err => console.error(err))
+    });
 	
     app.listen(port, () => {console.log(`Server corriendo en puerto ${port}!`) });
     

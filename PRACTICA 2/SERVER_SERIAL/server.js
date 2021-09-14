@@ -4,7 +4,6 @@ const bodyParser = require("body-parser");
 var cookieParser = require('cookie-parser');
 var cors = require('cors')
 const app = express();
-var router = express.Router();
 const port = 3000;
 const hostname = '34.125.201.133';
 var axios = require('axios');
@@ -38,13 +37,33 @@ arduinoSerialPort.on('open',function() {
 var parser = arduinoSerialPort.pipe(new Delimiter({ delimiter: '\n' }));
 
 parser.on('data', function(data){
-	data = data.toString();
-	if(data.includes('{') && data.includes('}'))
+	var dato = data.toString();
+	if(dato.includes('{') && dato.includes('}'))
 	{
-		//POST -> EN SILLA
-
-		//POST -> SALIO SILLA
-
+		var datos = JSON.parse(JSON.stringify(dato));
+		var fecha_envio = Date.now();
+		datos["fecha"]= fecha_envio.toString();
+		//envio de data
+		console.log(datos);
+		sendData(datos);
 	}
 
 });
+
+sendData = function(body) {
+	var config = {
+		method: 'post',
+		host: hostname,
+		port: port_usuarios,
+		path: '/insertData',
+		url: 'http://'+hostname+':'+port+'/insertData',
+		headers: {
+		  'Content-Type': 'application/json'
+		},
+		data : body
+	};
+
+	axios(config)
+	.then(function (response) { console.log(response); })
+	.catch(function (error) {});
+}
