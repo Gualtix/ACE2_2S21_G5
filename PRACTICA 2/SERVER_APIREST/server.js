@@ -4,8 +4,8 @@ var cookieParser = require('cookie-parser');
 var cors = require('cors')
 const app = express();
 var mongoClient = require('mongodb').MongoClient;
-const urlMongo = "mongodb://34.67.81.164:27017/"
-var nameDB = "arqui2";
+const urlMongo = "mongodb://db:27017/"
+const nameDB = 'arqui2';
 
 app.use(cookieParser());
 app.use(cors());
