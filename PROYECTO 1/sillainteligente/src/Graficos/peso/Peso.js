@@ -10,7 +10,7 @@ export default class Peso extends React.Component{
             data: [],
             curTime: ''  
         };
-        this.url = Environment.HOST + Environment.PORT;
+        this.url = Environment.HOST + ":" + Environment.PORT;
         this.getData = this.getData.bind(this);
     }
 
@@ -21,7 +21,6 @@ export default class Peso extends React.Component{
                 if(response.data.length > 0){
                     var datito = [];
                     response.data.forEach((element)=>{
-                        datito.push(element);
                     })
 
                     this.setState({data: datito});

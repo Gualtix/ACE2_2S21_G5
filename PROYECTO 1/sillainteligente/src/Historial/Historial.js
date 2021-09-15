@@ -18,40 +18,33 @@ export default class Movimiento extends React.Component{
     }
 
     async getData(){
-        let config = {
-            method: 'get',
-            host: Environment.HOST,
-            port: Environment.PORT,
-            path: '/insertData',
-            url: this.url,
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            data : {}
-        };
-        axios.get(config)
+
+        axios.get(this.url, {})
         .then(
             (response)=>{
                 if(response.data.length > 0){
                     var datito = [];
                     response.data.forEach((element)=>{
-                        var date = new Date(element.fecha1).getTime();
-                        var date1 = new Date(element.fecha2).getTime();
-                        var tiempo = (date1 - date)/3600;
-                        let val = {
-                            Fecha: element.fecha1,
-                            Entrada: element.fecha1,
-                            Salida: element.fecha2,
-                            Peso: (element.peso1 + element.peso2)/2,
-                            Tiempo_Uso: tiempo
+                        if(element.fecha2 !== "" && element.fecha2 !== undefined)
+                        {
+                            var date = new Date(element.fecha1).getTime();
+                            var date1 = new Date(element.fecha2).getTime();
+                            var tiempo = (date1 - date)/3600;
+                            let val = {
+                                Fecha: new Date(element.fecha1).toLocaleString(),
+                                Entrada: new Date(element.fecha1).toLocaleString(),
+                                Salida: new Date(element.fecha2).toLocaleString(),
+                                Peso: ((element.peso1 + element.peso2)/2).toFixed(2) + " Kg",
+                                Tiempo_Uso: tiempo.toFixed(2) + " min"
+                            }
+                            datito.push(val);
                         }
-                        datito.push(val);
-                    })
+                    });
 
                     this.setState({data: datito});
                     if(this.childInventarioP.current != null){
                         this.childInventarioP.current.removeRow();
-                        this.childInventarioP.current.agregar_datos(datito);
+                        this.childInventarioP.current.agregar_datos(this.state.data);
                     }
                 }
             }

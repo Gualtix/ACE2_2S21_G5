@@ -10,16 +10,16 @@ function App() {
     <div id="main-wrapper">
           <header>
             <nav>
-               <div class="menu-icon">
-                  <i class="fa fa-bars fa-2x"></i>
+               <div className="menu-icon">
+                  <i className="fa fa-bars fa-2x"></i>
                </div>
-               <div class="logo">
+               <div className="logo">
                   SMART CHAIR
                </div>
             </nav>
          </header>
       <div className="page-wrapper">
-        <div classNameName="container-fluid">
+        <div className="container-fluid">
           <br />
           <div className="row">
             <div className="col-md-6 col-sm-12 col-lg-6">
