@@ -11,7 +11,7 @@ var axios = require('axios');
 //SERIAL
 var SerialPort = require("serialport");
 var Delimiter = require('@serialport/parser-delimiter');
-var arduinoCOMPort = "\\\\.\\COM8";
+var arduinoCOMPort = "\\\\.\\COM7";
 
 app.use(cookieParser());
 app.use(cors());
