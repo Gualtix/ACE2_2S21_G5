@@ -11,7 +11,7 @@ export default class Movimiento extends React.Component{
             data: [],
             curTime: ''  
         };
-        this.url = Environment.HOST + "Horario" + Environment.PORT;
+        this.url = Environment.HOST + ":" + Environment.PORT + "/Horario";
         this.tableHeader = ["Fecha", "Tiempo_Uso", "Peso", "Entrada", "Salida"];
         this.getData = this.getData.bind(this);
         this.childInventarioP = React.createRef();
