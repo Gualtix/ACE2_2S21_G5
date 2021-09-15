@@ -323,7 +323,7 @@ function Semana(informacion){
         {
             let value = {
                 dia: "",
-                uso: 0
+                contador: 0
             }
             switch(a)
             {
