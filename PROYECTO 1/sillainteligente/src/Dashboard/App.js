@@ -38,7 +38,7 @@ function App() {
             </div>
           </div>
           <div className="row">
-              <div className="col-md-6 col-sm-12 col-lg-12">
+              <div className="col-md-12 col-sm-12 col-lg-12">
                   <Historial />
               </div>
           </div>
