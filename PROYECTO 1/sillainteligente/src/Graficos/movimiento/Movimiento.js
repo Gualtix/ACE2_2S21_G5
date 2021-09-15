@@ -52,7 +52,7 @@ export default class Movimiento extends React.Component{
         return (
             <div className="card border-dark mb-3">
                 <div className="card-body">
-                    <h1>Movimiento y Uso</h1>
+                    <h2>Movimiento y Uso</h2>
                 </div>
                 <div className="card-footer text-right">
                     <strong>Last Update on:</strong>&nbsp;<span className="badge badge-info">{this.state.curTime}</span>

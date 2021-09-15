@@ -1,18 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
 
 :root {
-    --primary: #4b7ff1/*#555BFF*/;
-    --secondary: #3571b6;
-    --background: white;
-    --green: #1FC11B;
-    --yellow: #FFD913;
-    --orange: #FF9C55;
-    --red: #FF5555;
-    --blue: #184af0;
-    --gray: #f4f6f9;
-    --white: #ffffff;
-    --black: #000000;
+  --primary: #398bf7/*#555BFF*/;
+  --secondary: #22d2ac;
+  --background: white;
+  --green: #1FC11B;
+  --yellow: #FFD913;
+  --orange: #FF9C55;
+  --red: #FF5555;
 } 
 
 * {
@@ -20,11 +17,10 @@
   
   body {
     background: #fff;
-    font-family: Ubuntu, 'Rubik', sans-serif;
+    font-family: 'Popins', Ubuntu, 'Rubik', sans-serif;
     margin: 0;
-    
+    color: #000;
     overflow-x: hidden;
-    color: var(--black);
     font-weight: 300; }
   
   html {
@@ -55,7 +51,7 @@ header {
     margin: 16px 46px;
     color: #fff;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 30px;
     letter-spacing: 2px;
 }
 
@@ -169,15 +165,17 @@ nav ul li a {
   h4,
   h5,
   h6 {
-    color: #455a64;
-    font-family: "Montserrat", sans-serif;
+    color: #000;
+    font-family: "Popins", sans-serif;
     font-weight: 400; }
   
   h1 {
+    font-weight: 900;
     line-height: 40px;
     font-size: 36px; }
   
   h2 {
+    font-weight: bold;
     line-height: 36px;
     font-size: 24px; }
   
@@ -1609,7 +1607,7 @@ nav ul li a {
   *******************/
   .footer {
     bottom: 0;
-    color: var(--white);
+    color: #000;
     left: 0px;
     font-weight: bold;
     padding: 17px 15px;

@@ -22,25 +22,42 @@ function App() {
         <div className="container-fluid">
           <br />
           <div className="row">
-            <div className="col-md-6 col-sm-12 col-lg-6">
-              <TiempoUso />
-            </div>
-            <div className="col-md-6 col-sm-12 col-lg-6">
-              <Peso />    
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-6 col-sm-12 col-lg-6">
-              <Movimiento />  
-            </div>
-            <div className="col-md-6 col-sm-12 col-lg-6">
-              <Horario />
-            </div>
-          </div>
-          <div className="row">
-              <div className="col-md-12 col-sm-12 col-lg-12">
-                  <Historial />
+            <div className="col-md-12 col-sm-12 col-lg-12">
+              <h1>INFORMACIÓN</h1>
+              <br />
+              <div className="card border-dark mb-3">
+                <div className="card-body">
+                    
+                </div>
               </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-md-12 col-sm-12 col-lg-12">
+              <h1>REPORTES DE USO</h1>
+              <br />
+              <div className="row">
+                <div className="col-md-6 col-sm-12 col-lg-6">
+                  <TiempoUso />
+                </div>
+                <div className="col-md-6 col-sm-12 col-lg-6">
+                  <Peso />    
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-md-6 col-sm-12 col-lg-6">
+                  <Movimiento />  
+                </div>
+                <div className="col-md-6 col-sm-12 col-lg-6">
+                  <Horario />
+                </div>
+              </div>
+              <div className="row">
+                  <div className="col-md-12 col-sm-12 col-lg-12">
+                      <Historial />
+                  </div>
+              </div>
+            </div>
           </div>
         </div>
         <footer className="footer">

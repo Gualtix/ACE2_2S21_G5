@@ -74,7 +74,7 @@ export default class Movimiento extends React.Component{
         return (
             <div className="card border-dark mb-3">
                 <div className="card-body">
-                    <h1>Historial</h1>
+                    <h2>Historial</h2>
                     <div className="table-responsive">
                         <TableDatos data={this.tableHeader} ref={this.childInventarioP}/>
                     </div>

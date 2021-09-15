@@ -52,7 +52,7 @@ export default class Peso extends React.Component{
         return (
             <div className="card border-dark mb-3">
                 <div className="card-body">
-                    <h1>Peso</h1>
+                    <h2>Peso</h2>
                 </div>
                 <div className="card-footer text-right">
                     <strong>Last Update on:</strong>&nbsp;<span className="badge badge-info">{this.state.curTime}</span>
