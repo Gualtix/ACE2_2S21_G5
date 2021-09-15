@@ -91,12 +91,32 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
         .catch(error => console.error(error));
     });
 
+    app.get('/Peso', (req, res)=>{
+        coleccion.find( { en_silla: { $ne: false } }).toArray()
+        .then(result =>
+        {
+            console.log("Obtener datos!!");
+            res.status(200).json(result);
+        })
+        .catch(error => console.error(error));
+    });
+
     app.get('/Horario', (req, res)=>{
         coleccion.find().toArray()
         .then(result =>
         {
             console.log("Obtener datos!!");
             res.status(200).json(Horario(result));
+        })
+        .catch(error => console.error(error));
+    });
+
+    app.get('/Semana', (req, res)=>{
+        coleccion.find().toArray()
+        .then(result =>
+        {
+            console.log("Obtener datos!!");
+            res.status(200).json(Semana(result));
         })
         .catch(error => console.error(error));
     });
@@ -270,5 +290,99 @@ function Levanta_porDia(informacion){
             parado: 0
         }
         return value;
+    }
+}
+
+function Semana(informacion){
+    try{
+        var fecha_envio = Date.now();
+		var n_date = new Date(fecha_envio).toISOString();
+        var time_millis = new Date(n_date).getTime() - (1000 * 60 * 60 * 24);
+        const lista = []
+        const lista_aux = []
+        //listamos solo datos que necesitamos
+        informacion.forEach(element => {
+            var date_chair = new Date(element.fecha).getDay()
+            switch(date_chair)
+            {
+                case 0:
+                    element.dia = "Domingo";
+                    break;
+                case 1:
+                    element.dia = "Lunes";
+                    break;
+                case 2:
+                    element.dia = "Martes";
+                    break;
+                case 3:
+                    element.dia = "Miercoles";
+                    break;
+                case 4:
+                    element.dia = "Jueves";
+                    break;
+                case 5:
+                    element.dia = "Viernes";
+                    break;
+                case 6:
+                    element.dia = "Sabado";
+                    break;                    
+            }
+            lista.push(element);
+        });
+        for(var a = 0; a<7; a++)
+        {
+            let value = {
+                dia: "",
+                uso: 0
+            }
+            switch(a)
+            {
+                case 0:
+                    value.dia = "Domingo";
+                    break;
+                case 1:
+                    value.dia = "Lunes";
+                    break;
+                case 2:
+                    value.dia = "Martes";
+                    break;
+                case 3:
+                    value.dia = "Miercoles";
+                    break;
+                case 4:
+                    value.dia = "Jueves";
+                    break;
+                case 5:
+                    value.dia = "Viernes";
+                    break;
+                case 6:
+                    value.dia = "Sabado";
+                    break;                    
+            }
+            lista_aux.push(value);
+        }
+        for(var day = 0; day<7;day++)
+        {
+            for(var a = 0; a<lista.length; a++)
+            {
+                if(lista[a].en_silla == true && lista[a].dia == lista_aux[day].dia)
+                {
+                    for(var b = a+1; b<lista.length; b++ )
+                    {
+                        if(lista[b].en_silla == false && lista[a].dia == lista_aux[day].dia)
+                        {
+                            lista_aux[day].contador = lista_aux[day].contador + 1;
+                            a = b;
+                            break;
+                        }
+                    }
+                    if(a==lista.length) break;
+                }
+            }
+        }
+        return lista_aux;
+    } catch(error) {
+        console.log(error)
+        return [];
     }
 }
