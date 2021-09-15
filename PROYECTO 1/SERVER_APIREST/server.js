@@ -19,7 +19,7 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
     console.log("Conectado a la base de datos!")
 	const db = client.db(nameDB)
 	const coleccion = db.collection('data')
-
+    
 
     app.get('/', (req, res) => {
         res.send('API ARQUI 2 :D');
@@ -27,7 +27,8 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
 
     app.post('/insertData',(req, res)=>{
         const data = req.body;
-        
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Authorization');
 		if(data.en_silla == null || data.peso == null || data.fecha == null)
 		{
 			res.status(404).send('No se han insertado datos');
@@ -49,6 +50,8 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
     });
 
     app.get('/getAll', async (req, res) => {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Authorization');
         coleccion.find().toArray()
         .then(results => {
             console.log("Obtener datos!");
@@ -58,6 +61,8 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
     });
 
     app.get('/Last3Hour/Simple', async (req, res)=>{
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Authorization');
         coleccion.find().toArray()
         .then(result =>
         {
@@ -68,6 +73,8 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
     });
 
     app.get('/deleteAll', (req, res) => {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Authorization');
         coleccion.drop().then(result => {
             console.log("Eliminado!")
             res.status(200).send("Eliminado!")
@@ -75,6 +82,8 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
     });
 
     app.get('/Last3Hour/Agrupados', (req, res)=>{
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Authorization');
         coleccion.find().toArray()
         .then(result =>
         {
@@ -85,6 +94,8 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
     });
 
     app.get('/Peso', (req, res)=>{
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Authorization');
         coleccion.find( { en_silla: { $ne: false } }).toArray()
         .then(result =>
         {
@@ -95,6 +106,8 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
     });
 
     app.get('/Horario', (req, res)=>{
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Authorization');
         coleccion.find().toArray()
         .then(result =>
         {
@@ -105,6 +118,8 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
     });
 
     app.get('/Semana', (req, res)=>{
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Authorization');
         coleccion.find().toArray()
         .then(result =>
         {
@@ -115,6 +130,8 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
     });
 
     app.get('/Informacion/Levantado/Sentado', (req, res)=>{
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Authorization');
         coleccion.find().toArray()
         .then(result =>
         {
