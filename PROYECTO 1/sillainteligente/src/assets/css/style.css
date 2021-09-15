@@ -30,12 +30,19 @@
     background: #ffffff;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale; }
+
 header {
     width: 100%;
     height: 20vh;
     background: url(../images/background.jpg) no-repeat 50% 50%;
     background-size: cover;
 }
+
+.fades {
+  position: sticky;
+  top: 0;
+}
+
 .content {
     width: 94%;
     margin: 4em auto;
@@ -56,7 +63,6 @@ header {
 }
 
 nav {
-    position: fixed;
     width: 100%;
     line-height: 60px;
 }
