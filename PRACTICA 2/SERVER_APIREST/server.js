@@ -14,13 +14,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json({ limit: '5mb', extended: true }));
 
-/*
-Modelo de datos
-
-
-
-*/
-
 mongoClient.connect(urlMongo, { useUnifiedTopology: true })
 .then(client => {
     console.log("Conectado a la base de datos!")
@@ -295,9 +288,6 @@ function Levanta_porDia(informacion){
 
 function Semana(informacion){
     try{
-        var fecha_envio = Date.now();
-		var n_date = new Date(fecha_envio).toISOString();
-        var time_millis = new Date(n_date).getTime() - (1000 * 60 * 60 * 24);
         const lista = []
         const lista_aux = []
         //listamos solo datos que necesitamos
