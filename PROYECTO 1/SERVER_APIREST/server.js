@@ -36,26 +36,35 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
         res.header("Access-Control-Allow-Origin", "*");
         if(data.Nombre != null || data.Ubicacion != null || data.Silla != null)
         {
-            coleccion1.drop().then(result => {
-                console.log("Eliminado!")
-                const informacion = {
-                    "Nombre_Usuario": data.Nombre,
-                    "Ubicacion": data.Ubicacion,
-                    "Silla": data.Silla
-                }
-                coleccion1.insertOne(informacion)
+            const informacion = {
+                "Nombre_Usuario": data.Nombre,
+                "Ubicacion": data.Ubicacion,
+                "Silla": data.Silla
+            }
+            
+            coleccion1.insertOne(informacion)
                 .then(result => {
-                    console.log("Registro Insertado!");
-                    res.status(200).send('Registro Insertado!');
+                    coleccion1.drop().then(result => {
+                        console.log("Eliminado!")
+                        
+                        coleccion1.insertOne(informacion)
+                        .then(result => {
+                            console.log("Registro Insertado!");
+                            res.status(200).send('Registro Insertado!');
+                        })
+                        .catch(error => {
+                            console.error("Error al insertar un registro: ", error)
+                            res.status(404).send('No se han insertado datos');
+                        });
+                    }).catch(err => {
+                        console.error(err)
+                        res.status(404).send('No se han insertado datos');
+                    });
                 })
                 .catch(error => {
                     console.error("Error al insertar un registro: ", error)
                     res.status(404).send('No se han insertado datos');
                 });
-            }).catch(err => {
-                console.error(err)
-                res.status(404).send('No se han insertado datos');
-            });
         }
         else{
             res.status(404).send('No se han insertado datos');
