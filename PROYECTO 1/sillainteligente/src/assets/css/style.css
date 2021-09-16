@@ -89,12 +89,13 @@ nav ul li {
     padding: 16px 40px;;
 }
 
-nav ul li a {
+nav ul li a  {
     text-decoration: none;
-    color: #fff;
-    font-size: 16px;
-    font-weight: 500;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 900;
 }
+
 
 .menu-icon {
     line-height: 60px;
