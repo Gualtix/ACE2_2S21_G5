@@ -4,6 +4,7 @@ import Horario from '../Graficos/horario/Horario';
 import Peso from '../Graficos/peso/Peso';
 import Historial from '../Historial/Historial';
 import Movimiento from '../Graficos/movimiento/Movimiento';
+import { Link } from 'react-router-dom';
 
 function App() {
   
@@ -17,6 +18,13 @@ function App() {
                </div>
                <div className="logo">
                   SMART CHAIR
+               </div>
+               <div class="menu">
+                  <ul>
+                     <li><Link className="nav-link" to="/">Home</Link></li>
+                     <li><Link className="nav-link" to="/">Reportes</Link></li>
+                     <li><Link className="nav-link" to="/">Perfil</Link></li>
+                  </ul>
                </div>
             </nav>
          </header>
