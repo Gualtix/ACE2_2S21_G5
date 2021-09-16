@@ -1,4 +1,5 @@
 import React from "react";
+import DatosArduino from "../Arduino/Arduino";
 
 export default class Bd extends React.Component {
 
@@ -17,11 +18,7 @@ export default class Bd extends React.Component {
                 <div className="col-md-12 col-sm-12 col-lg-12">
                 <h1>DATA ARDUINO</h1>
                 <br />
-                <div className="card border-dark mb-3">
-                    <div className="card-body">
-                        
-                    </div>
-                </div>
+                <DatosArduino />
                 </div>
             </div>
         </div>

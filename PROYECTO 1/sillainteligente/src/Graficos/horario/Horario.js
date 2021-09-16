@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React from "react";
 import axios from 'axios';
 import Environment from '../../environment';
 
@@ -10,11 +10,15 @@ export default class Horario extends React.Component{
             data: [],
             curTime: ''  
         };
+        this.isSubscribedHorario = false;
         this.url = Environment.HOST + ":" + Environment.PORT;
         this.getData = this.getData.bind(this);
     }
 
     async getData(){
+        this.setState({
+            curTime : new Date().toLocaleString()
+        })
         axios.get(this.url,{})
         .then(
             (response)=>{
@@ -30,21 +34,24 @@ export default class Horario extends React.Component{
         ).catch(err => {})
     }
 
+    setState = (state, callback) => {
+        if (this.isSubscribedHorario) {
+          super.setState(state, callback);
+        }
+     }
+
     async componentDidMount() {
         try {
-            setInterval( () => {
-                this.setState({
-                    curTime : new Date().toLocaleString()
-                })
-            },1000)
-            setInterval(this.getData, 60000);
+            this.isSubscribedHorario = true;
+            setInterval(this.getData, 30000);
         } catch (error) {
             console.log("Errores de render");
         }
 
     }
 
-    componentWillUnmount() {
+    async componentWillUnmount() {
+        this.isSubscribedHorario = false;
         clearInterval(this.getData);
     }
 

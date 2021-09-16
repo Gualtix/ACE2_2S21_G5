@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React from "react";
 import axios from 'axios';
 import Environment from '../../environment';
 
@@ -10,11 +10,16 @@ export default class Movimiento extends React.Component{
             data: [],
             curTime: ''  
         };
+        this.isSubscribedMovimiento = false;
         this.url = Environment.HOST + ":" + Environment.PORT;
         this.getData = this.getData.bind(this);
     }
 
+    
     async getData(){
+        this.setState({
+            curTime : new Date().toLocaleString()
+        })
         axios.get(this.url,{})
         .then(
             (response)=>{
@@ -29,21 +34,24 @@ export default class Movimiento extends React.Component{
         ).catch(err => {})
     }
 
+    setState = (state, callback) => {
+        if (this.isSubscribedMovimiento) {
+          super.setState(state, callback);
+        }
+     }
+
     async componentDidMount() {
         try {
-            setInterval( () => {
-                this.setState({
-                    curTime : new Date().toLocaleString()
-                })
-            },1000)
-            setInterval(this.getData, 1000);
+            this.isSubscribedMovimiento = true;
+            setInterval(this.getData, 30000);
         } catch (error) {
             console.log("Errores de render");
         }
 
     }
 
-    componentWillUnmount() {
+    async componentWillUnmount() {
+        this.isSubscribedMovimiento = false;
         clearInterval(this.getData);
     }
 

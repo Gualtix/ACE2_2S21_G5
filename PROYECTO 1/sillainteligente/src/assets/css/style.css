@@ -96,6 +96,11 @@ nav ul li a  {
     font-weight: 900;
 }
 
+.info {
+  font-weight: bold;
+  color: #000;
+}
+
 
 .menu-icon {
     line-height: 60px;
