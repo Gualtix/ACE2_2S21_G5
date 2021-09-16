@@ -24,10 +24,52 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
     console.log("Conectado a la base de datos!")
 	const db = client.db(nameDB)
 	const coleccion = db.collection('data')
+    const coleccion1 = db.collection('info_usuario')
     
 
     app.get('/', (req, res) => {
         res.send('API ARQUI 2 :D');
+    });
+
+    app.post('/usuario',(req, res)=>{
+        const data = req.body;
+        res.header("Access-Control-Allow-Origin", "*");
+        if(data.Nombre != null || data.Ubicacion != null || data.Silla != null)
+        {
+            coleccion1.drop().then(result => {
+                console.log("Eliminado!")
+                const informacion = {
+                    "Nombre_Usuario": data.Nombre,
+                    "Ubicacion": data.Ubicacion,
+                    "Silla": data.Silla
+                }
+                coleccion1.insertOne(informacion)
+                .then(result => {
+                    console.log("Registro Insertado!");
+                    res.status(200).send('Registro Insertado!');
+                })
+                .catch(error => {
+                    console.error("Error al insertar un registro: ", error)
+                    res.status(404).send('No se han insertado datos');
+                });
+            }).catch(err => {
+                console.error(err)
+                res.status(404).send('No se han insertado datos');
+            });
+        }
+        else{
+            res.status(404).send('No se han insertado datos');
+        }
+    });
+
+    app.get('/usuario/informacion', async (req, res) => {
+        res.header("Access-Control-Allow-Origin", "*");
+        coleccion1.find().toArray()
+        .then(results => {
+            console.log("Obtener datos!");
+            res.status(200).json(results)
+        })
+        .catch(error => console.error(error))
     });
 
     app.post('/insertData',(req, res)=>{
@@ -49,7 +91,10 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
 				console.log("Registro Insertado!");
 				res.status(200).send('Registro Insertado!');
 			})
-			.catch(error => console.error("Error al insertar un registro: ", error));
+			.catch(error => {
+                console.error("Error al insertar un registro: ", error)
+                res.status(404).send('No se han insertado datos');
+            });
 		}
     });
 
