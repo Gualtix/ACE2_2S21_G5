@@ -761,12 +761,19 @@ function Last_Group_Levantar(informacion, option){
         {
             var value = {
                 contador: 0,
-                dia: getDia(Dia)
+                dia: getDia(Dia),
+                veces: 0
             }
+            var dat = null
             for(var a = 0; a<lista.length; a++)
             {
                 if(lista[a].Dia == Dia)
                 {
+                    if(dat != new Date(lista[a].fecha).toLocaleDateString())
+                    {
+                        value.veces = value.veces + 1;
+                        dat = new Date(lista[a].fecha).toLocaleDateString()
+                    }
                     if(lista[a].en_silla == false)
                     {
                         for(var b = a+1; b<lista.length; b++ )
@@ -780,18 +787,18 @@ function Last_Group_Levantar(informacion, option){
                         }
                         if(a==lista.length) break;
                     }
+
                 }
             }
             lista_aux.push(value);
         }
 
-        var sumatoriaObjeto = lista_aux.reduce(function(acumulador, siguienteValor){
+        /*var sumatoriaObjeto = lista_aux.reduce(function(acumulador, siguienteValor){
             return {
               contador: acumulador.contador + siguienteValor.contador
             };
-          }, {contador: 0}); 
-          console.log(sumatoriaObjeto);
-        lista_aux.forEach((element)=>{element.promedio = element.contador/sumatoriaObjeto});
+          }, {contador: 0}); */
+          lista_aux.forEach((element)=>{element.promedio = element.contador/element.veces});
         return lista_aux;
     } catch(error) {
         console.log(error)
@@ -819,12 +826,19 @@ function Semana_Group_Levantar(informacion, option){
             {
                 var value = {
                     contador: 0,
-                    dia: getDia(Dia)
+                    dia: getDia(Dia),
+                    veces: 0
                 }
+                var dat = null
                 for(var a = 0; a<lista.length; a++)
                 {
                     if(lista[a].Dia == Dia)
                     {
+                        if(dat != new Date(lista[a].fecha).toLocaleDateString())
+                        {
+                            value.veces = value.veces + 1;
+                            dat = new Date(lista[a].fecha).toLocaleDateString()
+                        }
                         if(lista[a].en_silla == false)
                         {
                             for(var b = a+1; b<lista.length; b++ )
@@ -848,12 +862,19 @@ function Semana_Group_Levantar(informacion, option){
             {
                 var value = {
                     contador: 0,
-                    dia: getDia(Dia)
+                    dia: getDia(Dia),
+                    veces: 0
                 }
+                var dat = null
                 for(var a = 0; a<lista.length; a++)
                 {
                     if(lista[a].Semana == Number(option) && lista[a].Dia == Dia)
                     {
+                        if(dat != new Date(lista[a].fecha).toLocaleDateString())
+                        {
+                            value.veces = value.veces + 1;
+                            dat = new Date(lista[a].fecha).toLocaleDateString()
+                        }
                         if(lista[a].en_silla == false)
                         {
                             for(var b = a+1; b<lista.length; b++ )
@@ -873,12 +894,12 @@ function Semana_Group_Levantar(informacion, option){
             }
         }
 
-        var sumatoriaObjeto = lista_aux.reduce(function(acumulador, siguienteValor){
+        /*var sumatoriaObjeto = lista_aux.reduce(function(acumulador, siguienteValor){
             return {
               contador: acumulador.contador + siguienteValor.contador
             };
-          }, {contador: 0}); 
-        lista_aux.forEach((element)=>{element.promedio = element.contador/sumatoriaObjeto});
+          }, {contador: 0}); */
+          lista_aux.forEach((element)=>{element.promedio = element.contador/element.veces});
         return lista_aux;
     } catch(error) {
         console.log(error)
@@ -905,16 +926,21 @@ function Mes_Group_Levantar(informacion, option){
             {
                 var value = {
                     contador: 0,
-                    dia: getDay(Dia)
+                    dia: getDay(Dia),
+                    veces = 0
                 }   
-                var peso = 0;
+                var dat = null;
                 for(var a = 0; a<lista.length; a++)
                 {
                     (lista[a].Dia == Dia)
                     {
+                        if(dat != new Date(lista[a].fecha).toLocaleDateString())
+                        {
+                            value.veces = value.veces + 1;
+                            dat = new Date(lista[a].fecha).toLocaleDateString()
+                        }
                         if(lista[a].en_silla == false)
                         {
-                            peso = peso + lista[a].peso;
                             for(var b = a+1; b<lista.length; b++ )
                             {
                                 if(lista[b].en_silla == true)
@@ -937,16 +963,21 @@ function Mes_Group_Levantar(informacion, option){
             {
                 var value = {
                     contador: 0,
-                    dia: getDay(Dia)
+                    dia: getDay(Dia),
+                    veces: 0
                 }  
-                var peso = 0;
+                var dat = null;
                 for(var a = 0; a<lista.length; a++)
                 {
                     if(lista[a].Mes == Number(option) && lista[a].Dia == Dia)
                     {
+                        if(dat != new Date(lista[a].fecha).toLocaleDateString())
+                        {
+                            value.veces = value.veces + 1;
+                            dat = new Date(lista[a].fecha).toLocaleDateString()
+                        }
                         if(lista[a].en_silla == false)
                         {
-                            peso = peso + lista[a].peso;
                             for(var b = a+1; b<lista.length; b++ )
                             {
                                 if(lista[b].en_silla == true)
@@ -963,12 +994,12 @@ function Mes_Group_Levantar(informacion, option){
                 lista_aux.push(value);
             }
         }
-        var sumatoriaObjeto = lista_aux.reduce(function(acumulador, siguienteValor){
+        /*var sumatoriaObjeto = lista_aux.reduce(function(acumulador, siguienteValor){
             return {
               contador: acumulador.contador + siguienteValor.contador
             };
-          }, {contador: 0}); 
-        lista_aux.forEach((element)=>{element.promedio = element.contador/sumatoriaObjeto});
+          }, {contador: 0}); */
+          lista_aux.forEach((element)=>{element.promedio = element.contador/element.veces});
         return lista_aux;
     } catch(error) {
         console.log(error)
