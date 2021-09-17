@@ -1227,7 +1227,8 @@ function Uso_Silla(informacion)
         const lista = []
         const lista_aux = []
         //listamos solo datos que necesitamos
-        var actual = Date.now().getWeekNumber();
+        var actual_temp = Date.now();
+        var actual = new Date(actual_temp).getWeekNumber()
         informacion.forEach(element => {
             var date_chair = new Date(element.fecha).getWeekNumber();
             if(actual == date_chair) lista.push(element);
@@ -1280,7 +1281,8 @@ function Uso_Historial(informacion)
         const lista = []
         const lista_aux = []
         //listamos solo datos que necesitamos
-        var actual = Date.now().getWeekNumber();
+        var actual_temp = Date.now();
+        var actual = new Date(actual_temp).getWeekNumber()
         informacion.forEach(element => {
             var date_chair = new Date(element.fecha).getWeekNumber();
             if(actual == date_chair) lista.push(element);
