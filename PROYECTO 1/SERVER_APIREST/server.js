@@ -790,6 +790,7 @@ function Last_Group_Levantar(informacion, option){
               contador: acumulador.contador + siguienteValor.contador
             };
           }, {contador: 0}); 
+          console.log(sumatoriaObjeto);
         lista_aux.forEach((element)=>{element.promedio = element.contador/sumatoriaObjeto});
         return lista_aux;
     } catch(error) {
