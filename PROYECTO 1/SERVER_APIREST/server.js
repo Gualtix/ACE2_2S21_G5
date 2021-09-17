@@ -423,7 +423,7 @@ function Last_Group_Peso(informacion){
                     peso = peso + lista[a].peso;
                 }
             }
-            value.peso = (contador>0)?(peso/value.contador).toFixed(2): 0.00;
+            value.peso = (value.contador>0)?(peso/value.contador).toFixed(2): 0.00;
             lista_aux.push(value);
         }
         return lista_aux;
@@ -458,7 +458,7 @@ function Semana_Group_Peso(informacion){
                     peso = peso + lista[a].peso;
                 }
             }
-            value.peso = (contador>0)?(peso/value.contador).toFixed(2): 0.00;
+            value.peso = (value.contador>0)?(peso/value.contador).toFixed(2): 0.00;
             lista_aux.push(value);
         }
 
@@ -494,7 +494,7 @@ function Mes_Group_Peso(informacion){
                     peso = peso + lista[a].peso;
                 }
             }
-            value.peso = (contador>0)?(peso/value.contador).toFixed(2): 0.00;
+            value.peso = (value.contador>0)?(peso/value.contador).toFixed(2): 0.00;
             lista_aux.push(value);
         }
         return lista_aux;
@@ -548,7 +548,7 @@ function Last_Group_Info(informacion, option){
                     if(a==lista.length) break;
                 }
             }
-            value.peso = (contador>0)?(peso/value.contador).toFixed(2): 0.00;
+            value.peso = (value.contador>0)?(peso/value.contador).toFixed(2): 0.00;
             lista_aux.push(value);
         }
         else
@@ -576,7 +576,7 @@ function Last_Group_Info(informacion, option){
                     }
                 }
             }
-            value.peso = (contador>0)?(peso/value.contador).toFixed(2): 0.00;
+            value.peso = (value.contador>0)?(peso/value.contador).toFixed(2): 0.00;
             lista_aux.push(value);
         }
 
@@ -625,7 +625,7 @@ function Semana_Group_Info(informacion, option){
                     if(a==lista.length) break;
                 }
             }
-            value.peso = (contador>0)?(peso/value.contador).toFixed(2): 0.00;
+            value.peso = (value.contador>0)?(peso/value.contador).toFixed(2): 0.00;
             lista_aux.push(value);
         }
         else{
@@ -652,7 +652,7 @@ function Semana_Group_Info(informacion, option){
                     }
                 }
             }
-            value.peso = (contador>0)?(peso/value.contador).toFixed(2): 0.00;
+            value.peso = (value.contador>0)?(peso/value.contador).toFixed(2): 0.00;
             lista_aux.push(value);
         }
 
@@ -700,7 +700,7 @@ function Mes_Group_Info(informacion, option){
                     if(a==lista.length) break;
                 }
             }
-            value.peso = (contador>0)?(peso/value.contador).toFixed(2): 0.00;
+            value.peso = (value.contador>0)?(peso/value.contador).toFixed(2): 0.00;
             lista_aux.push(value);
         }
         else
@@ -728,7 +728,7 @@ function Mes_Group_Info(informacion, option){
                     }
                 }
             }
-            value.peso = (contador>0)?(peso/value.contador).toFixed(2): 0.00;
+            value.peso = (value.contador>0)?(peso/value.contador).toFixed(2): 0.00;
             lista_aux.push(value);
         }
         return lista_aux;
@@ -800,7 +800,7 @@ function Last_Group_Levantar(informacion, option){
                     }
                 }
             }
-            value.peso = (contador>0)?(peso/value.contador).toFixed(2): 0.00;
+            value.peso = (value.contador>0)?(peso/value.contador).toFixed(2): 0.00;
             lista_aux.push(value);
         }
 
@@ -993,8 +993,8 @@ function Last_Group_Promedio(informacion){
                 }
 
             }
-            value.peso = (contador>0)?(peso/value.contador).toFixed(2): 0.00;
-            value.horas = (contador>0)?(value.horas/contador).toFixed(2): 0.00;
+            value.peso = (value.contador>0)?(peso/value.contador).toFixed(2): 0.00;
+            value.horas = (value.contador>0)?(value.horas/contador).toFixed(2): 0.00;
             lista_aux.push(value);
         }
         return lista_aux;
@@ -1046,8 +1046,8 @@ function Semana_Group_Promedio(informacion){
                 }
 
             }
-            value.peso = (contador>0)?(peso/value.contador).toFixed(2): 0.00;
-            value.horas = (contador>0)?(value.horas/contador).toFixed(2): 0.00;
+            value.peso = (value.contador>0)?(peso/value.contador).toFixed(2): 0.00;
+            value.horas = (value.contador>0)?(value.horas/contador).toFixed(2): 0.00;
             lista_aux.push(value);
         }
 
@@ -1099,8 +1099,8 @@ function Mes_Group_Promedio(informacion){
                     }
                 }
             }
-            value.peso = (contador>0)?(peso/value.contador).toFixed(2): 0.00;
-            value.horas = (contador>0)?(value.horas/contador).toFixed(2): 0.00;
+            value.peso = (value.contador>0)?(peso/value.contador).toFixed(2): 0.00;
+            value.horas = (value.contador>0)?(value.horas/contador).toFixed(2): 0.00;
             lista_aux.push(value);
         }
 
@@ -1345,7 +1345,7 @@ function Last_Group(informacion){
                     }
                 }
             }
-            value.peso = (contador>0)?(peso/value.contador).toFixed(2): 0.00;
+            value.peso = (value.contador>0)?(peso/value.contador).toFixed(2): 0.00;
             lista_aux.push(value);
         }
         return lista_aux;
@@ -1418,7 +1418,7 @@ function Semana_Group(informacion){
                     }
                 }
             }
-            value.peso = (contador>0)?(peso/value.contador).toFixed(2): 0.00;
+            value.peso = (value.contador>0)?(peso/value.contador).toFixed(2): 0.00;
             lista_aux.push(value);
         }
 
@@ -1467,7 +1467,7 @@ function Mes_Group(informacion){
                     }
                 }
             }
-            value.peso = (contador>0)?(peso/value.contador).toFixed(2): 0.00;
+            value.peso = (value.contador>0)?(peso/value.contador).toFixed(2): 0.00;
             lista_aux.push(value);
         }
         return lista_aux;
