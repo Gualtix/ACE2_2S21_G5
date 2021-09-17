@@ -1299,15 +1299,16 @@ function Uso_Historial(informacion)
             if(lista[a].en_silla == true)
             {
                 let value = {
-                    dia: getDia(day)
+                    fecha: new Date(lista[a].fecha).toLocaleDateString(),
+                    entrada: new Date(lista[a].fecha).toLocaleTimeString(),
+                    tiempo: 0
                 }
-                value.fecha = new Date(lista[a].fecha).toLocaleDateString();
-                value.entrada = new Date(lista[a].fecha).toLocaleTimeString();
                 for(var b = a+1; b<lista.length; b++ )
                 {
                     if(lista[b].en_silla == false)
                     {
                         value.salida = new Date(lista[b].fecha).toLocaleTimeString();
+                        value.tiempo = ((new Date(lista[b].fecha).getTime() - new Date(lista[a].fecha).getTime())/216000).toFixed(2)
                         a = b;
                         break;
                     }
