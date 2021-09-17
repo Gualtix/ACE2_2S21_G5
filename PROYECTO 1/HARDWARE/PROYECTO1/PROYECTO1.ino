@@ -35,9 +35,10 @@ HX711 bascula;
 
 void setup() {
   // Iniciar comunicación serie
-#ifdef DEBUG_HX711
   Serial.begin(9600);
-  Serial.println("[HX7] Inicio del sensor HX711");
+#ifdef DEBUG_HX711
+  
+  //Serial.println("[HX7] Inicio del sensor HX711");
 #endif
 
   // Iniciar sensor
@@ -57,6 +58,7 @@ void loop() {
   identificar();
   medir_peso();
   datas();
+  Serial.println(data);
   delayMicroseconds(500);
   reset_data();
 }
@@ -103,11 +105,15 @@ void medir_peso()
 {
   if(en_silla)
   {
-    Serial.print("[HX7] Leyendo: ");
+    //Serial.print("[HX7] Leyendo: ");
     peso = (bascula.get_units() * -1);
-    Serial.print(peso, 1);
-    Serial.print(" Kg");
-    Serial.println();
+    //Serial.print(peso, 1);
+    //Serial.print(" Kg");
+    //Serial.println();
+  }
+  else
+  {
+    peso = 0.00;
   }
 }
 
@@ -125,5 +131,5 @@ void identificar()
   distance = duration / 59;
   //if(distance>0 && distance<60) en_silla = true;
   en_silla = (distance > 0 && distance < 10) ? true : false;
-  Serial.println(en_silla ? "Sentado" : "De pie");
+  //Serial.println(en_silla ? "Sentado" : "De pie");
 }
