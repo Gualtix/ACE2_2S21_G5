@@ -798,7 +798,7 @@ function Last_Group_Levantar(informacion, option){
               contador: acumulador.contador + siguienteValor.contador
             };
           }, {contador: 0}); */
-          lista_aux.forEach((element)=>{element.promedio = element.contador/element.veces});
+          lista_aux.forEach((element)=>{element.promedio = (element.veces==0)?0:element.contador/element.veces});
         return lista_aux;
     } catch(error) {
         console.log(error)
@@ -899,7 +899,7 @@ function Semana_Group_Levantar(informacion, option){
               contador: acumulador.contador + siguienteValor.contador
             };
           }, {contador: 0}); */
-          lista_aux.forEach((element)=>{element.promedio = element.contador/element.veces});
+          lista_aux.forEach((element)=>{element.promedio = (element.veces==0)?0:element.contador/element.veces});
         return lista_aux;
     } catch(error) {
         console.log(error)
@@ -999,7 +999,7 @@ function Mes_Group_Levantar(informacion, option){
               contador: acumulador.contador + siguienteValor.contador
             };
           }, {contador: 0}); */
-          lista_aux.forEach((element)=>{element.promedio = element.contador/element.veces});
+          lista_aux.forEach((element)=>{element.promedio = (element.veces==0)?0:element.contador/element.veces});
         return lista_aux;
     } catch(error) {
         console.log(error)
