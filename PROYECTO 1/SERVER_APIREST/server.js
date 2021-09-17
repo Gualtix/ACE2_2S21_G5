@@ -1270,7 +1270,7 @@ function Uso_Silla(informacion)
               contador: acumulador.contador + siguienteValor.contador
             };
           }, {contador: 0});
-        var promedio = sumatoriaObjeto/lista_aux.length;
+        var promedio = sumatoriaObjeto.contador/lista_aux.length;
         lista_aux.forEach(element => {    
             element.promedio = promedio;
         });
