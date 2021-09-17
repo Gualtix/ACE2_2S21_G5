@@ -30,8 +30,10 @@ export default class Peso extends React.Component{
     {
         let m = (y1-y0)/(x1-x0);
         let values = []
+        console.log(x0,y0,x1,y1,data)
         for(var a=1; a<data; a++)
         {
+            
             values.push(m * (a-x0) + y0)
         }
         return values;
@@ -76,7 +78,7 @@ export default class Peso extends React.Component{
                                     tendencia.push(this.calculo(anteriorx,anteriory,a,element.peso));
                                     anteriorx = a;
                                     anteriory = element.peso;
-                                    cantidad = cantidad +element.peso;
+                                    cantidad = cantidad + Number(element.peso);
                                     a++;
                                 });
                                 break;
@@ -87,7 +89,7 @@ export default class Peso extends React.Component{
                                     tendencia.push(this.calculo(anteriorx,anteriory,a,element.peso));
                                     anteriorx = a;
                                     anteriory = element.peso;
-                                    cantidad = cantidad +element.peso;
+                                    cantidad = cantidad + Number(element.peso)
                                     a++;
                                 });
                                 break;
@@ -98,12 +100,13 @@ export default class Peso extends React.Component{
                                     tendencia.push(this.calculo(anteriorx,anteriory,a,element.peso));
                                     anteriorx = a;
                                     anteriory = element.peso;
-                                    cantidad = cantidad +element.peso;
+                                    cantidad = cantidad + Number(element.peso)
                                     a++;
                                 });
                                 break;
                         }
-                        let tendencia1 = this.calculoten(0,datito[0],a-1,(cantidad/(a-1),datito.length));
+                        let tendencia1 = this.calculoten(0,datito[0],a-1,(cantidad/(a-1)), datito.length);
+                        
                         const data = {
                             labels: label,
                             datasets: [

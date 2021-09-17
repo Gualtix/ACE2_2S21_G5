@@ -1377,15 +1377,16 @@ function Horario_Semanal(informacion)
             var dia_anterior = null;
             for(var a = 0; a<lista.length; a++)
             {
-                var hora_actual = new Date(lista[a].fecha).getHours();
+                var hora_actual_temp = new Date(lista[a].fecha)
+                var hora_actual = hora_actual_temp.getHours();
                 if(hora_actual == hora)
                 {
-                    if(dia_anterior != lista[a].fecha)
+                    if(dia_anterior != new Date(lista[a].fecha).toLocaleDateString())
                     {
                         if(lista[a].en_silla == true)
                         {
                             value.contador = value.contador + 1;
-                            dia_anterior = lista[a].fecha
+                            dia_anterior = new Date(lista[a].fecha).toLocaleDateString()
                         }
                     }
                 }

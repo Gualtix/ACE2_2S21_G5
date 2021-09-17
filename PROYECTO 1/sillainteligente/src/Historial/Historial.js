@@ -38,7 +38,7 @@ export default class Movimiento extends React.Component{
                             {
                                 var date = new Date(item.fecha1).getTime();
                                 var date1 = new Date(item.fecha2).getTime();
-                                var tiempo = (date1 - date)/3600;
+                                var tiempo = (date1 - date)/3600000;
                                 datito.push(
                                     {
                                         fecha: new Date(item.fecha1).toLocaleString(),
