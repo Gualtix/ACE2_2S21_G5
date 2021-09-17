@@ -11,7 +11,7 @@ var axios = require('axios');
 //SERIAL
 var SerialPort = require("serialport");
 var Delimiter = require('@serialport/parser-delimiter');
-var arduinoCOMPort = "\\\\.\\COM8";
+var arduinoCOMPort = "\\\\.\\COM7";
 
 app.use(cookieParser());
 app.use(cors());
@@ -25,20 +25,19 @@ Modelo de datos
 */
 
 
-var arduinoSerialPort = new SerialPort(arduinoCOMPort, {  
- baudRate: 9600
+var arduinoSerialPort = new SerialPort(arduinoCOMPort, {
+	baudRate: 9600
 });
 
-arduinoSerialPort.on('open',function() {
-  console.log('Serial Port ' + arduinoCOMPort + ' is opened.');
+arduinoSerialPort.on('open', function () {
+	console.log('Serial Port ' + arduinoCOMPort + ' is opened.');
 });
 
 var parser = arduinoSerialPort.pipe(new Delimiter({ delimiter: '\n' }));
 
-parser.on('data', function(data){
+parser.on('data', function (data) {
 	var dato = data.toString();
-	if(dato.includes('{') && dato.includes('}'))
-	{
+	if (dato.includes('{') && dato.includes('}')) {
 		var fecha_envio = Date.now();
 		var n_date = new Date(fecha_envio).toISOString();
 		var datos = JSON.parse(JSON.parse(JSON.stringify(dato)));
@@ -54,20 +53,20 @@ parser.on('data', function(data){
 
 });
 
-sendData = function(body) {
+sendData = function (body) {
 	var config = {
 		method: 'post',
 		host: hostname,
 		port: port,
 		path: '/insertData',
-		url: 'http://'+hostname+':'+port+'/insertData',
+		url: 'http://' + hostname + ':' + port + '/insertData',
 		headers: {
-		  'Content-Type': 'application/json'
+			'Content-Type': 'application/json'
 		},
-		data : body
+		data: body
 	};
 
 	axios(config)
-	.then(function (response) { console.log(response.status, response.data); })
-	.catch(function (error) {});
+		.then(function (response) { console.log(response.status, response.data); })
+		.catch(function (error) { });
 }
