@@ -1,8 +1,7 @@
 import React,{Component} from "react";
 import axios from 'axios';
 import Environment from '../environment';
-import Swal from 'sweetalert2/dist/sweetalert2.js'
-import 'sweetalert2/src/sweetalert2.scss'
+import Swal from 'sweetalert2'
 
 export default class Configuraciones extends React.Component{
     constructor(props){
