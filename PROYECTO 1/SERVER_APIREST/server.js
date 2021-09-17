@@ -408,7 +408,7 @@ function getTime(informacion){
                 if(informacion[a].en_silla == false)
                 {
                     value.inicio = informacion[a].fecha;
-                    value.tiempo = ((new Date(value.final).getTime() - new Date(value.inicio).getTime())/3600).toFixed(2)
+                    value.tiempo = ((new Date(value.final).getTime() - new Date(value.inicio).getTime())/(1000*60*60)).toFixed(2)
                     return [value];
                 }
             }
@@ -570,7 +570,7 @@ function Last_Group_Info(informacion, option){
                         {
                             value.contador = value.contador + 1;
                             peso = peso + lista[b].peso;
-                            value.horas = Number(value.horas) + Number(((new Date(lista[b].fecha).getTime() - new Date(lista[a].fecha).getTime())/216000).toFixed(2))
+                            value.horas = Number(value.horas) + Number(((new Date(lista[b].fecha).getTime() - new Date(lista[a].fecha).getTime())/(1000*60*60)).toFixed(2))
                             a = b;
                             break;
                         }
@@ -597,7 +597,7 @@ function Last_Group_Info(informacion, option){
                             {
                                 value.contador = value.contador + 1;
                                 peso = peso + lista[b].peso;
-                                value.horas = Number(value.horas) + Number(((new Date(lista[b].fecha).getTime() - new Date(lista[a].fecha).getTime())/216000).toFixed(2))
+                                value.horas = Number(value.horas) + Number(((new Date(lista[b].fecha).getTime() - new Date(lista[a].fecha).getTime())/(1000*60*60)).toFixed(2))
                                 a = b;
                                 break;
                             }
@@ -647,7 +647,7 @@ function Semana_Group_Info(informacion, option){
                         {
                             value.contador = value.contador + 1;
                             peso = peso + lista[b].peso;
-                            value.horas = Number(value.horas) + Number(((new Date(lista[b].fecha).getTime() - new Date(lista[a].fecha).getTime())/216000).toFixed(2))
+                            value.horas = Number(value.horas) + Number(((new Date(lista[b].fecha).getTime() - new Date(lista[a].fecha).getTime())/(1000*60*60)).toFixed(2))
                             a = b;
                             break;
                         }
@@ -673,7 +673,7 @@ function Semana_Group_Info(informacion, option){
                             {
                                 value.contador = value.contador + 1;
                                 peso = peso + lista[b].peso;
-                                value.horas = Number(value.horas) + Number(((new Date(lista[b].fecha).getTime() - new Date(lista[a].fecha).getTime())/216000).toFixed(2))
+                                value.horas = Number(value.horas) + Number(((new Date(lista[b].fecha).getTime() - new Date(lista[a].fecha).getTime())/(1000*60*60)).toFixed(2))
                                 a = b;
                                 break;
                             }
@@ -722,7 +722,7 @@ function Mes_Group_Info(informacion, option){
                         {
                             value.contador = value.contador + 1;
                             peso = peso + lista[b].peso;
-                            value.horas = Number(value.horas) + Number(((new Date(lista[b].fecha).getTime() - new Date(lista[a].fecha).getTime())/216000).toFixed(2))
+                            value.horas = Number(value.horas) + Number(((new Date(lista[b].fecha).getTime() - new Date(lista[a].fecha).getTime())/(1000*60*60)).toFixed(2))
                             a = b;
                             break;
                         }
@@ -749,7 +749,7 @@ function Mes_Group_Info(informacion, option){
                             {
                                 value.contador = value.contador + 1;
                                 peso = peso + lista[b].peso;
-                                value.horas = Number(value.horas) + Number(((new Date(lista[b].fecha).getTime() - new Date(lista[a].fecha).getTime())/216000).toFixed(2))
+                                value.horas = Number(value.horas) + Number(((new Date(lista[b].fecha).getTime() - new Date(lista[a].fecha).getTime())/(1000*60*60)).toFixed(2))
                                 a = b;
                                 break;
                             }
@@ -1076,7 +1076,7 @@ function Last_Group_Promedio(informacion){
                             {
                                 value.contador = value.contador + 1;
                                 peso = peso + lista[b].peso;
-                                value.horas = Number(value.horas) + Number(((new Date(lista[b].fecha).getTime() - new Date(lista[a].fecha).getTime())/216000).toFixed(2))
+                                value.horas = Number(value.horas) + Number(((new Date(lista[b].fecha).getTime() - new Date(lista[a].fecha).getTime())/(1000*60*60)).toFixed(2))
                                 a = b;
                                 break;
                             }
@@ -1129,7 +1129,7 @@ function Semana_Group_Promedio(informacion){
                             {
                                 value.contador = value.contador + 1;
                                 peso = peso + lista[b].peso;
-                                value.horas = Number(value.horas) + Number(((new Date(lista[b].fecha).getTime() - new Date(lista[a].fecha).getTime())/216000).toFixed(2))
+                                value.horas = Number(value.horas) + Number(((new Date(lista[b].fecha).getTime() - new Date(lista[a].fecha).getTime())/(1000*60*60)).toFixed(2))
                                 a = b;
                                 break;
                             }
@@ -1183,7 +1183,7 @@ function Mes_Group_Promedio(informacion){
                             {
                                 value.contador = value.contador + 1;
                                 peso = peso + lista[b].peso;
-                                value.horas = Number(value.horas) + Number(((new Date(lista[b].fecha).getTime() - new Date(lista[a].fecha).getTime())/216000).toFixed(2))
+                                value.horas = Number(value.horas) + Number(((new Date(lista[b].fecha).getTime() - new Date(lista[a].fecha).getTime())/(1000*60*60)).toFixed(2))
                                 a = b;
                                 break;
                             }
@@ -1338,7 +1338,7 @@ function Uso_Historial(informacion)
                     if(lista[b].en_silla == false)
                     {
                         value.salida = new Date(lista[b].fecha).toLocaleTimeString();
-                        value.tiempo = ((new Date(lista[b].fecha).getTime() - new Date(lista[a].fecha).getTime())/216000).toFixed(2)
+                        value.tiempo = ((new Date(lista[b].fecha).getTime() - new Date(lista[a].fecha).getTime())/(1000*60*60)).toFixed(2)
                         a = b;
                         break;
                     }

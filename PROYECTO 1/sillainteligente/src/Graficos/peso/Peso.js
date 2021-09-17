@@ -20,18 +20,23 @@ export default class Peso extends React.Component{
         this.calculo = this.calculo.bind(this);
     }
 
-    calculo = (x0,y0,x1,y1,data)=>
+    calculo = (x0,y0,x1,y1)=>
     {
         let m = (y1-y0)/(x1-x0);
-        let dat = [];
-        var a = 1;
-        data.forEach((element)=>
-        {
-            dat.push(m*a)
-            a++;
-        })
-        return dat;
+        return m * (x1-x0) + y0;
     }
+
+    calculoten = (x0,y0,x1,y1, data)=>
+    {
+        let m = (y1-y0)/(x1-x0);
+        let values = []
+        for(var a=1; a<data; a++)
+        {
+            values.push(m * (a-x0) + y0)
+        }
+        return values;
+    }
+
 
     async getData(){
         if(this.isSubscribedPeso)
@@ -57,28 +62,48 @@ export default class Peso extends React.Component{
                     if(response.data.length > 0){
                         let datito = [];
                         let label = [];
+                        let tendencia = [];
+                        let anteriorx = 0;
+                        let anteriory = 0;
+                        let cantidad = 0;
+                        let a = 1;
                         switch(this.state.tipo)
                         {
                             case "mes":
                                 response.data.forEach(element => {
                                     label.push(element.mes)
                                     datito.push(element.peso)
+                                    tendencia.push(this.calculo(anteriorx,anteriory,a,element.peso));
+                                    anteriorx = a;
+                                    anteriory = element.peso;
+                                    cantidad = cantidad +element.peso;
+                                    a++;
                                 });
                                 break;
                             case "semana":
                                 response.data.forEach(element => {
                                     label.push(element.semana)
-                                    datito.push(element.peso)
+                                    datito.push(element.peso);
+                                    tendencia.push(this.calculo(anteriorx,anteriory,a,element.peso));
+                                    anteriorx = a;
+                                    anteriory = element.peso;
+                                    cantidad = cantidad +element.peso;
+                                    a++;
                                 });
                                 break;
                             default:
                                 response.data.forEach(element => {
                                     label.push(element.dia)
-                                    datito.push(element.peso)
+                                    datito.push(element.peso);
+                                    tendencia.push(this.calculo(anteriorx,anteriory,a,element.peso));
+                                    anteriorx = a;
+                                    anteriory = element.peso;
+                                    cantidad = cantidad +element.peso;
+                                    a++;
                                 });
                                 break;
                         }
-                        let tendencia = this.calculo(1,datito[0], datito.length, datito[datito.length-1],datito);
+                        let tendencia1 = this.calculoten(0,datito[0],a-1,(cantidad/(a-1),datito.length));
                         const data = {
                             labels: label,
                             datasets: [
@@ -90,10 +115,16 @@ export default class Peso extends React.Component{
                                 borderColor: "rgba(75,192,192,1)"
                               },
                               {
-                                label: "Tendencia",
+                                label: "Tendencia-a",
                                 data: tendencia,
                                 fill: false,
                                 borderColor: "#742774"
+                              },
+                              {
+                                label: "Tendencia-b",
+                                data: tendencia1,
+                                fill: false,
+                                borderColor: "#900C3F"
                               }
                             ]
                           };
