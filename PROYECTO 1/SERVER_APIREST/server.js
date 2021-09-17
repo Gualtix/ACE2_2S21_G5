@@ -1076,7 +1076,7 @@ function Last_Group_Promedio(informacion){
                             {
                                 value.contador = value.contador + 1;
                                 peso = peso + lista[b].peso;
-                                value.horas = Number(value.horas) + Number(((new Date(lista[b].fecha).getTime() - new Date(lista[a].fecha).getTime())/(1000*60*60)).toFixed(2))
+                                value.horas = Number(value.horas) + Number(((new Date(lista[b].fecha).getTime() - new Date(lista[a].fecha).getTime())).toFixed(2))
                                 a = b;
                                 break;
                             }
@@ -1087,7 +1087,7 @@ function Last_Group_Promedio(informacion){
 
             }
             value.peso = (value.contador>0)?(peso/value.contador).toFixed(2): 0.00;
-            value.horas = (value.contador>0)?(value.horas/value.contador).toFixed(2): 0.00;
+            value.horas = (value.contador>0)?((value.horas/value.contador)).toFixed(2): 0.00;
             lista_aux.push(value);
         }
         return lista_aux;
@@ -1129,7 +1129,7 @@ function Semana_Group_Promedio(informacion){
                             {
                                 value.contador = value.contador + 1;
                                 peso = peso + lista[b].peso;
-                                value.horas = Number(value.horas) + Number(((new Date(lista[b].fecha).getTime() - new Date(lista[a].fecha).getTime())/(1000*60*60)).toFixed(2))
+                                value.horas = Number(value.horas) + Number(((new Date(lista[b].fecha).getTime() - new Date(lista[a].fecha).getTime())).toFixed(2))
                                 a = b;
                                 break;
                             }
@@ -1183,7 +1183,7 @@ function Mes_Group_Promedio(informacion){
                             {
                                 value.contador = value.contador + 1;
                                 peso = peso + lista[b].peso;
-                                value.horas = Number(value.horas) + Number(((new Date(lista[b].fecha).getTime() - new Date(lista[a].fecha).getTime())/(1000*60*60)).toFixed(2))
+                                value.horas = Number(value.horas) + Number(((new Date(lista[b].fecha).getTime() - new Date(lista[a].fecha).getTime())).toFixed(2))
                                 a = b;
                                 break;
                             }

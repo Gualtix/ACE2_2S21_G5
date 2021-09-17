@@ -45,7 +45,7 @@ export default class Movimiento extends React.Component{
                                         entrada: new Date(item.fecha1).toLocaleTimeString(),
                                         salida: new Date(item.fecha2).toLocaleTimeString(),
                                         peso: ((item.peso1 + item.peso2)/2).toFixed(2) + " Kg",
-                                        tiempo_uso: tiempo.toFixed(2) + " min"
+                                        tiempo_uso: tiempo.toFixed(2) + " hrs"
                                     }
                                 );
                             }
