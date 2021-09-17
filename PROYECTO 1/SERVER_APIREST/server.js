@@ -755,35 +755,17 @@ function Last_Group_Levantar(informacion, option){
                 lista.push(element);
             }
         });
-        var value = {
-            contador: 0
-        }
 
-        if(option == "all")
+
+        for(var Dia = 0; Dia<7; Dia++)
         {
-            for(var a = 0; a<lista.length; a++)
-            {
-                if(lista[a].en_silla == false)
-                {
-                    for(var b = a+1; b<lista.length; b++ )
-                    {
-                        if(lista[b].en_silla == true)
-                        {
-                            value.contador = value.contador + 1;
-                            a = b;
-                            break;
-                        }
-                    }
-                    if(a==lista.length) break;
-                }
+            var value = {
+                contador: 0,
+                dia: getDia(Dia)
             }
-            lista_aux.push(value);
-        }
-        else
-        {
             for(var a = 0; a<lista.length; a++)
             {
-                if(lista[a].Dia == Number(option))
+                if(lista[a].Dia == Dia)
                 {
                     if(lista[a].en_silla == false)
                     {
@@ -800,10 +782,15 @@ function Last_Group_Levantar(informacion, option){
                     }
                 }
             }
-            value.peso = (value.contador>0)?(peso/value.contador).toFixed(2): 0.00;
             lista_aux.push(value);
         }
 
+        var sumatoriaObjeto = lista_aux.reduce(function(acumulador, siguienteValor){
+            return {
+              contador: acumulador.contador + siguienteValor.contador
+            };
+          }, {contador: 0}); 
+        lista_aux.forEach((element)=>{element.promedio = element.contador/sumatoriaObjeto});
         return lista_aux;
     } catch(error) {
         console.log(error)
@@ -819,56 +806,78 @@ function Semana_Group_Levantar(informacion, option){
         //listamos solo datos que necesitamos
         informacion.forEach(element => {
             element.Semana = new Date(element.fecha).getWeekNumber();
+            element.Dia = new Date(element.fecha).getDay();
             lista.push(element);
         });
 
-        var value = {
-            contador: 0
-        }
+
 
         if(option=="all")
         {
-            for(var a = 0; a<lista.length; a++)
+            for(var Dia = 0; Dia<7; Dia++)
             {
-                if(lista[a].en_silla == false)
+                var value = {
+                    contador: 0,
+                    dia: getDia(Dia)
+                }
+                for(var a = 0; a<lista.length; a++)
                 {
-                    for(var b = a+1; b<lista.length; b++ )
+                    if(lista[a].Dia == Dia)
                     {
-                        if(lista[b].en_silla == true)
+                        if(lista[a].en_silla == false)
                         {
-                            value.contador = value.contador + 1;
-                            a = b;
-                            break;
+                            for(var b = a+1; b<lista.length; b++ )
+                            {
+                                if(lista[b].en_silla == true)
+                                {
+                                    value.contador = value.contador + 1;
+                                    a = b;
+                                    break;
+                                }
+                            }
+                            if(a==lista.length) break;
                         }
                     }
-                    if(a==lista.length) break;
                 }
+                lista_aux.push(value);
             }
-            lista_aux.push(value);
         }
         else{
-            for(var a = 0; a<lista.length; a++)
+            for(var Dia = 0; Dia<7; Dia++)
             {
-                if(lista[a].Semana == Number(option))
+                var value = {
+                    contador: 0,
+                    dia: getDia(Dia)
+                }
+                for(var a = 0; a<lista.length; a++)
                 {
-                    if(lista[a].en_silla == false)
+                    if(lista[a].Semana == Number(option) && lista[a].Dia == Dia)
                     {
-                        for(var b = a+1; b<lista.length; b++ )
+                        if(lista[a].en_silla == false)
                         {
-                            if(lista[b].en_silla == true)
+                            for(var b = a+1; b<lista.length; b++ )
                             {
-                                value.contador = value.contador + 1;
-                                a = b;
-                                break;
+                                if(lista[b].en_silla == true)
+                                {
+                                    value.contador = value.contador + 1;
+                                    a = b;
+                                    break;
+                                }
                             }
+                            if(a==lista.length) break;
                         }
-                        if(a==lista.length) break;
                     }
                 }
+                lista_aux.push(value);
             }
-            lista_aux.push(value);
         }
 
+        var sumatoriaObjeto = lista_aux.reduce(function(acumulador, siguienteValor){
+            return {
+              contador: acumulador.contador + siguienteValor.contador
+            };
+          }, {contador: 0}); 
+        lista_aux.forEach((element)=>{element.promedio = element.contador/sumatoriaObjeto});
         return lista_aux;
     } catch(error) {
         console.log(error)
@@ -884,59 +893,81 @@ function Mes_Group_Levantar(informacion, option){
         //listamos solo datos que necesitamos
         informacion.forEach(element => {
             element.Mes = new Date(element.fecha).getMonth();
+            element.Dia = new Date(element.fecha).getDay();
             lista.push(element);
         });
-        var value = {
-            contador: 0
-        }
+
 
         if(option == "all")
         {
-            var peso = 0;
-            for(var a = 0; a<lista.length; a++)
+            for(var Dia=0; Dia<7; Dia++)
             {
-                if(lista[a].en_silla == false)
+                var value = {
+                    contador: 0,
+                    dia: getDay(Dia)
+                }   
+                var peso = 0;
+                for(var a = 0; a<lista.length; a++)
                 {
-                    peso = peso + lista[a].peso;
-                    for(var b = a+1; b<lista.length; b++ )
+                    (lista[a].Dia == Dia)
                     {
-                        if(lista[b].en_silla == true)
+                        if(lista[a].en_silla == false)
                         {
-                            value.contador = value.contador + 1;
-                            a = b;
-                            break;
+                            peso = peso + lista[a].peso;
+                            for(var b = a+1; b<lista.length; b++ )
+                            {
+                                if(lista[b].en_silla == true)
+                                {
+                                    value.contador = value.contador + 1;
+                                    a = b;
+                                    break;
+                                }
+                            }
+                            if(a==lista.length) break;
                         }
                     }
-                    if(a==lista.length) break;
                 }
+                lista_aux.push(value);
             }
-            lista_aux.push(value);
         }
         else
         {
-            var peso = 0;
-            for(var a = 0; a<lista.length; a++)
+            for(var Dia=0; Dia<7; Dia++)
             {
-                if(lista[a].Mes == Number(option))
+                var value = {
+                    contador: 0,
+                    dia: getDay(Dia)
+                }  
+                var peso = 0;
+                for(var a = 0; a<lista.length; a++)
                 {
-                    if(lista[a].en_silla == false)
+                    if(lista[a].Mes == Number(option) && lista[a].Dia == Dia)
                     {
-                        peso = peso + lista[a].peso;
-                        for(var b = a+1; b<lista.length; b++ )
+                        if(lista[a].en_silla == false)
                         {
-                            if(lista[b].en_silla == true)
+                            peso = peso + lista[a].peso;
+                            for(var b = a+1; b<lista.length; b++ )
                             {
-                                value.contador = value.contador + 1;
-                                a = b;
-                                break;
+                                if(lista[b].en_silla == true)
+                                {
+                                    value.contador = value.contador + 1;
+                                    a = b;
+                                    break;
+                                }
                             }
+                            if(a==lista.length) break;
                         }
-                        if(a==lista.length) break;
                     }
                 }
+                lista_aux.push(value);
             }
-            lista_aux.push(value);
         }
+        var sumatoriaObjeto = lista_aux.reduce(function(acumulador, siguienteValor){
+            return {
+              contador: acumulador.contador + siguienteValor.contador
+            };
+          }, {contador: 0}); 
+        lista_aux.forEach((element)=>{element.promedio = element.contador/sumatoriaObjeto});
         return lista_aux;
     } catch(error) {
         console.log(error)
