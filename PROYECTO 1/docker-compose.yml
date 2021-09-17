@@ -1,4 +1,4 @@
-version: "2.0"
+version: "2.2"
 services: 
 
   db:
@@ -27,6 +27,15 @@ services:
       - networkapi
     volumes:
       - /proc/:/elements/procs/
+
+  frontend:
+    container_name: application-react
+    restart: always
+    build: ./sillainteligente
+    ports:
+        - "80:80"
+    depends_on:
+      - server
 
 networks:
   networkapi:

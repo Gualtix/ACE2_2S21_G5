@@ -4,6 +4,7 @@ import App from '../Dashboard/App';
 import Bd from '../BD/Bd';
 import Menu from '../Menu/Menu';
 import Profile from '../Profile/Profile'
+import Reportes from '../Reportes/Reportes';
 
 export default function Nav(){
     return(
@@ -12,6 +13,7 @@ export default function Nav(){
                 <Menu />
                 <div className="page-wrapper">
                     <Route exact  path='/' component={App} />
+                    <Route exact  path='/Reporte' component={Reportes} />
                     <Route exact  path='/Informacion' component={Bd} />
                     <Route exact  path='/Perfil' component={Profile} />
                     <footer className="footer">

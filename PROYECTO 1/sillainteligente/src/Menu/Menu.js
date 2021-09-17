@@ -21,7 +21,7 @@ export default class Menu extends React.Component{
                 <div className="menu">
                     <ul>
                         <li><Link to="/">Home</Link></li>
-                        <li><Link to="/">Reportes</Link></li>
+                        <li><Link to="/Reporte">Reportes</Link></li>
                         <li><Link to="/Informacion">Información</Link></li>
                         <li><Link to="/Perfil">Perfil</Link></li>
                     </ul>

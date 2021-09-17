@@ -1,14 +1,13 @@
 
 import TiempoUso from '../Graficos/tiempo-uso/TiempoUso';
-import Horario from '../Graficos/horario/Horario';
 import Peso from '../Graficos/peso/Peso';
 import Historial from '../Historial/Historial';
-import Movimiento from '../Graficos/movimiento/Movimiento';
 import React from "react";
 import MayorUso from '../Graficos/MayorUso/MayorUso';
 import MovimientoDia from '../Graficos/movimiento_dia/MovimientoDia';
 import TiempoUsoGrafica from '../Graficos/tiempo-uso-grafica/TiempoUsoGrafica';
 import GraficaLevantar from '../Graficos/grafica-levantar/GraficaLevantar';
+import Informacion from '../Profile/informacion';
 
 export default class App extends React.Component {
 
@@ -98,7 +97,7 @@ export default class App extends React.Component {
             <br />
             <div className="card border-dark mb-3">
               <div className="card-body">
-                  
+                  <Informacion />
               </div>
             </div>
           </div>

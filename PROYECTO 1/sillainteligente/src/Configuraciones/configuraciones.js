@@ -1,6 +1,8 @@
 import React,{Component} from "react";
 import axios from 'axios';
 import Environment from '../environment';
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+import 'sweetalert2/src/sweetalert2.scss'
 
 export default class Configuraciones extends React.Component{
     constructor(props){
@@ -20,12 +22,13 @@ export default class Configuraciones extends React.Component{
 
     submitHandler = e => {
         e.preventDefault()
-        console.log(this.state);
+        
         axios.post(this.url, this.state)
             .then(response => {
-                console.log(response)
+                if(response.data === "Registro Insertado!") Swal.fire('Registro Actualizado!', '', 'success')
+                else Swal.fire('Error', 'Por favor intente de nuevo más tarde', 'error')
             }).catch(error => {
-                console.log(error)
+                Swal.fire('Error', 'Por favor intente de nuevo más tarde', 'error')
             })
     }
 

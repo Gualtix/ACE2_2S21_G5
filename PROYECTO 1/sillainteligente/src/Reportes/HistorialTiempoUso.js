@@ -6,7 +6,7 @@ import ReactTable from "react-table";
 import 'react-table/react-table.css'
 
 
-export default class DatosArduino extends React.Component{
+export default class HistorialTiempoUso extends React.Component{
     constructor(props)
     {
         super(props);
@@ -15,8 +15,8 @@ export default class DatosArduino extends React.Component{
             loading:true,
             data: []  
         };
-        this.isSubscribedArduino = false;
-        this.url = Environment.HOST + ":" + Environment.PORT + "/getAll";
+        this.isSubscribedHistorialTiempoUso = false;
+        this.url = Environment.HOST + ":" + Environment.PORT + "/Reportes/Uso/Historial";
         this.tableHeader = ["Fecha", "En_Silla", "Peso"];
         this.getData = this.getData.bind(this);
         this.childInventarioP = React.createRef();
@@ -26,11 +26,12 @@ export default class DatosArduino extends React.Component{
     
 
     async getData(){
-        if(this.isSubscribedArduino)
+        if(this.isSubscribedHistorialTiempoUso)
         {
             this.setState({
                 curTime : new Date().toLocaleString()
             })
+
             axios.get(this.url, {})
             .then(
                 (response)=>{
@@ -41,8 +42,9 @@ export default class DatosArduino extends React.Component{
                             datito.push(
                                 {
                                     fecha: new Date(item.fecha).toLocaleString(),
-                                    en_silla: String(item.en_silla)==="true"?"SENTADO":"PARADO",
-                                    peso: item.peso.toFixed(2) + " Kg"
+                                    tiempo: Number(item.tiempo).toFixed(2),
+                                    entrada: item.entrada,
+                                    salida: item.salida
                                 }
                             );
                         });
@@ -66,18 +68,20 @@ export default class DatosArduino extends React.Component{
                 }
             ).catch(err => {})
         }
+
     }
 
     
+
     setState = (state, callback) => {
-        if (this.isSubscribedArduino) {
+        if (this.isSubscribedHistorialTiempoUso) {
           super.setState(state, callback);
         }
      }
 
      async componentDidMount() {
         try {
-            this.isSubscribedArduino = true;
+            this.isSubscribedHistorialTiempoUso = true;
             setInterval(this.getData, 5000);
         } catch (error) {
             console.log("Errores de render");
@@ -86,7 +90,7 @@ export default class DatosArduino extends React.Component{
     }
 
     async componentWillUnmount() {
-        this.isSubscribedArduino = false;
+        this.isSubscribedHistorialTiempoUso = false;
         clearInterval(this.getData);
     }
 
@@ -98,24 +102,24 @@ export default class DatosArduino extends React.Component{
                 accessor: "fecha"
             },
             {
-                Header: "Estado",
-                accessor: "en_silla",
-                Cell: (row) => {
-                    if(row.original.en_silla === "SENTADO") return <span className="badge badge-success text-dark"><strong>{row.original.en_silla}</strong></span>
-                    return <span className="badge badge-warning text-dark"><strong>{row.original.en_silla}</strong></span>
-                  }
+                Header: "Tiempo",
+                accessor: "tiempo"
             },
             {
-                Header: "Peso",
-                accessor: "peso"
-            }
+                Header: "Entrada",
+                accessor: "entrada"
+            },
+            {
+                Header: "Salida",
+                accessor: "salida"
+            }                      
           ];
           //<TableDatosArduino data={this.tableHeader} ref={this.childInventarioP}/>
 
         return (
             <div className="card border-dark mb-3">
                 <div className="card-body">
-                    <h2>Historial</h2>
+                    <h2>Historial de Tiempo de Uso</h2>
                     <div className="table-responsive">
                         <ReactTable  
                             data={this.state.data}  
