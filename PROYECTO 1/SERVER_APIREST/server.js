@@ -217,6 +217,17 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
         .catch(error => console.error(error));
     });
 
+    app.get('/Dashboard/TiempoUso', (req, res)=>{
+        res.header("Access-Control-Allow-Origin", "*");
+        coleccion.find().sort({$natural:-1}).toArray()
+        .then(result =>
+        {
+            console.log("Obtener datos!!");
+            res.status(200).json(getTime(result));
+        })
+        .catch(error => console.error(error));
+    });
+
     //REPORTES Y GRAFICAS
     app.get('/Reportes/Uso/Grafica', (req, res)=>{
         res.header("Access-Control-Allow-Origin", "*");
@@ -379,6 +390,33 @@ Date.prototype.getWeekNumber = function () {
     d.setDate(d.getDate() + 4 - (d.getDay() || 7));
     return Math.ceil((((d - new Date(d.getFullYear(), 0, 1)) / 8.64e7) + 1) / 7);
 };
+
+
+function getTime(informacion){
+    try{
+        if(informacion[0].en_silla)
+        {
+            var value = {
+                final: informacion[0].fecha,
+                tiempo: 0
+            }
+            for(var a = 0; a<informacion.length; a++)
+            {
+                if(informacion[a].en_silla == false)
+                {
+                    value.inicio = informacion[a].fecha;
+                    value.tiempo = ((new Date(value.final).getTime() - new Date(value.inicio).getTime())/3600).toFixed(2)
+                    return [value];
+                }
+            }
+            return [value];
+        }
+        return [];
+    } catch(error) {
+        console.log(error)
+        return [];
+    }
+}
 
 //DASHBOARD-PESO
 function Last_Group_Peso(informacion){
