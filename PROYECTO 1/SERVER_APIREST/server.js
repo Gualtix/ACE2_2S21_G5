@@ -394,7 +394,10 @@ Date.prototype.getWeekNumber = function () {
 
 function getTime(informacion){
     try{
-        if(informacion[0].en_silla)
+        var fecha_actual_temp = Date.now();
+        var fecha_actual = new Date(fecha_actual_temp).toLocaleDateString();
+        var fecha = new Date(informacion[0].fecha).toLocaleDateString();
+        if(informacion[0].en_silla && fecha_actual == fecha)
         {
             var value = {
                 final: informacion[0].fecha,
