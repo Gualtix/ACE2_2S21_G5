@@ -1057,7 +1057,7 @@ function Last_Group_Promedio(informacion){
 
             }
             value.peso = (value.contador>0)?(peso/value.contador).toFixed(2): 0.00;
-            value.horas = (value.contador>0)?(value.horas/contador).toFixed(2): 0.00;
+            value.horas = (value.contador>0)?(value.horas/value.contador).toFixed(2): 0.00;
             lista_aux.push(value);
         }
         return lista_aux;
@@ -1110,7 +1110,7 @@ function Semana_Group_Promedio(informacion){
 
             }
             value.peso = (value.contador>0)?(peso/value.contador).toFixed(2): 0.00;
-            value.horas = (value.contador>0)?(value.horas/contador).toFixed(2): 0.00;
+            value.horas = (value.contador>0)?(value.horas/value.contador).toFixed(2): 0.00;
             lista_aux.push(value);
         }
 
@@ -1163,7 +1163,7 @@ function Mes_Group_Promedio(informacion){
                 }
             }
             value.peso = (value.contador>0)?(peso/value.contador).toFixed(2): 0.00;
-            value.horas = (value.contador>0)?(value.horas/contador).toFixed(2): 0.00;
+            value.horas = (value.contador>0)?(value.horas/value.contador).toFixed(2): 0.00;
             lista_aux.push(value);
         }
 
