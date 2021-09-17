@@ -1231,7 +1231,11 @@ function Uso_Silla(informacion)
         var actual = new Date(actual_temp).getWeekNumber()
         informacion.forEach(element => {
             var date_chair = new Date(element.fecha).getWeekNumber();
-            if(actual == date_chair) lista.push(element);
+            if(actual == date_chair) 
+            {
+                element.dia = new Date(element.fecha).getDay()
+                lista.push(element);
+            }
         });
         for(var day = 0; day<7;day++)
         {
@@ -1242,18 +1246,21 @@ function Uso_Silla(informacion)
 
             for(var a = 0; a<lista.length; a++)
             {
-                if(lista[a].en_silla == true && lista[a].dia == lista_aux[day].dia)
+                if(lista[a].dia == day)
                 {
-                    for(var b = a+1; b<lista.length; b++ )
+                    if(lista[a].en_silla == true)
                     {
-                        if(lista[b].en_silla == false && lista[a].dia == lista_aux[day].dia)
+                        for(var b = a+1; b<lista.length; b++ )
                         {
-                            lista_aux[day].contador = lista_aux[day].contador + 1;
-                            a = b;
-                            break;
+                            if(lista[b].en_silla == false)
+                            {
+                                value.contador = value.contador + 1;
+                                a = b;
+                                break;
+                            }
                         }
+                        if(a==lista.length) break;
                     }
-                    if(a==lista.length) break;
                 }
             }
             lista_aux.push(value);
@@ -1287,32 +1294,28 @@ function Uso_Historial(informacion)
             var date_chair = new Date(element.fecha).getWeekNumber();
             if(actual == date_chair) lista.push(element);
         });
-        for(var day = 0; day<7;day++)
+        for(var a = 0; a<lista.length; a++)
         {
-            for(var a = 0; a<lista.length; a++)
+            if(lista[a].en_silla == true)
             {
-                if(lista[a].en_silla == true && lista[a].dia == lista_aux[day].dia)
-                {
-                    let value = {
-                        dia: getDia(day)
-                    }
-                    value.fecha = new Date(lista[a].fecha).toLocaleDateString();
-                    value.entrada = new Date(lista[a].fecha).toLocaleTimeString();
-                    for(var b = a+1; b<lista.length; b++ )
-                    {
-                        if(lista[b].en_silla == false && lista[a].dia == lista_aux[day].dia)
-                        {
-                            value.salida = new Date(lista[b].fecha).toLocaleTimeString();
-                            a = b;
-                            break;
-                        }
-                    }
-                    lista_aux.push(value);
-                    if(a==lista.length) break;
+                let value = {
+                    dia: getDia(day)
                 }
-            }  
-        }
-
+                value.fecha = new Date(lista[a].fecha).toLocaleDateString();
+                value.entrada = new Date(lista[a].fecha).toLocaleTimeString();
+                for(var b = a+1; b<lista.length; b++ )
+                {
+                    if(lista[b].en_silla == false)
+                    {
+                        value.salida = new Date(lista[b].fecha).toLocaleTimeString();
+                        a = b;
+                        break;
+                    }
+                }
+                lista_aux.push(value);
+                if(a==lista.length) break;
+            }
+        }  
         return lista_aux;
     } catch(error) {
         console.log(error)
