@@ -242,7 +242,7 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
 
     app.get('/Reportes/Peso', (req, res)=>{
         res.header("Access-Control-Allow-Origin", "*");
-        coleccion.find({}, {sort:{$natural:-1}}).toArray()
+        coleccion.find().sort({$natural:-1}).limit(1).toArray()
         .then(result =>
         {
             console.log("Obtener datos!!");
