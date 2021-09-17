@@ -8,7 +8,7 @@ https://canvasjs.com/license/
 
 */
 var React = require('react');
-var CanvasJS = require('../Librerias/canvasjs.min');
+var CanvasJS = require('./canvasjs.min');
 CanvasJS = CanvasJS.Chart ? CanvasJS : window.CanvasJS;
 
 class CanvasJSChart extends React.Component {

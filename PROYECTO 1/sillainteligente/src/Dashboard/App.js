@@ -5,6 +5,10 @@ import Peso from '../Graficos/peso/Peso';
 import Historial from '../Historial/Historial';
 import Movimiento from '../Graficos/movimiento/Movimiento';
 import React from "react";
+import MayorUso from '../Graficos/MayorUso/MayorUso';
+import MovimientoDia from '../Graficos/movimiento_dia/MovimientoDia';
+import TiempoUsoGrafica from '../Graficos/tiempo-uso-grafica/TiempoUsoGrafica';
+import GraficaLevantar from '../Graficos/grafica-levantar/GraficaLevantar';
 
 export default class App extends React.Component {
 
@@ -19,6 +23,9 @@ export default class App extends React.Component {
     this.isSubscribedApp = false;
     this.update_data = this.update_data.bind(this);
     this.childTiempoUso = React.createRef();
+    this.childPeso = React.createRef();
+    this.childTiempoUsoGrafica = React.createRef();
+    this.childGraficaLevantar = React.createRef();
     this.handleDropdownChange = this.handleDropdownChange.bind(this);
     this.handleDropdownChangeOption = this.handleDropdownChangeOption.bind(this);
   }
@@ -52,6 +59,9 @@ export default class App extends React.Component {
     try
     { 
       if(this.childTiempoUso.current != null)  this.childTiempoUso.current.update(this.state.tipo, this.state.option);
+      if(this.childPeso.current != null)  this.childPeso.current.update(this.state.tipo);
+      if(this.childTiempoUsoGrafica.current != null) this.childTiempoUsoGrafica.current.update(this.state.tipo);
+      if(this.childGraficaLevantar.current != null) this.childGraficaLevantar.current.update(this.state.tipo, this.state.option);
     }
     catch(error){}
   }
@@ -118,18 +128,32 @@ export default class App extends React.Component {
             <br />
             <div className="row">
               <div className="col-md-4 col-sm-12 col-lg-4">
-                <TiempoUso ref={this.childTiempoUso}/>
+                <div className="row">
+                  <div className="col-md-12 col-lg-12">
+                    <MovimientoDia />
+                  </div>
+                </div> 
+                <div className="row">
+                  <div className="col-md-12 col-lg-12">
+                    <TiempoUso ref={this.childTiempoUso}/>
+                  </div>
+                </div>
               </div>
               <div className="col-md-8 col-sm-12 col-lg-8">
-                <Peso />    
+                <Peso ref={this.childPeso}/>    
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-md-12 col-sm-12 col-lg-12">
+                <MayorUso />  
               </div>
             </div>
             <div className="row">
               <div className="col-md-6 col-sm-12 col-lg-6">
-                <Movimiento />  
+                <TiempoUsoGrafica ref={this.childTiempoUsoGrafica} />  
               </div>
               <div className="col-md-6 col-sm-12 col-lg-6">
-                <Horario />
+                <GraficaLevantar ref={this.childGraficaLevantar} />
               </div>
             </div>
             <div className="row">

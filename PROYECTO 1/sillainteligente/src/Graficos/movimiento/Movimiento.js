@@ -17,21 +17,24 @@ export default class Movimiento extends React.Component{
 
     
     async getData(){
-        this.setState({
-            curTime : new Date().toLocaleString()
-        })
-        axios.get(this.url,{})
-        .then(
-            (response)=>{
-                if(response.data.length > 0){
-                    var datito = [];
-                    response.data.forEach((element)=>{
-                    })
-
-                    this.setState({data: datito});
+        if(this.isSubscribedMovimiento)
+        {
+            this.setState({
+                curTime : new Date().toLocaleString()
+            })
+            axios.get(this.url,{})
+            .then(
+                (response)=>{
+                    if(response.data.length > 0){
+                        var datito = [];
+                        response.data.forEach((element)=>{
+                        })
+    
+                        this.setState({data: datito});
+                    }
                 }
-            }
-        ).catch(err => {})
+            ).catch(err => {})
+        }
     }
 
     setState = (state, callback) => {

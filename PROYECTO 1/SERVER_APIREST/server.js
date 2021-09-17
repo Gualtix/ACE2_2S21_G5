@@ -956,7 +956,7 @@ function Mes_Group_Levantar(informacion, option){
             {
                 var value = {
                     contador: 0,
-                    dia: getDay(Dia),
+                    dia: getDia(Dia),
                     veces: 0
                 }   
                 var dat = null;
@@ -993,7 +993,7 @@ function Mes_Group_Levantar(informacion, option){
             {
                 var value = {
                     contador: 0,
-                    dia: getDay(Dia),
+                    dia: getDia(Dia),
                     veces: 0
                 }  
                 var dat = null;

@@ -13,7 +13,7 @@ export default class TiempoUso extends React.Component{
             option: '',
             horas: ''
         };
-        this.isSubscribedTiempo = false;
+        this.isSubscribedTiempoUsito = false;
         this.url = Environment.HOST + ":" + Environment.PORT + '/Dashboard/Horas/Total';
         this.getData = this.getData.bind(this);
         this.update = this.update.bind(this);
@@ -25,41 +25,44 @@ export default class TiempoUso extends React.Component{
     }
 
     async getData(){
-        this.setState({
-            curTime : new Date().toLocaleString()
-        })
-
-        var data = {tipo: this.state.tipo, option: this.state.option}
-        var config = {
-            method: 'POST',
-            host: Environment.HOST,
-            port: Environment.PORT,
-            path: '/Dashboard/Horas/Total',
-            url: this.url,
-            headers: { },
-            data : data           
-          };
-          
-
-        axios(config)
-        .then(
-            (response)=>{
-                if(response.data.length > 0){
-                    this.setState({horas: Number(response.data[0].horas).toFixed(2)})
+        if(this.isSubscribedTiempoUsito)
+        {
+            this.setState({
+                curTime : new Date().toLocaleString()
+            })
+    
+            var data = {tipo: this.state.tipo, option: this.state.option}
+            var config = {
+                method: 'POST',
+                host: Environment.HOST,
+                port: Environment.PORT,
+                path: '/Dashboard/Horas/Total',
+                url: this.url,
+                headers: { },
+                data : data           
+              };
+              
+    
+            axios(config)
+            .then(
+                (response)=>{
+                    if(response.data.length > 0){
+                        this.setState({horas: Number(response.data[0].horas).toFixed(2)})
+                    }
                 }
-            }
-        ).catch(err => {})
+            ).catch(err => {})
+        }
     }
 
     setState = (state, callback) => {
-        if (this.isSubscribedTiempo) {
+        if (this.isSubscribedTiempoUsito) {
           super.setState(state, callback);
         }
      }
 
     async componentDidMount() {
         try {
-            this.isSubscribedTiempo = true;
+            this.isSubscribedTiempoUsito = true;
             setInterval(this.getData, 1000);
         } catch (error) {
             console.log("Errores de render");
@@ -68,7 +71,7 @@ export default class TiempoUso extends React.Component{
     }
 
     async componentWillUnmount() {
-        this.isSubscribedTiempo = false;
+        this.isSubscribedTiempoUsito = false;
         clearInterval(this.getData);
     }
 

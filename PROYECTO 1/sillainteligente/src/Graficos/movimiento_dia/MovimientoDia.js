@@ -9,57 +9,60 @@ export default class MovimientoDia extends React.Component{
         this.state = {
             data: [],
             curTime: '',
-            tipo: '',
-            option: '',
-            horas: ''
+            inicio: '',
+            final: '',
+            tiempo: ''
         };
-        this.isSubscribedTiempo = false;
-        this.url = Environment.HOST + ":" + Environment.PORT + '/Dashboard/Horas/Total';
+        this.isSubscribedMovimientoDia = false;
+        this.url = Environment.HOST + ":" + Environment.PORT + '/Dashboard/TiempoUso';
         this.getData = this.getData.bind(this);
-        this.update = this.update.bind(this);
-    }
-
-    update = (tipo, option) => {
-        
-        this.setState({tipo: tipo, option: option});
     }
 
     async getData(){
-        this.setState({
-            curTime : new Date().toLocaleString()
-        })
-
-        var data = {tipo: this.state.tipo, option: this.state.option}
-        var config = {
-            method: 'POST',
-            host: Environment.HOST,
-            port: Environment.PORT,
-            path: '/Dashboard/Horas/Total',
-            url: this.url,
-            headers: { },
-            data : data           
-          };
-          
-
-        axios(config)
-        .then(
-            (response)=>{
-                if(response.data.length > 0){
-                    this.setState({horas: Number(response.data[0].horas).toFixed(2)})
+        if(this.isSubscribedMovimientoDia)
+        {
+            this.setState({
+                curTime : new Date().toLocaleString()
+            })
+    
+            var config = {
+                method: 'GET',
+                host: Environment.HOST,
+                port: Environment.PORT,
+                path: '/Dashboard/TiempoUso',
+                url: this.url,
+                headers: { },
+                data : {}           
+              };
+              
+    
+            axios(config)
+            .then(
+                (response)=>{
+                    if(response.data.length > 0){
+                        this.setState({tiempo: Number(response.data[0].tiempo).toFixed(2)})
+                        this.setState({inicio: new Date(response.data[0].inicio).toLocaleString()})
+                        this.setState({final: new Date(response.data[0].final).toLocaleString()})
+                    }
+                    else{
+                        this.setState({tiempo: 0.00})
+                        this.setState({inicio: ''})
+                        this.setState({final: ''})
+                    }
                 }
-            }
-        ).catch(err => {})
+            ).catch(err => {})
+        }
     }
 
     setState = (state, callback) => {
-        if (this.isSubscribedTiempo) {
+        if (this.isSubscribedMovimientoDia) {
           super.setState(state, callback);
         }
      }
 
     async componentDidMount() {
         try {
-            this.isSubscribedTiempo = true;
+            this.isSubscribedMovimientoDia = true;
             setInterval(this.getData, 1000);
         } catch (error) {
             console.log("Errores de render");
@@ -68,7 +71,7 @@ export default class MovimientoDia extends React.Component{
     }
 
     async componentWillUnmount() {
-        this.isSubscribedTiempo = false;
+        this.isSubscribedMovimientoDia = false;
         clearInterval(this.getData);
     }
 
@@ -77,12 +80,9 @@ export default class MovimientoDia extends React.Component{
         return (
             <div className="card border-dark mb-3">
                 <div className="card-body">
-                    <h2>Tiempo Total de Horas de Uso</h2>
-                    <br />
-                    <h1 className="text-center"> <span className="badge badge bg-dark">{this.state.horas}&nbsp;Hrs</span></h1>
-                </div>
-                <div className="card-footer text-right">
-                    <strong>Last Update on:</strong>&nbsp;<span className="badge badge-info">{this.state.curTime}</span>
+                    <h1 className="text-right">Tiempo: &nbsp;<span className="badge badge bg-dark">{this.state.tiempo}&nbsp;Hrs</span></h1>
+                    <h1 className="text-right">Inicio: &nbsp;<span className="badge badge bg-dark">{this.state.inicio}&nbsp;</span></h1>
+                    <h1 className="text-right">Fin: &nbsp; <span className="badge badge bg-dark">{this.state.final}&nbsp;</span></h1>
                 </div>
             </div>
         )
