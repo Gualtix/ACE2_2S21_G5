@@ -122,7 +122,7 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
 
     //DASHBOARD
 
-    app.get('/Dashboard/Peso', (req, res)=>{
+    app.post('/Dashboard/Peso', (req, res)=>{
         res.header("Access-Control-Allow-Origin", "*");
         coleccion.find( { en_silla: { $ne: false } }).toArray()
         .then(result =>

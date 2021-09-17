@@ -2,7 +2,7 @@ import React from "react";
 import axios from 'axios';
 import Environment from '../../environment';
 
-export default class TiempoUso extends React.Component{
+export default class MovimientoDia extends React.Component{
     constructor(props)
     {
         super(props);

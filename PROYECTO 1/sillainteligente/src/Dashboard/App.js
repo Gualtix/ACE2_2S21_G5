@@ -117,10 +117,10 @@ export default class App extends React.Component {
             </div>
             <br />
             <div className="row">
-              <div className="col-md-6 col-sm-12 col-lg-6">
+              <div className="col-md-4 col-sm-12 col-lg-4">
                 <TiempoUso ref={this.childTiempoUso}/>
               </div>
-              <div className="col-md-6 col-sm-12 col-lg-6">
+              <div className="col-md-8 col-sm-12 col-lg-8">
                 <Peso />    
               </div>
             </div>
