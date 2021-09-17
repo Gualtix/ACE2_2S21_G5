@@ -462,7 +462,7 @@ function Semana_Group_Peso(informacion){
             lista_aux.push(value);
         }
 
-        return lista_aux.sort;
+        return lista_aux;
     } catch(error) {
         console.log(error)
         return [];
@@ -656,7 +656,7 @@ function Semana_Group_Info(informacion, option){
             lista_aux.push(value);
         }
 
-        return lista_aux.sort;
+        return lista_aux;
     } catch(error) {
         console.log(error)
         return [];
@@ -869,7 +869,7 @@ function Semana_Group_Levantar(informacion, option){
             lista_aux.push(value);
         }
 
-        return lista_aux.sort;
+        return lista_aux;
     } catch(error) {
         console.log(error)
         return [];
@@ -1051,7 +1051,7 @@ function Semana_Group_Promedio(informacion){
             lista_aux.push(value);
         }
 
-        return lista_aux.sort;
+        return lista_aux;
     } catch(error) {
         console.log(error)
         return [];
@@ -1422,7 +1422,7 @@ function Semana_Group(informacion){
             lista_aux.push(value);
         }
 
-        return lista_aux.sort;
+        return lista_aux;
     } catch(error) {
         console.log(error)
         return [];
