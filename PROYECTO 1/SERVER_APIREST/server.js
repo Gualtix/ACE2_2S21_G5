@@ -143,7 +143,7 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
         .catch(error => console.error(error));
     });
 
-    app.get('/Dashboard/Horas/Total', (req, res)=>{
+    app.post('/Dashboard/Horas/Total', (req, res)=>{
         res.header("Access-Control-Allow-Origin", "*");
         coleccion.find().toArray()
         .then(result =>
@@ -164,7 +164,7 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
         .catch(error => console.error(error));
     });
 
-    app.get('/Dashboard/Levantar', (req, res)=>{
+    app.post('/Dashboard/Levantar', (req, res)=>{
         res.header("Access-Control-Allow-Origin", "*");
         coleccion.find().toArray()
         .then(result =>
@@ -185,7 +185,7 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
         .catch(error => console.error(error));
     });
 
-    app.get('/Dashboard/Horas/Promedio', (req, res)=>{
+    app.post('/Dashboard/Horas/Promedio', (req, res)=>{
         res.header("Access-Control-Allow-Origin", "*");
         coleccion.find().toArray()
         .then(result =>

@@ -8,26 +8,45 @@ export default class TiempoUso extends React.Component{
         super(props);
         this.state = {
             data: [],
-            curTime: ''  
+            curTime: '',
+            tipo: '',
+            option: '',
+            horas: ''
         };
         this.isSubscribedTiempo = false;
-        this.url = Environment.HOST + ":" + Environment.PORT;
+        this.url = Environment.HOST + ":" + Environment.PORT + '/Dashboard/Horas/Total';
         this.getData = this.getData.bind(this);
+        this.update = this.update.bind(this);
+    }
+
+    update = (tipo, option) => {
+        
+        this.setState({tipo: tipo, option: option});
     }
 
     async getData(){
         this.setState({
             curTime : new Date().toLocaleString()
         })
-        axios.get(this.url,{})
+
+        var data = {tipo: this.state.tipo, option: this.state.option}
+        var config = {
+            method: 'GET',
+            host: Environment.HOST,
+            port: Environment.PORT,
+            path: '/Dashboard/Horas/Total',
+            url: this.url,
+            headers: { },
+            data : JSON.stringify(data)            
+          };
+          
+
+        axios.get(this.url, config)
         .then(
             (response)=>{
                 if(response.data.length > 0){
-                    var datito = [];
-                    response.data.forEach((element)=>{
-                    })
-
-                    this.setState({data: datito});
+                    console.log(response.data[0]);
+                    this.setState({horas: (response.data[0].horas).toFixed(2)})
                 }
             }
         ).catch(err => {})
@@ -42,7 +61,7 @@ export default class TiempoUso extends React.Component{
     async componentDidMount() {
         try {
             this.isSubscribedTiempo = true;
-            setInterval(this.getData, 30000);
+            setInterval(this.getData, 1000);
         } catch (error) {
             console.log("Errores de render");
         }
@@ -59,7 +78,9 @@ export default class TiempoUso extends React.Component{
         return (
             <div className="card border-dark mb-3">
                 <div className="card-body">
-                    <h2>Tiempo de Uso</h2>
+                    <h2>Tiempo Total de Horas de Uso</h2>
+                    <br />
+                    <h3><strong>Horas: &nbsp;</strong><span className="badge badge-light">{this.state.horas}</span></h3>
                 </div>
                 <div className="card-footer text-right">
                     <strong>Last Update on:</strong>&nbsp;<span className="badge badge-info">{this.state.curTime}</span>
