@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var cors = require('cors')
 const app = express();
 const port = 3000;
-const hostname = '34.67.114.165';
+const hostname = '34.136.38.118';
 var axios = require('axios');
 
 //SERIAL

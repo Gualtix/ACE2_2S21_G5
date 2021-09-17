@@ -50,6 +50,7 @@ export default class App extends React.Component {
     else
     {
       this.setState({ tipo: "all" });
+      this.setState({ option: "all" });
     }
   }
 
