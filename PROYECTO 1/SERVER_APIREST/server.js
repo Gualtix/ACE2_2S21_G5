@@ -136,23 +136,43 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
         }).catch(err => console.error(err))
     });
 
-    app.get('/Last3Hour/Agrupados', (req, res)=>{
+    app.get('/Informacion/Agrupados', (req, res)=>{
         res.header("Access-Control-Allow-Origin", "*");
         coleccion.find().toArray()
         .then(result =>
         {
             console.log("Obtener datos!!");
-            res.status(200).json(Last3Hour_gruped(result));
+            if(req.body.tipo == "semana")
+            {
+                res.status(200).json(Semana_Group(result));
+            }
+            else if(req.body.tipo == "mes")
+            {
+                res.status(200).json(Mes_Group(result));
+            }
+            else{
+                res.status(200).json(Last_Group(result));
+            }
+            
         })
         .catch(error => console.error(error));
     });
 
     app.get('/Peso', (req, res)=>{
         res.header("Access-Control-Allow-Origin", "*");
-        coleccion.find( { en_silla: { $ne: false } }).toArray()
+        coleccion.find( { en_silla: { $ne: false } })
+        .aggregate(                                 
+            [                                 
+             {$group:                         
+                     {         
+                       peso_total: {$sum: peso}  
+                     }
+              }
+             ]
+           ).toArray()
         .then(result =>
         {
-            console.log("Obtener datos!!");
+            console.log("Obtener datos!!", result);
             res.status(200).json(result);
         })
         .catch(error => console.error(error));
@@ -196,58 +216,234 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
 })
 .catch(console.error);
 
-function Last3Hour(informacion){
+function getDia(dia)
+{
+    switch(dia)
+    {
+        case 0:
+            return "Domingo";
+        case 1:
+            return "Lunes";
+        case 2:
+            return "Martes";
+        case 3:
+            return "Miercoles";
+        case 4:
+            return "Jueves";
+        case 5:
+            return "Viernes";
+        case 6:
+            return "Sabado";        
+    }
+}
+
+function getMes(mes)
+{
+    switch(mes)
+    {
+        case 0:
+            return "Enero"
+        case 1:
+            return "Febrero"
+        case 2:
+            return "Marzo"
+        case 3:
+            return "Abril"
+        case 4:
+            return "Mayo"
+        case 5:
+            return "Junio"
+        case 6:
+            return "Julio"
+        case 7:
+            return "Agosto"
+        case 8:
+            return "Septiembre"
+        case 9:
+            return "Octubre"
+        case 10:
+            return "Noviembre"
+        case 11:
+            return "Diciembre"                    
+    }
+}
+
+
+function Last_Group(informacion){
     try{
         var fecha_envio = Date.now();
 		var n_date = new Date(fecha_envio).toISOString();
-        var time_millis = new Date(n_date).getTime() - (1000 * 60 * 60 * 3);
+        var time_millis = new Date(n_date).getTime() - (1000 * 60 * 60 * 24 * 7);
         const lista = []
+        const lista_aux = []
         //listamos solo datos que necesitamos
         informacion.forEach(element => {
             var date_chair = new Date(element.fecha).getTime()
-            if(date_chair >= time_millis) lista.push(element);
+            if(date_chair >= time_millis) 
+            {
+                element.Dia = new Date(element.fecha).getDay();
+                lista.push(element);
+            }
         });
-        return lista;
+        for(var Dia=0; Dia<7; Dia++)
+        {
+            var value = {
+                dia: getDia(Dia),
+                contador: 0
+            }
+            var peso = 0;
+            for(var a = 0; a<lista.length; a++)
+            {
+                if(lista[a].Dia == Dia)
+                {
+                    if(lista[a].en_silla == true)
+                    {
+                        peso = peso + lista[a].peso;
+                        for(var b = a+1; b<lista.length; b++ )
+                        {
+                            if(lista[b].en_silla == false)
+                            {
+                                value.contador = value.contador + 1;
+                                peso = peso + lista[b].peso;
+                                a = b;
+                                break;
+                            }
+                        }
+                        if(a==lista.length) break;
+                    }
+                }
+            }
+            value.peso = (contador>0)?peso/value.contador.toFixed(2): 0.00;
+            lista_aux.push(value);
+        }
+        return lista_aux;
     } catch(error) {
         console.log(error)
         return [];
     }
 }
 
-function Last3Hour_gruped(informacion){
+Date.prototype.getWeekNumber = function () {
+    var d = new Date(+this);
+    d.setHours(0, 0, 0, 0);
+    d.setDate(d.getDate() + 4 - (d.getDay() || 7));
+    return Math.ceil((((d - new Date(d.getFullYear(), 0, 1)) / 8.64e7) + 1) / 7);
+};
+
+function Semana_Group(informacion){
     try{
-        var fecha_envio = Date.now();
-		var n_date = new Date(fecha_envio).toISOString();
-        var time_millis = new Date(n_date).getTime() - (1000 * 60 * 60 * 3);
+
         const lista = []
         const lista_aux = []
         //listamos solo datos que necesitamos
         informacion.forEach(element => {
-            var date_chair = new Date(element.fecha).getTime()
-            if(date_chair >= time_millis) lista.push(element);
+            element.Semana = new Date(element.fecha).getWeekNumber();
+            lista.push(element);
         });
-
-        for(var a = 0; a<lista.length; a++)
-        {
-            if(lista[a].en_silla == true)
+        /*
+            for(var a = 0; a<lista.length; a++)
             {
-                var value = {
-                    fecha1: lista[a].fecha,
-                    peso1: lista[a].peso
-                }
-                for(var b = a+1; b<lista.length; b++ )
+                if(lista[a].en_silla == true)
                 {
-                    if(lista[b].en_silla == false)
+                    var value = {
+                        fecha1: lista[a].fecha,
+                        peso1: lista[a].peso,
+                        semana: lista[a].Semana
+                    }
+                    for(var b = a+1; b<lista.length; b++ )
                     {
-                        value.fecha2 = lista[b].fecha;
-                        value.peso2 = lista[b].peso;
-                        a = b;
-                        break;
+                        if(lista[b].en_silla == false)
+                        {
+                            value.fecha2 = lista[b].fecha;
+                            value.peso2 = lista[b].peso;
+                            a = b;
+                            break;
+                        }
+                    }
+                    lista_aux.push(value);
+                    if(a==lista.length) break;
+                }
+            }
+        */
+        for(var Semana=0; Semana<53; Semana++)
+        {
+            var value = {
+                semana: Semana,
+                contador: 0
+            }
+            var peso = 0;
+            for(var a = 0; a<lista.length; a++)
+            {
+                if(lista[a].Semana == Semana)
+                {
+                    if(lista[a].en_silla == true)
+                    {
+                        peso = peso + lista[a].peso;
+                        for(var b = a+1; b<lista.length; b++ )
+                        {
+                            if(lista[b].en_silla == false)
+                            {
+                                value.contador = value.contador + 1;
+                                peso = peso + lista[b].peso;
+                                a = b;
+                                break;
+                            }
+                        }
+                        if(a==lista.length) break;
                     }
                 }
-                lista_aux.push(value);
-                if(a==lista.length) break;
             }
+            value.peso = (contador>0)?peso/value.contador.toFixed(2): 0.00;
+            lista_aux.push(value);
+        }
+
+        return lista_aux.sort;
+    } catch(error) {
+        console.log(error)
+        return [];
+    }
+}
+
+function Mes_Group(informacion){
+    try{
+
+        const lista = []
+        const lista_aux = []
+        //listamos solo datos que necesitamos
+        informacion.forEach(element => {
+            element.Mes = new Date(element.fecha).getMonth();
+            lista.push(element);
+        });
+        for(var Mes=0; Mes<12; Mes++)
+        {
+            var value = {
+                mes: getMes(Mes),
+                contador: 0
+            }
+            var peso = 0;
+            for(var a = 0; a<lista.length; a++)
+            {
+                if(lista[a].Mes == Mes)
+                {
+                    if(lista[a].en_silla == true)
+                    {
+                        peso = peso + lista[a].peso;
+                        for(var b = a+1; b<lista.length; b++ )
+                        {
+                            if(lista[b].en_silla == false)
+                            {
+                                value.contador = value.contador + 1;
+                                peso = peso + lista[b].peso;
+                                a = b;
+                                break;
+                            }
+                        }
+                        if(a==lista.length) break;
+                    }
+                }
+            }
+            value.peso = (contador>0)?peso/value.contador.toFixed(2): 0.00;
+            lista_aux.push(value);
         }
         return lista_aux;
     } catch(error) {
@@ -360,61 +556,15 @@ function Semana(informacion){
         //listamos solo datos que necesitamos
         informacion.forEach(element => {
             var date_chair = new Date(element.fecha).getDay()
-            switch(date_chair)
-            {
-                case 0:
-                    element.dia = "Domingo";
-                    break;
-                case 1:
-                    element.dia = "Lunes";
-                    break;
-                case 2:
-                    element.dia = "Martes";
-                    break;
-                case 3:
-                    element.dia = "Miercoles";
-                    break;
-                case 4:
-                    element.dia = "Jueves";
-                    break;
-                case 5:
-                    element.dia = "Viernes";
-                    break;
-                case 6:
-                    element.dia = "Sabado";
-                    break;                    
-            }
+            element.dia = getDia(date_chair);
             lista.push(element);
         });
         for(var a = 0; a<7; a++)
         {
             let value = {
-                dia: "",
+                dia: getDia(a),
                 contador: 0
-            }
-            switch(a)
-            {
-                case 0:
-                    value.dia = "Domingo";
-                    break;
-                case 1:
-                    value.dia = "Lunes";
-                    break;
-                case 2:
-                    value.dia = "Martes";
-                    break;
-                case 3:
-                    value.dia = "Miercoles";
-                    break;
-                case 4:
-                    value.dia = "Jueves";
-                    break;
-                case 5:
-                    value.dia = "Viernes";
-                    break;
-                case 6:
-                    value.dia = "Sabado";
-                    break;                    
+                
             }
             lista_aux.push(value);
         }
