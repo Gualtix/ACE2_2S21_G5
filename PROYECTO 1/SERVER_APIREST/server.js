@@ -264,17 +264,6 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
 
 
     //OTROS
-    app.get('/Last3Hour/Simple', async (req, res)=>{
-        res.header("Access-Control-Allow-Origin", "*");
-        coleccion.find().toArray()
-        .then(result =>
-        {
-            console.log("Obtener datos!!");
-            res.status(200).json(Last3Hour(result));
-        })
-        .catch(error => console.error(error));
-    });
-
     app.get('/deleteAll', (req, res) => {
         res.header("Access-Control-Allow-Origin", "*");
         coleccion.drop().then(result => {
