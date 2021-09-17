@@ -927,7 +927,7 @@ function Mes_Group_Levantar(informacion, option){
                 var value = {
                     contador: 0,
                     dia: getDay(Dia),
-                    veces = 0
+                    veces: 0
                 }   
                 var dat = null;
                 for(var a = 0; a<lista.length; a++)
