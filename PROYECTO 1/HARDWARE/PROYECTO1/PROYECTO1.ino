@@ -59,7 +59,7 @@ void loop() {
   medir_peso();
   datas();
   Serial.println(data);
-  delayMicroseconds(500);
+  delayMicroseconds(1000);
   reset_data();
 }
 
