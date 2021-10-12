@@ -19,13 +19,24 @@ void loop() {
   data = "";
   delay(1000);
   contador++;
-  if(contador%2==0)si = !si;
+  if(contador>120 && si)
+  {
+    si = false;
+    contador = 0;
+  }
+  else if(contador>30 && !si)
+  {
+    si = true;
+    contador = 0;
+  }
+  
 }
 
 void datas()
 {
   if(si)
   {
+    peso = 70.84;
     data.concat("{");
     //*******************************************IDENTIFICAR
     data.concat("\"en_silla\":");
@@ -38,7 +49,8 @@ void datas()
   }
   else
   {
-        data.concat("{");
+    peso = 0;
+    data.concat("{");
     //*******************************************IDENTIFICAR
     data.concat("\"en_silla\":");
     data.concat(String("false"));
@@ -46,8 +58,7 @@ void datas()
     //*****************************************PESO
     data.concat("\"peso\":");
     data.concat(String(peso,4));
-
     data.concat("}");
   }
-
+    
 }
