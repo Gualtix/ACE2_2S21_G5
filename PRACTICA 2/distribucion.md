@@ -8,7 +8,7 @@
 
 ## Walter
 - APP WEB
-- SERVER API -> para comunicar con el server local
+
 
 ## Marco
 - bluetooth
@@ -17,6 +17,7 @@
 ## Manuel - Jose - Dulce
 - Integracion
 - Documentacion
+- SERVER API -> para comunicar con el server local
 
 
 
