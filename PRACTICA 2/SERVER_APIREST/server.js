@@ -40,7 +40,7 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
                 let result = resulta[0]
             console.log("Obtener datos!!");
             console.log(result.temperatura);
-            res.status(200).send((result.temperatura));
+            res.send((result.temperatura));
         })
         .catch(error => {
             res.status(404).send("error");
@@ -56,7 +56,7 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
                 console.log(resulta)
                 let result = resulta[0]
             console.log("Obtener datos!!");
-            res.status(200).send((result.humedad));
+            res.send((result.humedad));
         })
         .catch(error => {
             res.status(404).send("error");
@@ -72,7 +72,7 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
                 console.log(resulta)
                 let result = resulta[0]
             console.log("Obtener datos!!");
-            res.status(200).send((result.velocidad));
+            res.send((result.velocidad));
         })
         .catch(error => {
             res.status(404).send("error");
@@ -88,7 +88,7 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
                 console.log(resulta)
                 let result = resulta[0]
             console.log("Obtener datos!!");
-            res.status(200).send((result.direccion));
+            res.send((result.direccion));
         })
         .catch(error => {
             res.status(404).send("error");
@@ -104,7 +104,7 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
                 console.log(resulta)
                 let result = resulta[0]
             console.log("Obtener datos!!");
-            res.status(200).send((result.luminosidad));
+            res.send((result.luminosidad));
         })
         .catch(error => {
             res.status(404).send("error");
