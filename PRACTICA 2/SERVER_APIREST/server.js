@@ -33,9 +33,11 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
     //INFORMACION
     app.get('/informacion/temperatura',(req, res)=>{
         res.header("Access-Control-Allow-Origin", "*");
-        coleccion.find().sort({$natural:-1}).limit(1)
-        .then(result =>
-        {
+        coleccion.find().sort({$natural:-1}).limit(1).toArray()
+        .then(resulta =>
+            {
+                console.log(resulta)
+                let result = resulta[0]
             console.log("Obtener datos!!");
             console.log(result.temperatura);
             res.status(200).send((result.temperatura));
@@ -48,9 +50,11 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
 
     app.get('/informacion/humedad',(req, res)=>{
         res.header("Access-Control-Allow-Origin", "*");
-        coleccion.find().sort({$natural:-1}).limit(1)
-        .then(result =>
-        {
+        coleccion.find().sort({$natural:-1}).limit(1).toArray()
+        .then(resulta =>
+            {
+                console.log(resulta)
+                let result = resulta[0]
             console.log("Obtener datos!!");
             res.status(200).send((result.humedad));
         })
@@ -62,9 +66,11 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
 
     app.get('/informacion/velocidad',(req, res)=>{
         res.header("Access-Control-Allow-Origin", "*");
-        coleccion.find().sort({$natural:-1}).limit(1)
-        .then(result =>
-        {
+        coleccion.find().sort({$natural:-1}).limit(1).toArray()
+        .then(resulta =>
+            {
+                console.log(resulta)
+                let result = resulta[0]
             console.log("Obtener datos!!");
             res.status(200).send((result.velocidad));
         })
@@ -76,9 +82,11 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
 
     app.get('/informacion/direccion',(req, res)=>{
         res.header("Access-Control-Allow-Origin", "*");
-        coleccion.find().sort({$natural:-1}).limit(1)
-        .then(result =>
-        {
+        coleccion.find().sort({$natural:-1}).limit(1).toArray()
+        .then(resulta =>
+            {
+                console.log(resulta)
+                let result = resulta[0]
             console.log("Obtener datos!!");
             res.status(200).send((result.direccion));
         })
@@ -90,9 +98,11 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
 
     app.get('/informacion/luminosidad',(req, res)=>{
         res.header("Access-Control-Allow-Origin", "*");
-        coleccion.find().sort({$natural:-1}).limit(1)
-        .then(result =>
-        {
+        coleccion.find().sort({$natural:-1}).limit(1).toArray()
+        .then(resulta =>
+            {
+                console.log(resulta)
+                let result = resulta[0]
             console.log("Obtener datos!!");
             res.status(200).send((result.luminosidad));
         })
@@ -105,9 +115,11 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
     //INFORMACION JSON
     app.get('/informacion/temperatura/json',(req, res)=>{
         res.header("Access-Control-Allow-Origin", "*");
-        coleccion.find().sort({$natural:-1}).limit(1)
-        .then(result =>
-        {
+        coleccion.find().sort({$natural:-1}).limit(1).toArray()
+        .then(resulta =>
+            {
+                console.log(resulta)
+                let result = resulta[0]
             console.log("Obtener datos!!");
             let value = 
             {
@@ -123,9 +135,11 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
 
     app.get('/informacion/humedad/json',(req, res)=>{
         res.header("Access-Control-Allow-Origin", "*");
-        coleccion.find().sort({$natural:-1}).limit(1)
-        .then(result =>
-        {
+        coleccion.find().sort({$natural:-1}).limit(1).toArray()
+        .then(resulta =>
+            {
+                console.log(resulta)
+                let result = resulta[0]
             console.log("Obtener datos!!");
             let value = 
             {
@@ -141,9 +155,11 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
 
     app.get('/informacion/velocidad/json',(req, res)=>{
         res.header("Access-Control-Allow-Origin", "*");
-        coleccion.find().sort({$natural:-1}).limit(1)
-        .then(result =>
-        {
+        coleccion.find().sort({$natural:-1}).limit(1).toArray()
+        .then(resulta =>
+            {
+                console.log(resulta)
+                let result = resulta[0]
             console.log("Obtener datos!!");
             let value = 
             {
@@ -159,9 +175,11 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
 
     app.get('/informacion/direccion/json',(req, res)=>{
         res.header("Access-Control-Allow-Origin", "*");
-        coleccion.find().sort({$natural:-1}).limit(1)
-        .then(result =>
-        {
+        coleccion.find().sort({$natural:-1}).limit(1).toArray()
+        .then(resulta =>
+            {
+                console.log(resulta)
+                let result = resulta[0]
             console.log("Obtener datos!!");
             let value = 
             {
@@ -177,9 +195,11 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
 
     app.get('/informacion/luminosidad/json',(req, res)=>{
         res.header("Access-Control-Allow-Origin", "*");
-        coleccion.find().sort({$natural:-1}).limit(1)
-        .then(result =>
-        {
+        coleccion.find().sort({$natural:-1}).limit(1).toArray()
+        .then(resulta =>
+            {
+                console.log(resulta)
+                let result = resulta[0]
             console.log("Obtener datos!!");
             let value = 
             {
@@ -196,9 +216,11 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
     //GENERAL
     app.get('/informacion',(req, res)=>{
         res.header("Access-Control-Allow-Origin", "*");
-        coleccion.find().sort({$natural:-1}).limit(1)
-        .then(result =>
+        coleccion.find().sort({$natural:-1}).limit(1).toArray()
+        .then(resulta =>
         {
+            console.log(resulta)
+            let result = resulta[0]
             console.log("Obtener datos!!");
             let value = 
             {
