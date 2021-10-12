@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="./css/style.css">
+        <script type="text/javascript" src="./js/action.js"></script>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
+        <script src="./js/jquery.flying-circles.js"></script>
+
+
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body> 
+
+        <div id="manix">
+            <div id="temperature" class="sub" style="height: 610px; background-color: white;">
+                <!--
+                <h1 id="txt_temperature">The label element</h1>
+                <button id="izq" style="width: 25px; height: 25px;" onClick="viento.update_temperature(1)"> I </button>
+                <button id="der" style="width: 25px; height: 25px;" onClick="viento.update_temperature(-1)"> D </button>
+                -->
+                
+                <div id="termo" style="margin: auto; position: relative; bottom: -70px;">
+                    <div id="indic">
+                    </div>
+                </div>
+            </div>
+            
+    
+            <div id="main">
+    
+                
+    
+                <div id="wind" class="sub" style="background-color: #D9E2FF;">
+
+                    <!--
+                    <button id="izq" style="width: 25px; height: 25px;" onClick="viento.update_point(-5)"></button>
+                    <button id="der" style="width: 25px; height: 25px;" onClick="viento.update_point(5)"></button>
+                    -->
+                    
+                    <div id="comp" style="margin: auto; position: relative; bottom: -50px;">
+                        <div id="point">
+                        
+                        </div>
+                    </div>
+                </div>
+            
+                
+            
+                <div id="humidity" class="sub"> 
+
+                    <!--
+                    <h1 id="txt_humidity">The label element</h1>
+                    <button id="izq" style="width: 25px; height: 25px;" onClick="viento.update_humidity(1)"> I </button>
+                    <button id="der" style="width: 25px; height: 25px;" onClick="viento.update_humidity(-1)"> D </button>
+                    -->
+
+                    <div id="hb" class="moving-circles" style="background-color: white; width: 350px; height: 350px; margin: auto; position: relative; bottom: -50px;">
+                    </div>
+            
+                </div>
+            
+                <div id="speed" class="sub" style="background-color: #303030;">
+
+                    <!--
+                    <h1 id="txt_speed">Speed</h1>
+                    <button id="izq" style="width: 25px; height: 25px;" onClick="viento.update_speed(5)"> I </button>
+                    <button id="der" style="width: 25px; height: 25px;" onClick="viento.update_speed(-5)"> D </button>
+                    -->
+                    
+                    <div id="taco" style="margin: auto; position: relative; bottom: -50px;">
+                        <div id="agun">
+                        
+                        </div>
+                    </div>
+                </div>
+    
+                <div id="light" class="sub" style="background-color: #656E7D;">
+                    <!--
+                    <h1 id="txt_light">Light</h1>
+                    <button id="izq" style="width: 25px; height: 25px;" onClick="viento.update_light(5)"> I </button>
+                    <button id="der" style="width: 25px; height: 25px;" onClick="viento.update_light(-5)"> D </button>
+                    -->
+                    
+                    <div id="lamp" style="margin: auto; position: relative; bottom: -50px;">
+                        <div id="resp">
+                        
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+
+        </div>
+        
+    </body>
+</html>

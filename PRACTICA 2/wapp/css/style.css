@@ -1,0 +1,134 @@
+#manix{
+    border: 2px solid rgb(255, 255, 255);
+    display: flex;
+    width: 935px;
+    margin: auto;
+}
+
+#main{
+    border: 2px solid rgb(255, 255, 255);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 5px 5px;
+    justify-content: center;
+    max-width: 615px;
+    margin: auto;
+}
+
+.sub{
+
+    width: 300px;
+    height: 300px;
+    background-color: rgb(125, 238, 125);
+    overflow: hidden;
+    border: 3px solid;
+    border-radius: 15px;
+    margin: auto;
+}
+
+#comp 
+{
+    width:250px;
+    height:250px;
+    background-size: 100% 100%;
+    background-image:url('../img/comp.fw.png');
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#point 
+{
+    width:22px;
+    height:145px;
+    background-size: 100% 100%;
+    background-image:url('../img/point.fw.png');
+    transition: all 0.5s ease-in-out;
+}
+
+
+
+#termo 
+{
+    width:210px;
+    height:500px;
+    background-size: 100% 100%;
+    background-image:url('../img/termo.fw.png');
+    display: flex;
+    justify-content: right;
+}
+
+#indic  
+{
+    width:135px;
+    height:65px;
+    background-size: 100% 100%;
+    background-image:url('../img/indic.fw.png');
+    transition: all 0.5s ease-in-out;
+    position: relative;
+}
+
+
+
+#particles 
+{
+    width:210px;
+    height:500px;
+    background-size: 100% 100%;
+    background-image:url('../img/termo.fw.png');
+    display: flex;
+    justify-content: right;
+}
+
+
+
+
+#taco 
+{
+    width:250px;
+    height:250px;
+    background-size: 100% 100%;
+    background-image:url('../img/taco.fw.png');
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#agun 
+{
+    width:18px;
+    height:160px;
+    background-size: 100% 100%;
+    background-image:url('../img/agun.fw.png');
+    transition: all 0.5s ease-in-out;
+}
+
+
+#lamp 
+{
+    width:250px;
+    height:250px;
+    background-size: 100% 100%;
+    background-image:url('../img/lamp.fw.png');
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#resp 
+{
+    width:230px;
+    height:210px;
+    background-size: 100% 100%;
+    background-image:url('../img/resp.fw.png');
+    transition: all 0.5s ease-in-out;
+    opacity: 0.9;
+}
+
+
+
+
+
+
+
+
