@@ -33,7 +33,7 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
     //INFORMACION
     app.get('/informacion/temperatura',(req, res)=>{
         res.header("Access-Control-Allow-Origin", "*");
-        coleccion.find().sort({$natural:-1}).limit(1).toArray()
+        coleccion.find().sort({$natural:-1}).limit(1)
         .then(result =>
         {
             console.log("Obtener datos!!");
@@ -48,7 +48,7 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
 
     app.get('/informacion/humedad',(req, res)=>{
         res.header("Access-Control-Allow-Origin", "*");
-        coleccion.find().sort({$natural:-1}).limit(1).toArray()
+        coleccion.find().sort({$natural:-1}).limit(1)
         .then(result =>
         {
             console.log("Obtener datos!!");
@@ -62,7 +62,7 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
 
     app.get('/informacion/velocidad',(req, res)=>{
         res.header("Access-Control-Allow-Origin", "*");
-        coleccion.find().sort({$natural:-1}).limit(1).toArray()
+        coleccion.find().sort({$natural:-1}).limit(1)
         .then(result =>
         {
             console.log("Obtener datos!!");
@@ -76,7 +76,7 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
 
     app.get('/informacion/direccion',(req, res)=>{
         res.header("Access-Control-Allow-Origin", "*");
-        coleccion.find().sort({$natural:-1}).limit(1).toArray()
+        coleccion.find().sort({$natural:-1}).limit(1)
         .then(result =>
         {
             console.log("Obtener datos!!");
@@ -90,7 +90,7 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
 
     app.get('/informacion/luminosidad',(req, res)=>{
         res.header("Access-Control-Allow-Origin", "*");
-        coleccion.find().sort({$natural:-1}).limit(1).toArray()
+        coleccion.find().sort({$natural:-1}).limit(1)
         .then(result =>
         {
             console.log("Obtener datos!!");
@@ -105,7 +105,7 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
     //INFORMACION JSON
     app.get('/informacion/temperatura/json',(req, res)=>{
         res.header("Access-Control-Allow-Origin", "*");
-        coleccion.find().sort({$natural:-1}).limit(1).toArray()
+        coleccion.find().sort({$natural:-1}).limit(1)
         .then(result =>
         {
             console.log("Obtener datos!!");
@@ -123,7 +123,7 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
 
     app.get('/informacion/humedad/json',(req, res)=>{
         res.header("Access-Control-Allow-Origin", "*");
-        coleccion.find().sort({$natural:-1}).limit(1).toArray()
+        coleccion.find().sort({$natural:-1}).limit(1)
         .then(result =>
         {
             console.log("Obtener datos!!");
@@ -141,7 +141,7 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
 
     app.get('/informacion/velocidad/json',(req, res)=>{
         res.header("Access-Control-Allow-Origin", "*");
-        coleccion.find().sort({$natural:-1}).limit(1).toArray()
+        coleccion.find().sort({$natural:-1}).limit(1)
         .then(result =>
         {
             console.log("Obtener datos!!");
@@ -159,7 +159,7 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
 
     app.get('/informacion/direccion/json',(req, res)=>{
         res.header("Access-Control-Allow-Origin", "*");
-        coleccion.find().sort({$natural:-1}).limit(1).toArray()
+        coleccion.find().sort({$natural:-1}).limit(1)
         .then(result =>
         {
             console.log("Obtener datos!!");
@@ -177,7 +177,7 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
 
     app.get('/informacion/luminosidad/json',(req, res)=>{
         res.header("Access-Control-Allow-Origin", "*");
-        coleccion.find().sort({$natural:-1}).limit(1).toArray()
+        coleccion.find().sort({$natural:-1}).limit(1)
         .then(result =>
         {
             console.log("Obtener datos!!");
@@ -196,7 +196,7 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
     //GENERAL
     app.get('/informacion',(req, res)=>{
         res.header("Access-Control-Allow-Origin", "*");
-        coleccion.find().sort({$natural:-1}).limit(1).toArray()
+        coleccion.find().sort({$natural:-1}).limit(1)
         .then(result =>
         {
             console.log("Obtener datos!!");
