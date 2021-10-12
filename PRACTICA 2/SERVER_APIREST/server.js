@@ -37,6 +37,7 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
         .then(result =>
         {
             console.log("Obtener datos!!");
+            console.log(result.temperatura);
             res.status(200).send((result.temperatura));
         })
         .catch(error => {
