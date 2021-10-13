@@ -16,14 +16,30 @@
     <body> 
 
         <div id="manix">
-            <div id="temperature" class="sub" style="height: 610px; background-color: white;">
+            <div id="temperature" class="sub" style="height: 610px; background-color: white; border-color: rgb(159, 19, 214);" >
                 <!--
                 <h1 id="txt_temperature">The label element</h1>
                 <button id="izq" style="width: 25px; height: 25px;" onClick="viento.update_temperature(1)"> I </button>
                 <button id="der" style="width: 25px; height: 25px;" onClick="viento.update_temperature(-1)"> D </button>
                 -->
+
+                <div class = "contix">
+
+                    <div class="izq">
+                        TEMPERATURA
+                    </div>
+
+                    <div class="der" id="txt_temperature">
+                        0 °C
+                    </div>
+
+                </div>
+
+                <div class="sep">
+                    
+                </div>
                 
-                <div id="termo" style="margin: auto; position: relative; bottom: -70px;">
+                <div id="termo" style="margin: auto; position: relative; bottom: -20px;">
                     <div id="indic">
                     </div>
                 </div>
@@ -34,14 +50,30 @@
     
                 
     
-                <div id="wind" class="sub" style="background-color: #D9E2FF;">
+                <div id="wind" class="sub" style="background-color: #D9E2FF; border-color: rgb(36, 80, 202);">
 
                     <!--
                     <button id="izq" style="width: 25px; height: 25px;" onClick="viento.update_point(-5)"></button>
                     <button id="der" style="width: 25px; height: 25px;" onClick="viento.update_point(5)"></button>
                     -->
+
+                    <div class = "contix" >
+
+                        <div class="izq" style="font-size: 20px; line-height: 30px; background-color: rgb(129, 160, 248); border-color: rgb(36, 80, 202);">
+                            DIRECCION DEL VIENTO
+                        </div>
+    
+                        <div class="der" id="txt_wind" style="font-size: 25px;">
+                            noroeste
+                        </div>
+    
+                    </div>
+
+                    <div class="sep" style="background-color: rgb(36, 80, 202);">
                     
-                    <div id="comp" style="margin: auto; position: relative; bottom: -50px;">
+                    </div>
+                    
+                    <div id="comp" style="margin: auto; position: relative; bottom: 0px;">
                         <div id="point">
                         
                         </div>
@@ -50,7 +82,7 @@
             
                 
             
-                <div id="humidity" class="sub"> 
+                <div id="humidity" class="sub" style="border-color: greenyellow;">  
 
                     <!--
                     <h1 id="txt_humidity">The label element</h1>
@@ -58,34 +90,82 @@
                     <button id="der" style="width: 25px; height: 25px;" onClick="viento.update_humidity(-1)"> D </button>
                     -->
 
-                    <div id="hb" class="moving-circles" style="background-color: white; width: 350px; height: 350px; margin: auto; position: relative; bottom: -50px;">
+                    <div class = "contix" >
+
+                        <div class="izq" style=" background-color: rgb(228, 255, 193); border-color:greenyellow">
+                            HUMEDAD
+                        </div>
+    
+                        <div class="der" id="txt_humidity" style="font-size: 22px;">
+                            75 %
+                        </div>
+    
+                    </div>
+
+                    <div class="sep" style="background-color: greenyellow;">
+                    
+                    </div>
+
+                    <div id="hb" class="moving-circles" style="background-color: white; width: 350px; height: 350px; margin: auto; position: relative; bottom: 0px;">
                     </div>
             
                 </div>
             
-                <div id="speed" class="sub" style="background-color: #303030;">
+                <div id="speed" class="sub" style="background-color: #303030; border-color: black;">
 
                     <!--
                     <h1 id="txt_speed">Speed</h1>
                     <button id="izq" style="width: 25px; height: 25px;" onClick="viento.update_speed(5)"> I </button>
                     <button id="der" style="width: 25px; height: 25px;" onClick="viento.update_speed(-5)"> D </button>
                     -->
+
+                    <div class = "contix" >
+
+                        <div class="izq" style="font-size: 20px; line-height: 30px; background-color: silver; border-color:black">
+                            VELOCIDAD DEL VIENTO
+                        </div>
+    
+                        <div class="der" id="txt_speed" style="font-size: 22px;">
+                            0 km/h
+                        </div>
+    
+                    </div>
+
+                    <div class="sep" style="background-color: black;">
                     
-                    <div id="taco" style="margin: auto; position: relative; bottom: -50px;">
+                    </div>
+                    
+                    <div id="taco" style="margin: auto; position: relative; bottom: 0px;">
                         <div id="agun">
                         
                         </div>
                     </div>
                 </div>
     
-                <div id="light" class="sub" style="background-color: #656E7D;">
+                <div id="light" class="sub" style="background-color: #656E7D; border-color: gold;">
                     <!--
                     <h1 id="txt_light">Light</h1>
                     <button id="izq" style="width: 25px; height: 25px;" onClick="viento.update_light(5)"> I </button>
                     <button id="der" style="width: 25px; height: 25px;" onClick="viento.update_light(-5)"> D </button>
                     -->
+
+                    <div class = "contix" >
+
+                        <div class="izq" style=" background-color: rgb(255, 255, 138); border-color:gold">
+                            LUMENES
+                        </div>
+    
+                        <div class="der" id="txt_light" style="font-size: 22px;">
+                            1300
+                        </div>
+    
+                    </div>
+
+                    <div class="sep" style="background-color: gold;">
                     
-                    <div id="lamp" style="margin: auto; position: relative; bottom: -50px;">
+                    </div>
+                    
+                    <div id="lamp" style="margin: auto; position: relative; bottom: -0px;">
                         <div id="resp">
                         
                         </div>

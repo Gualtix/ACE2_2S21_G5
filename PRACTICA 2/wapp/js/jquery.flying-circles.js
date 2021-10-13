@@ -86,6 +86,7 @@ var Dots = (function() {
 	    	random_opacity = (options.randomOpacity == true) ? randomize(1, 0) : 1; 
 
 
+			/*
 	        $(item).css("background-color", generated_color).animate({
 	        	backgroundColor: '#000000',
 	        	opacity: random_opacity,
@@ -96,6 +97,17 @@ var Dots = (function() {
 	        },move_speed, function(){
 	    		return anim( item );
 	        });
+			*/
+
+			$(item).css("background-color", generated_color).animate({
+	        	backgroundColor: '#000000',
+	        	opacity: random_opacity,
+	        	top: top_destination,
+	        	left: left_destination,
+	        	width: generated_size,
+	        	height: generated_size
+	        });
+			
     };
 
     var randomize = function( max, min ) {

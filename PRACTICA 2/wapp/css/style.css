@@ -1,3 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@1,700&display=swap');
+
+
+h2{
+font-family: roboto-regular;
+}
+
+
+
+body {
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+
 #manix{
     border: 2px solid rgb(255, 255, 255);
     display: flex;
@@ -28,8 +42,8 @@
 
 #comp 
 {
-    width:250px;
-    height:250px;
+    width:240px;
+    height:240px;
     background-size: 100% 100%;
     background-image:url('../img/comp.fw.png');
     display: flex;
@@ -85,8 +99,8 @@
 
 #taco 
 {
-    width:250px;
-    height:250px;
+    width:240px;
+    height:240px;
     background-size: 100% 100%;
     background-image:url('../img/taco.fw.png');
     display: flex;
@@ -125,7 +139,52 @@
     opacity: 0.9;
 }
 
+.contix{
+    height: 55px;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    display: grid;
+    grid-template-columns: 60% 40%;
+    grid-gap: 3px;
+    overflow: hidden;
+}
 
+.der{
+    height: 100%;
+    width: 100%;
+    background-color:rgb(255, 255, 255);
+    
+    text-align: center;
+    line-height:65px;
+    font-size: 35px;
+}
+
+.izq{
+    height: 100%;
+    width: 100%;
+    background-color:rgb(194, 105, 230);
+
+    border: solid;
+    border-width: 5px;
+    border-color: rgb(159, 19, 214);
+    border-bottom: none;
+    border-top: none;
+    border-left: none;
+
+    text-align: center;
+    line-height:65px;
+    font-size: 20px;
+    word-wrap: break-word;
+}
+
+
+
+
+.sep{
+    height: 7px;
+    width: 100%;
+    background-color:rgb(159, 19, 214);
+}
 
 
 
