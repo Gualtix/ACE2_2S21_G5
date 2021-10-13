@@ -186,8 +186,60 @@ body {
     background-color:rgb(159, 19, 214);
 }
 
+#top
+{
+    height: 150px;
+    width: 935px;
+    margin: auto;
+    border-radius: 15px;
+    background-color:rgb(159, 19, 214);
+
+    text-align: center;
+    line-height:160px;
+    font-size: 70px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    margin-bottom: 0px;
+}
+
+
+#menu{
+
+    width: 935px;
+    margin: auto;
+
+    overflow: hidden;
+    margin-top: 5px;
+    margin-bottom: 25px;
+    
+}
 
 
 
 
 
+
+
+.topnav {
+    overflow: hidden;
+    background-color: #333;
+  }
+  
+  .topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  
+  .topnav a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  .topnav a.active {
+    background-color: yellowgreen;
+    color: white;
+  }
