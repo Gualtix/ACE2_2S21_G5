@@ -1,6 +1,6 @@
 //*********************************************************************************************IMPORTACION DE LIBRERIA
 #include <DHT.h>
-#include <SoftwareSerial.h>
+//#include <SoftwareSerial.h>
 //*********************************************************************************************DEFINICION DE PINES
 //*****************************************PINES TEMPERATURA Y HUMEDAD
 #define DHTPIN 7
@@ -19,7 +19,7 @@
 #define anemometer 50
 
 //*****************************************CONFIGURACION BLUETOOTH
-SoftwareSerial miBT(10, 11); // RX, TX
+//SoftwareSerial miBT(10, 11); // RX, TX
 
 //*********************************************************************************************DEFINICION DE VARIABLES
 //*****************************************INFORMACION
@@ -58,28 +58,33 @@ void setup()
 //*********************************************************************************************LOOP
 void loop()
 {
-  /*
+  
   data.concat("{");
   //*****************************************TEMPERATURA Y HUMEDAD
   Temperatura_Humedad();
   //*****************************************VELOCIDAD
   if(temperature)Velocity();
   //*****************************************DIRECCION
-  if(temperature && velocidad) getWindDirection();
+  if(temperature && velocidad) 
+  {
+    getWindDirection();
+    luminosidad();
+  }
   data.concat("}");
-  Serial.println(data);
+  Serial.println(data.c_str());
+  delay(1000);
   //*****************************************REINICIO DE DATA
   data = "";
   temperature = false;
   velocidad = false;
-  */
-  getWindDirection();
-  delay(5000);
+  
+
+  //delay(5000);
 
   // Enviar datos al bluetooth
-  miBT.println(data);
+  //miBT.println(data);
   // Enviar datos al serial para comprobar
-  Serial.println(data)
+
 }
 
 //*********************************************************************************************TEMPERATURA Y HUMEDAD
@@ -92,11 +97,11 @@ void Temperatura_Humedad()
     return;
   }
   //*****************************************HUMEDAD
-  data.concat("\"Humedad\":");
+  data.concat("\"humedad\":");
   data.concat(String(h, 4));
   data.concat(",");
   //*****************************************TEMPERATURA
-  data.concat("\"Temperatura\":");
+  data.concat("\"temperatura\":");
   data.concat(String(t, 4));
   temperature = true;
 }
@@ -106,7 +111,7 @@ void getWindDirection()
 {
   //*****************************************DIRECCION
   //data.concat(",");
-  //data.concat("\"Direccion\":");
+  //data.concat("\"direccion\":");
 
   Serial.println(analogRead(A_South));
   Serial.println(analogRead(A_West));
@@ -116,26 +121,26 @@ void getWindDirection()
   {
     last_windDir = current_windDir;
     current_windDir = 5;
-    data.concat("\"S\"");
+    data.concat("\"sur\"");
   }
 
   else if (analogRead(A_West) <= 510)
   {
     last_windDir = current_windDir;
     current_windDir = 1;
-    data.concat("\"O\"");
+    data.concat("\"oeste\"");
   }
   else if (analogRead(A_East) <= 510)
   {
     last_windDir = current_windDir;
     current_windDir = 3;
-    data.concat("\"E\"");
+    data.concat("\"este\"");
   }
   else
   {
     last_windDir = current_windDir;
     current_windDir = 7;
-    data.concat("\"N\"");
+    data.concat("\"norte\"");
   }
 }
 
@@ -163,7 +168,7 @@ void Velocity()
       int diameter = 15;
       int kmph = (diameter) * (rpm) * (0.001885);
       data.concat(",");
-      data.concat("\"Viento\":");
+      data.concat("\"velocidad\":");
       data.concat(String(kmph, 4));
       velocidad = true;
       frequency = 0;
@@ -171,4 +176,11 @@ void Velocity()
       break;
     }
   }
+}
+
+void luminosidad()
+{
+     data.concat(",");
+    data.concat("\"luminosidad\":");
+    data.concat(String(0, 4));
 }

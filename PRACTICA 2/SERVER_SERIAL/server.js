@@ -13,7 +13,7 @@ var axios = require('axios');
 //SERIAL
 var SerialPort = require("serialport");
 var Delimiter = require('@serialport/parser-delimiter');
-var bluetoothCOMPort = "\\\\.\\COM9";
+var bluetoothCOMPort = "\\\\.\\COM11";
 
 app.use(cookieParser());
 app.use(cors());
@@ -45,7 +45,9 @@ parser.on(
         var data_str = data.toString()
         if (data_str.includes('{') && data_str.includes('}')) {
             data_obj = JSON.parse(data)
-            sendData(data_obj)
+			console.log(data_obj)
+			if(data_obj.humedad && data_obj.humedad && data_obj.humedad && data_obj.humedad && data_obj.humedad) sendData(data_obj)
+			else console.log("No se puede registrar");
         }
     }
 )
