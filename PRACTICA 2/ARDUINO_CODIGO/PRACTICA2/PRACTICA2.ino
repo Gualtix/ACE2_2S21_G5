@@ -15,6 +15,9 @@
 #define A_West A3
 //#define A_NorthWest A6
 
+#define VIN 5 // V power voltage
+#define R 10000 //ohm resistance value
+
 //*****************************************PINES VELOCIDAD
 #define anemometer 50
 
@@ -40,6 +43,15 @@ int seconds = 0;
 long cnt = 0;
 //TRUE = HIGH
 int tmp_old_value = HIGH;
+
+//*********************************************************************************************LUMINOSIDAD
+const long A = 1000;     //Resistencia en oscuridad en KΩ
+const int B = 15; 
+const int Rc = 10;
+int V;
+int ilum;
+char val; // Variable que recibe data del puerto serial
+const int LDRPin = A7;
 
 //*********************************************************************************************SETUP
 void setup()
@@ -94,7 +106,8 @@ void Temperatura_Humedad()
   float t = dht.readTemperature();
   if (isnan(h) || isnan(t))
   {
-    return;
+    h = 0;
+    t = 0;
   }
   //*****************************************HUMEDAD
   data.concat("\"humedad\":");
@@ -110,13 +123,14 @@ void Temperatura_Humedad()
 void getWindDirection()
 {
   //*****************************************DIRECCION
-  //data.concat(",");
-  //data.concat("\"direccion\":");
+  data.concat(",");
+  data.concat("\"direccion\":");
+  data.concat("\"norte\"");
 
-  Serial.println(analogRead(A_South));
-  Serial.println(analogRead(A_West));
-  Serial.println(analogRead(A_East));
-
+  //Serial.println(analogRead(A_South));
+  //Serial.println(analogRead(A_West));
+  //Serial.println(analogRead(A_East));
+/*
   if (analogRead(A_South) <= 510)
   {
     last_windDir = current_windDir;
@@ -142,6 +156,7 @@ void getWindDirection()
     current_windDir = 7;
     data.concat("\"norte\"");
   }
+  */
 }
 
 //*********************************************************************************************VELOCIDAD DEL VIENTO
@@ -167,6 +182,7 @@ void Velocity()
       int rpm = (ajuste * 60);
       int diameter = 15;
       int kmph = (diameter) * (rpm) * (0.001885);
+      
       data.concat(",");
       data.concat("\"velocidad\":");
       data.concat(String(kmph, 4));
@@ -180,7 +196,18 @@ void Velocity()
 
 void luminosidad()
 {
-     data.concat(",");
+    V = analogRead(LDRPin);         
+    //ilum = (((long)V*A*10)/((long)B*Rc*(1023-V)));  
+    ilum = sensorRawToPhys(V);
+    data.concat(",");
     data.concat("\"luminosidad\":");
-    data.concat(String(0, 4));
+    data.concat(String(ilum, 4));
+}
+
+int sensorRawToPhys(int raw){
+  // Conversion rule
+  float Vout = float(raw) * (VIN / float(1023));// Conversion analog to voltage
+  float RLDR = (R * (VIN - Vout))/Vout; // Conversion voltage to resistance
+  int phys=500/(RLDR/1000); // Conversion resitance to lumen
+  return phys;
 }

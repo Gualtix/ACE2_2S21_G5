@@ -1,0 +1,42 @@
+version: "2"
+services: 
+
+  db:
+      image: 'mongo'
+      container_name: db
+      environment:
+          - PUID=1000
+          - PGID=1000
+      volumes:
+          - /home/barry/db/database:/data/db
+      ports:
+          - 27017:27017
+      restart: unless-stopped
+      networks:
+        - networkapi
+
+  server:
+    container_name: server-restapi
+    restart: always
+    build: ./SERVER_APIREST
+    ports:
+      - "3000:3000"
+    links:
+      - db
+    networks:
+      - networkapi
+    volumes:
+      - /proc/:/elements/procs/
+
+  frontend:
+    container_name: application-react
+    restart: always
+    build: ./sillainteligente
+    ports:
+        - "80:80"
+    depends_on:
+      - server
+
+networks:
+  networkapi:
+    driver: "bridge"
