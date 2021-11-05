@@ -25,6 +25,7 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
 	const db = client.db(nameDB)
 	const coleccion = db.collection('data')
     const coleccion1 = db.collection('info_usuario')
+    const coleccion2 = db.collection('configuracion')
     
 
     app.get('/', (req, res) => {
@@ -40,7 +41,8 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
             const informacion = {
                 "Nombre_Usuario": data.Nombre,
                 "Ubicacion": data.Ubicacion,
-                "Silla": data.Silla
+                "Silla": data.Silla,
+                "Tiempo": data.Tiempo
             }
             
             coleccion1.insertOne(informacion)
@@ -49,6 +51,39 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
                         console.log("Eliminado!")
                         
                         coleccion1.insertOne(informacion)
+                        .then(result => {
+                            console.log("Registro Insertado!");
+                            res.status(200).send('Registro Insertado!');
+                        })
+                        .catch(error => console.error(error));
+                    }).catch(error => console.error(error))
+                })
+                .catch(error => console.error(error))
+        }
+        else{
+            res.status(500).send('No se han insertado datos');
+        }
+    });
+
+
+    //Configuracion
+
+    app.post('/configuracion',(req, res)=>{
+        const data = req.body;
+        res.header("Access-Control-Allow-Origin", "*");
+        if(data.Tipo != null || data.Tiempo != null)
+        {
+            const informacion = {
+                "Configuracion": data.Tipo,
+                "Tiempo": data.Tiempo
+            }
+            
+            coleccion2.insertOne(informacion)
+                .then(result => {
+                    coleccion2.drop().then(result => {
+                        console.log("Eliminado!")
+                        
+                        coleccion2.insertOne(informacion)
                         .then(result => {
                             console.log("Registro Insertado!");
                             res.status(200).send('Registro Insertado!');
@@ -100,7 +135,47 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
 			coleccion.insertOne(informacion)
 			.then(result => {
 				console.log("Registro Insertado!");
-                
+                coleccion2.find().toArray()
+                .then(results => {
+                    console.log("Obtener datos!");
+                    
+                    if(results.length > 0)
+                    {
+                        let conf = results[0];
+                        if(conf.Configuracion == "Pomodoro")
+                        {
+                            const info = 
+                            {
+                                "Led": "verde"
+                            }
+                            res.status(200).json(info)
+                        }
+                        else if(conf.Configuracion == "Short")
+                        {
+                            const info = 
+                            {
+                                "Led": "amarrillo"
+                            }
+                            res.status(200).json(info)
+                        }
+                        else {
+                            const info = 
+                            {
+                                "Led": "rojo"
+                            }
+                            res.status(200).json(info)
+                        }
+                    }
+                    else{
+                        const info = 
+                        {
+                            "Led": ""
+                        }
+                        res.status(200).json(info)
+                    }
+                    
+                })
+                .catch(error => console.error(error))
 				//res.status(200).send('Registro Insertado!');
 			})
 			.catch(error => console.error(error))
