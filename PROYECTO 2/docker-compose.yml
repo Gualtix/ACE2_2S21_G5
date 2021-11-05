@@ -8,7 +8,7 @@ services:
           - PUID=1000
           - PGID=1000
       volumes:
-          - /home/barry/db/database:/data/db
+          - /home/analisiswannan/db/database:/data/db
       ports:
           - 27017:27017
       restart: unless-stopped
@@ -18,7 +18,7 @@ services:
   server:
     container_name: server-restapi
     restart: always
-    build: ./SERVER_APIREST
+    build: ./SERVER
     ports:
       - "3000:3000"
     links:
@@ -31,7 +31,7 @@ services:
   frontend:
     container_name: application-react
     restart: always
-    build: ./sillainteligente
+    build: ./Pomodoro/sillainteligente
     ports:
         - "80:80"
     depends_on:
