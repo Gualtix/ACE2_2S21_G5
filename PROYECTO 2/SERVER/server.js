@@ -195,12 +195,17 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
         .catch(error => console.error(error))
     });
 
-    app.get('/configuracion', async (req, res) => {
+    app.get('/obtenerTiempo', async (req, res) => {
         res.header("Access-Control-Allow-Origin", "*");
-        coleccion2.find().toArray()
+        coleccion1.find().toArray()
         .then(results => {
             console.log("Obtener datos!");
-            res.status(200).json(results)
+            const inf = {
+                "Pomodoro": results[0].Tiempo,
+                "Short_Break": Math.round(results[0].Tiempo*0.25),
+                "Large_Break": Math.round(results[0].Tiempo*0.5)
+            }
+            res.status(200).json(inf)
         })
         .catch(error => console.error(error))
     });
