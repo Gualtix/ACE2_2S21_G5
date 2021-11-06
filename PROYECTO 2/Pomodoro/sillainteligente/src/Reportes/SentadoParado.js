@@ -44,7 +44,7 @@ export default class SentadoParado extends React.Component{
             (response)=>{
                 if(response.data.Sentado != null && response.data.Parado != null){
                    
-                    let datos = [ (Number(response.data.Sentado)/60).toFixed(2), (Number(response.data.Parado)/60).toFixed(2)]
+                    let datos = [ ((Number(response.data.Sentado)*0.002)/60).toFixed(2), ((Number(response.data.Parado)*0.002)/60).toFixed(2)]
                     this.setState({datos: datos});
                 }
                 else{

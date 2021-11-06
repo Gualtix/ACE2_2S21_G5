@@ -41,7 +41,7 @@ export default class TiempoSilla extends React.Component{
             .then(
                 (response)=>{
                     if(response.data.Sentado !== null){
-                        this.setState({peso: (Number(response.data.Sentado)/60).toFixed(2)})
+                        this.setState({peso: ((Number(response.data.Sentado)*0.002)/60).toFixed(2)})
                     }
                 }
             ).catch(err => {})
