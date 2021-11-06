@@ -13,11 +13,9 @@ export default function Nav(){
             <div id="main-wrapper">
                 <Menu />
                 <div className="page-wrapper">
-                    <Route exact  path='/' component={App} />
-                    <Route exact  path='/Reporte' component={Reportes} />
+                    <Route exact  path='/' component={Pomodoro} />
                     <Route exact  path='/Informacion' component={Bd} />
-                    <Route exact  path='/Perfil' component={Profile} />
-                    <Route exact  path='/Pomodoro' component={Pomodoro} />                    
+                    <Route exact  path='/Perfil' component={Profile} />                  
                     <footer className="footer">
                         © 2021 SMART CHAIR
                     </footer>

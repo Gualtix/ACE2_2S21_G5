@@ -193,6 +193,14 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
         }).catch(err => console.error(err))
     });
 
+    app.get('/reiniciar/configuracion', (req, res) => {
+        res.header("Access-Control-Allow-Origin", "*");
+        coleccion2.drop().then(result => {
+            console.log("Eliminado!")
+            res.status(200).send("Eliminado!")
+        }).catch(err => console.error(err))
+    });
+
     app.listen(port, () => {console.log(`Server corriendo en puerto ${port}!`) });
     
 })
