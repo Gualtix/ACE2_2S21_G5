@@ -41,6 +41,7 @@ export default class Pomodoro extends React.Component{
         this.Iniciar = this.Iniciar.bind(this);
         this.postConfiguracion = this.postConfiguracion.bind(this);
         this.isSentado = false;
+        this.tipo = 4;
         this.tiempoUsoApp = 0;
     }
 
@@ -56,26 +57,32 @@ export default class Pomodoro extends React.Component{
                     this.minutes = this.minutes-1;
                 }
                 else{
-                    let data2 = {
-                        "Tiempo": this.tiempoUsoApp 
+                    if(this.tipo == 1)
+                    {
+                        let data2 = {
+                            "Tiempo": this.tiempoUsoApp 
+                        }
+                        let config2 = {
+                            method: 'post',
+                            url: this.urlPostTiempoUso,
+                            headers: { },
+                            data : data2
+                          };
+                        axios(config2)
+                        .then(function (response) {
+                        console.log(JSON.stringify(response.data));
+                        })
+                        .catch(function (error) {
+                        console.log(error);
+                        });
+    
+                        
+                        
                     }
-                    let config2 = {
-                        method: 'post',
-                        url: this.urlPostTiempoUso,
-                        headers: { },
-                        data : data2
-                      };
-                    axios(config2)
-                    .then(function (response) {
-                    console.log(JSON.stringify(response.data));
-                    })
-                    .catch(function (error) {
-                    console.log(error);
-                    });
-
                     this.minutes = 0;
                     this.seconds = 0;
                     this.tiempoUsoApp = 0;
+
                     this.isSubscribedTimeStarto = false;
                 }
             }
@@ -108,7 +115,7 @@ export default class Pomodoro extends React.Component{
     }
 
     postConfiguracion(tipo){
-
+        this.tipo = tipo;
         switch(tipo){
             case 1:
                 let data = {
@@ -199,24 +206,26 @@ export default class Pomodoro extends React.Component{
 
     async componentWillUnmount() {
         this.isSubscribedTime = false;
-        let data2 = {
-            "Tiempo": this.tiempoUsoApp 
+        if(this.tipo == 1)
+        {
+            let data2 = {
+                "Tiempo": this.tiempoUsoApp 
+            }
+            let config2 = {
+                method: 'post',
+                url: this.urlPostTiempoUso,
+                headers: { },
+                data : data2
+              };
+            axios(config2)
+            .then(function (response) {
+              console.log("tiempo uso");
+                console.log(JSON.stringify(response.data));
+            })
+            .catch(function (error) {
+            console.log(error);
+            });
         }
-        let config2 = {
-            method: 'post',
-            url: this.urlPostTiempoUso,
-            headers: { },
-            data : data2
-          };
-        axios(config2)
-        .then(function (response) {
-          console.log("tiempo uso");
-            console.log(JSON.stringify(response.data));
-        })
-        .catch(function (error) {
-        console.log(error);
-        });
-
         this.minutes = 0;
         this.seconds = 0;
         this.tiempoUsoApp = 0;
@@ -253,23 +262,27 @@ export default class Pomodoro extends React.Component{
         this.seconds = 0;
         this.setState({ minutos: 0})
         this.setState({ segundos: 0})
-        let data2 = {
-            "Tiempo": this.tiempoUsoApp 
+        if(this.tipo == 1)
+        {
+            let data2 = {
+                "Tiempo": this.tiempoUsoApp 
+            }
+            let config2 = {
+                method: 'post',
+                url: this.urlPostTiempoUso,
+                headers: { },
+                data : data2
+              };
+            axios(config2)
+            .then(function (response) {
+              console.log("tiempo uso");
+                console.log(JSON.stringify(response.data));
+            })
+            .catch(function (error) {
+            console.log(error);
+            });
         }
-        let config2 = {
-            method: 'post',
-            url: this.urlPostTiempoUso,
-            headers: { },
-            data : data2
-          };
-        axios(config2)
-        .then(function (response) {
-          console.log("tiempo uso");
-            console.log(JSON.stringify(response.data));
-        })
-        .catch(function (error) {
-        console.log(error);
-        });
+
         this.tiempoUsoApp = 0;
         this.isSubscribedTimeStarto = false;
         this.postConfiguracion(4);
