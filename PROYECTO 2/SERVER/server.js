@@ -248,8 +248,8 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
             console.log("Obtener datos!");
             const inf = {
                 "Pomodoro": results[0].Tiempo,
-                "Short_Break": Math.round(results[0].Tiempo*0.25),
-                "Large_Break": Math.round(results[0].Tiempo*0.5)
+                "Short_Break": Math.round(results[0].Tiempo*0.20),
+                "Large_Break": Math.round(results[0].Tiempo*0.50)
             }
             res.status(200).json(inf)
         })
