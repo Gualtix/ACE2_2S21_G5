@@ -56,23 +56,28 @@ export default class Informacion extends React.Component{
     render(){
         
         return(
-                <table className="table">
-                <tbody>
-                    <tr>
-                        <th scope="row">Nombre Usuario</th>
-                        <td>{this.state.usuario}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Ubicacion</th>
-                        <td>{this.state.Ubicacion}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">UID Silla</th>
-                        <td>{this.state.uid}</td>
-                    </tr>
-                    
-                </tbody>
-                </table>
+            <div className="container">
+                <div className="table-responsive">
+                    <table className="table">
+                    <tbody>
+                        <tr>
+                            <th scope="row">Nombre Usuario</th>
+                            <td>{this.state.usuario}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Ubicacion</th>
+                            <td>{this.state.Ubicacion}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">UID Silla</th>
+                            <td>{this.state.uid}</td>
+                        </tr>
+                        
+                    </tbody>
+                    </table>
+                </div>
+            </div>
+
         )
     }
 }

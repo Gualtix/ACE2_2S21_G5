@@ -1,21 +1,14 @@
 import './Profile.css';
 import Configuraciones from '../Configuraciones/configuraciones.js';
+import Informacion from './informacion';
 
 function Profile(){
     return(
         <div id="main-wrapper">
-           
-               
-                    <div className="logo">
-                        <br></br>
-                     PREFIL DE CONFIGURACION
-                     </div>
-               
-
-           
-        
+            <br />
             <div className = "page-wrapper">
                 <div className= "container-fluid">
+                    <Informacion/>
                     <br></br>
                     <div>
                        <Configuraciones/> 
@@ -23,11 +16,7 @@ function Profile(){
                 </div>
             </div>
         </div>
-        
-
-        
     )
-
 }
 
 export default Profile;
