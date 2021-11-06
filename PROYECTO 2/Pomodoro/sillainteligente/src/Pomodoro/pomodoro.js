@@ -193,6 +193,26 @@ export default class Pomodoro extends React.Component{
 
     async componentWillUnmount() {
         this.isSubscribedTime = false;
+        let data2 = {
+            "Tiempo": this.tiempoUsoApp 
+        }
+        let config2 = {
+            method: 'post',
+            url: this.urlPostTiempoUso,
+            headers: { },
+            data : data2
+          };
+        axios(config2)
+        .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        })
+        .catch(function (error) {
+        console.log(error);
+        });
+
+        this.minutes = 0;
+        this.seconds = 0;
+        this.tiempoUsoApp = 0;
         clearInterval(this.getData);
     }
 

@@ -282,6 +282,16 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
         .catch(error => console.error(error))
     });
 
+    app.get('/tiemposUso', async (req, res) => {
+        res.header("Access-Control-Allow-Origin", "*");
+        coleccion.find().toArray()
+        .then(results => {
+            console.log("Obtener datos!");
+            res.status(200).json(tiempos1(results))
+        })
+        .catch(error => console.error(error))
+    });
+
     app.listen(port, () => {console.log(`Server corriendo en puerto ${port}!`) });
     
 })
@@ -302,3 +312,17 @@ function tiempos(result)
     }
     return info;
 }
+
+function tiempos1(result)
+{
+    let tiempo = 0;
+    result.forEach(element => {
+       tiempo = tiempo  + element.Tiempo;
+    });
+    const info = 
+    {
+        "Tiempo": tiempo
+    }
+    return info;
+}
+
