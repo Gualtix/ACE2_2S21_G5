@@ -195,6 +195,16 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
         .catch(error => console.error(error))
     });
 
+    app.get('/configuracion', async (req, res) => {
+        res.header("Access-Control-Allow-Origin", "*");
+        coleccion2.find().toArray()
+        .then(results => {
+            console.log("Obtener datos!");
+            res.status(200).json(results)
+        })
+        .catch(error => console.error(error))
+    });
+
     app.get('/deleteAll', (req, res) => {
         res.header("Access-Control-Allow-Origin", "*");
         coleccion.drop().then(result => {
