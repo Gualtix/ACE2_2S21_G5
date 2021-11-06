@@ -32,6 +32,8 @@ services:
     container_name: application-react
     restart: always
     build: ./Pomodoro/sillainteligente
+    links:
+      - db
     ports:
         - "80:80"
     depends_on:
