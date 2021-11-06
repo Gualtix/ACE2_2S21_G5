@@ -134,6 +134,7 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
                     if(results.length > 0)
                     {
                         let conf = results[0];
+                        console.log(conf.Configuracion)
                         if(conf.Configuracion == "Pomodoro")
                         {
                             const info = 
