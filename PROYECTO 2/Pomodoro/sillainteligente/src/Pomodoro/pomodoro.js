@@ -86,15 +86,20 @@ export default class Pomodoro extends React.Component{
             try{
                 axios.get(this.url,{})
                 .then((response)=>{
-                    this.setState({ data: response.data})
-                    this.pomodoro = response.data.Pomodoro;
-                    this.short = response.data.Short_Break;
-                    this.large = response.data.Large_Break;
+                    if(response.data.length>0)
+                    {
+                        this.setState({ data: response.data})
+                        this.pomodoro = response.data.Pomodoro;
+                        this.short = response.data.Short_Break;
+                        this.large = response.data.Large_Break;
+                    }
                 }).catch((error)=>{console.log(error)})
 
                 axios.get(this.urlStatus, {})
                 .then((response)=>{
-                    this.isSentado = (response.data[0].en_silla)
+                    console.log(response.data);
+                    if(response.data.length > 0 ) this.isSentado = (response.data[0].en_silla)
+                    
                 }).catch((error)=>{console.log(error)})
 
             }catch(error){}
@@ -262,30 +267,55 @@ export default class Pomodoro extends React.Component{
             <div>
                 <br/>
                 <br/>
-                
                 <br/>
-                <center>
-                    <Card bg = "danger" style={{ width: '70rem', height: '30rem'}}>
-                        <Card.Body>
-                            <Button  onClick={this.Pomodoro} variant="light" style={{ width: '15rem', fontSize: '20px', fontWeight: 'bold', textDecoration: 'none', borderColor: '#ef5350', backgroundColor: '#ef5350', color: 'white'}} >Pomodoro</Button>&nbsp;
-                            <Button  onClick={this.Short} variant="light" style={{ width: '15rem', fontSize: '20px', fontWeight: 'bold', textDecoration: 'none', borderColor: '#ef5350', backgroundColor: '#ef5350', color: 'white'}} >Short Break</Button>&nbsp;
-                            <Button  onClick={this.Large} variant="light" style={{ width: '15rem', fontSize: '20px', fontWeight: 'bold', textDecoration: 'none', borderColor: '#ef5350', backgroundColor: '#ef5350', color: 'white'}} >Long Break</Button>&nbsp;
-                            <Button  onClick={this.Reiniciar} variant="light" style={{ width: '15rem', fontSize: '18px', fontWeight: 'bold', textDecoration: 'none', borderColor: '#ef5350', backgroundColor: '#ef5350', color: 'white'}} >Reiniciar</Button>&nbsp;
-                            { this.isSentado ? <span style={{ fontSize: '18px'}} className="badge badge-success text-dark"><strong>SENTADO</strong></span> : <span style={{ fontSize: '18px'}} className="badge badge-warning text-dark"><strong>PARADO</strong></span> }
-                            <br/>
-                            <br/>
-                            <br/>
-                            <br/>  
-                            <br/>
-                            <Card.Title style = {{fontSize: '100px', fontWeight: 'bold'}}>
-                                {this.minutes}:{this.seconds}   
-                            </Card.Title>                      
-                        </Card.Body>
-                        <Card.Footer className="text-right">
-                            { !this.isSubscribedTimeStarto ? <Button onClick={this.Iniciar} variant="light" style={{ width: '15rem', fontSize: '30px', fontWeight: 'bold', textDecoration: 'none', borderColor: '#e8504e', backgroundColor: '#e8504e', color: 'white'}} >START</Button>: null}
-                        </Card.Footer>
-                    </Card>
-                </center>
+                <div className="container-fluid">
+                    <div className="row">
+                        <div className="col-lg-12 col-sm-12 col-md-12">
+                            <center>
+                                <Card bg = "danger" style={{ width: '70rem', height: '30rem'}}>
+                                    <Card.Body>
+                                        <Button  onClick={this.Pomodoro} variant="light" style={{ width: '15rem', fontSize: '20px', fontWeight: 'bold', textDecoration: 'none', borderColor: '#ef5350', backgroundColor: '#ef5350', color: 'white'}} >Pomodoro</Button>&nbsp;
+                                        <Button  onClick={this.Short} variant="light" style={{ width: '15rem', fontSize: '20px', fontWeight: 'bold', textDecoration: 'none', borderColor: '#ef5350', backgroundColor: '#ef5350', color: 'white'}} >Short Break</Button>&nbsp;
+                                        <Button  onClick={this.Large} variant="light" style={{ width: '15rem', fontSize: '20px', fontWeight: 'bold', textDecoration: 'none', borderColor: '#ef5350', backgroundColor: '#ef5350', color: 'white'}} >Long Break</Button>&nbsp;
+                                        <Button  onClick={this.Reiniciar} variant="light" style={{ width: '15rem', fontSize: '18px', fontWeight: 'bold', textDecoration: 'none', borderColor: '#ef5350', backgroundColor: '#ef5350', color: 'white'}} >Reiniciar</Button>&nbsp;
+                                        { this.isSentado ? <span style={{ fontSize: '18px'}} className="badge badge-success text-dark"><strong>SENTADO</strong></span> : <span style={{ fontSize: '18px'}} className="badge badge-warning text-dark"><strong>PARADO</strong></span> }
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>  
+                                        <br/>
+                                        <Card.Title style = {{fontSize: '100px', fontWeight: 'bold'}}>
+                                            {this.minutes}:{this.seconds}   
+                                        </Card.Title>                      
+                                    </Card.Body>
+                                    <Card.Footer className="text-right">
+                                        { !this.isSubscribedTimeStarto ? <Button onClick={this.Iniciar} variant="light" style={{ width: '15rem', fontSize: '30px', fontWeight: 'bold', textDecoration: 'none', borderColor: '#e8504e', backgroundColor: '#e8504e', color: 'white'}} >START</Button>: null}
+                                    </Card.Footer>
+                                </Card>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+                <div className="container-fluid">
+                    <br />
+                    <div className="row">
+                        <div className="col-md-12 col-sm-12 col-lg-12">
+                        <h1>REPORTES DE USUARIO</h1>
+                        <br />
+                            <div className="row">
+                                <div className="col-md-2 col-lg-4 col-sm-12">
+
+                                </div>
+                                <div className="col-md-2 col-lg-4 col-sm-12">
+
+                                </div>
+                                <div className="col-md-2 col-lg-4 col-sm-12">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }

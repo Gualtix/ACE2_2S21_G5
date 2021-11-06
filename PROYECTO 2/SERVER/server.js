@@ -258,10 +258,10 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
 
     app.get('/deleteAll', (req, res) => {
         res.header("Access-Control-Allow-Origin", "*");
-        coleccion.drop().then(result => {
-            console.log("Eliminado!")
-            res.status(200).send("Eliminado!")
-        }).catch(err => console.error(err))
+        // coleccion.drop().then(result => {
+        //     console.log("Eliminado!")
+        //     res.status(200).send("Eliminado!")
+        // }).catch(err => console.error(err))
     });
 
     app.get('/reiniciar/configuracion', (req, res) => {
