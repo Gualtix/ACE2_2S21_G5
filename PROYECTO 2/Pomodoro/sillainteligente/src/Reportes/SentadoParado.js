@@ -97,6 +97,7 @@ export default class SentadoParado extends React.Component{
             borderWidth: 2
           }]
         };
+        /*
         const options = {
           scales: {
             yAxes: [
@@ -107,7 +108,7 @@ export default class SentadoParado extends React.Component{
               },
             ],
           },
-        };
+        };*/
         return (
             <div className="container-fluid">
             <div className="row">
@@ -116,7 +117,7 @@ export default class SentadoParado extends React.Component{
                         <div className="card-body">
                             <h2>Tiempo Sentado vrs Parado  (Minutos)</h2>
                             <br />
-                            <Bar data={data} options={options} />
+                            <Bar data={data} />
                         </div>
                     </div>
                 </div>
