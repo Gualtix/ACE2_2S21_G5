@@ -2,7 +2,7 @@ import React from "react";
 import axios from 'axios';
 import Environment from '../environment';
 
-export default class PesoActual extends React.Component{
+export default class TiempoSilla extends React.Component{
     constructor(props)
     {
         super(props);
@@ -14,7 +14,7 @@ export default class PesoActual extends React.Component{
             peso: 0
         };
         this.isSubscribedTPesoActual = false;
-        this.url = Environment.HOST + ":" + Environment.PORT + '/LastoPeso';
+        this.url = Environment.HOST + ":" + Environment.PORT + '/tiempos';
         this.getData = this.getData.bind(this);
     }
 
@@ -30,7 +30,7 @@ export default class PesoActual extends React.Component{
                 method: 'GET',
                 host: Environment.HOST,
                 port: Environment.PORT,
-                path: '/LastoPeso',
+                path: '/tiempos',
                 url: this.url,
                 headers: { },
                 data : {}           
@@ -40,8 +40,8 @@ export default class PesoActual extends React.Component{
             axios(config)
             .then(
                 (response)=>{
-                    if(response.data.length > 0){
-                        this.setState({peso: Number(response.data[0].peso).toFixed(2)})
+                    if(response.data.Sentado !== null){
+                        this.setState({peso: (Number(response.data.Sentado)/60).toFixed(2)})
                     }
                 }
             ).catch(err => {})
@@ -77,9 +77,9 @@ export default class PesoActual extends React.Component{
                     <div className="col col-lg-12 col-md-12 col-sm-12">
                         <div className="card border-dark">
                             <div className="card-body">
-                                <h2>Ultimo Peso Registrado</h2>
+                                <h2>Tiempo Uso Silla</h2>
                                 <br />
-                                <h1 className="text-center"> <span className="badge badge bg-dark">{this.state.peso}&nbsp;Kg</span></h1>
+                                <h1 className="text-center"> <span className="badge badge bg-dark">{this.state.peso}&nbsp;Min</span></h1>
                             </div>
                         </div>
                     </div>

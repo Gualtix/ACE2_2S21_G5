@@ -5,6 +5,7 @@ import Environment from '../environment';
 import ReactTable from "react-table"; 
 import 'react-table/react-table.css'
 
+
 export default class Movimiento extends React.Component{
     constructor(props)
     {

@@ -96,6 +96,31 @@ nav ul li a  {
     font-weight: 900;
 }
 
+nav.menu1 {
+  width: 100%;
+  line-height: 60px;
+}
+
+nav.menu1 ul {
+  line-height: 60px;
+  list-style: none;
+  background: rgba(0, 0, 0, 0);
+  overflow: hidden;
+  color: #000;
+  padding: 0;
+  text-align: right;
+  margin: 0;
+  padding-right: 40px;
+  transition: 1s;
+}
+
+nav.menu1 ul li a  {
+  text-decoration: none;
+  color: #000;
+  font-size: 18px;
+  font-weight: 900;
+}
+
 .info {
   font-weight: bold;
   color: #000;
@@ -114,7 +139,7 @@ nav ul li a  {
     display: none;
 }
 
-@media(max-width: 786px) {
+/* @media(max-width: 786px) {
 
     .logo {
           position: fixed;
@@ -146,7 +171,7 @@ nav ul li a  {
           display: block;
     }
 
-}
+} */
   a:hover,
   a:focus {
     text-decoration: none; }

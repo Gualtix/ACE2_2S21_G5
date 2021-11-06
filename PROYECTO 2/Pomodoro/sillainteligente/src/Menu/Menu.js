@@ -1,5 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+/*
+<div className="menu">
+                    <ul>
+                        <li><Link to="/">Home</Link></li>
+                        <li><Link to="/Informacion">Información</Link></li>
+                        <li><Link to="/Perfil">Perfil</Link></li>
+                    </ul>
+                </div>
+                */
 
 
 export default class Menu extends React.Component{
@@ -18,13 +27,7 @@ export default class Menu extends React.Component{
                 <div className="logo">
                     SMART CHAIR
                 </div>
-                <div className="menu">
-                    <ul>
-                        <li><Link to="/">Home</Link></li>
-                        <li><Link to="/Informacion">Información</Link></li>
-                        <li><Link to="/Perfil">Perfil</Link></li>
-                    </ul>
-                </div>
+                
                 </nav>
             </header>    
         )
