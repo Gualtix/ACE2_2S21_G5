@@ -26,6 +26,7 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
 	const coleccion = db.collection('data')
     const coleccion1 = db.collection('info_usuario')
     const coleccion2 = db.collection('configuracion')
+    const coleccion3 = db.collection('tiempo_uso')
     
 
     app.get('/', (req, res) => {
@@ -171,6 +172,27 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
                 })
                 .catch(error => console.error(error))
 				//res.status(200).send('Registro Insertado!');
+			})
+			.catch(error => console.error(error))
+		}
+    });
+
+    app.post('/tiempoUso',(req, res)=>{
+        const data = req.body;
+        res.header("Access-Control-Allow-Origin", "*");
+		if(data.Tiempo == null)
+		{
+			res.status(404).send('No se han insertado datos');
+		}else{
+
+            const informacion = {
+				"Tiempo": data.Tiempo
+			}
+
+			coleccion3.insertOne(informacion)
+			.then(result => {
+				console.log("Registro Insertado!");
+				res.status(200).send('Registro Insertado!');
 			})
 			.catch(error => console.error(error))
 		}

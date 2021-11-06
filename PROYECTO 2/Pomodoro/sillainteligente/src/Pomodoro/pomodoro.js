@@ -26,6 +26,7 @@ export default class Pomodoro extends React.Component{
         this.urlStatus = Environment.HOST + ":" + Environment.PORT + '/getStatus';
         this.urlConf = Environment.HOST + ":" + Environment.PORT + '/configuracion';
         this.urlConfdel = Environment.HOST + ":" + Environment.PORT + '/reiniciar/configuracion';
+        this.urlPostTiempoUso = Environment.HOST + ":" + Environment.PORT + '/tiempoUso';
         this.getData = this.getData.bind(this);
         this.startoTime = this.startoTime.bind(this);
         this.Pomodoro = this.Pomodoro.bind(this);
@@ -35,11 +36,13 @@ export default class Pomodoro extends React.Component{
         this.Iniciar = this.Iniciar.bind(this);
         this.postConfiguracion = this.postConfiguracion.bind(this);
         this.isSentado = false;
+        this.tiempoUsoApp = 0;
     }
 
     async startoTime(){
         if(this.isSubscribedTimeStarto)
         {
+            this.tiempoUsoApp = this.tiempoUsoApp + 1;
             if(this.seconds == 0)
             {
                 if(this.minutes > 0)
@@ -47,10 +50,34 @@ export default class Pomodoro extends React.Component{
                     this.seconds = 59;
                     this.minutes = this.minutes-1;
                 }
+                else{
+                    let data2 = {
+                        "Tiempo": this.tiempoUsoApp 
+                    }
+                    let config2 = {
+                        method: 'post',
+                        url: this.urlPostTiempoUso,
+                        headers: { },
+                        data : data2
+                      };
+                    axios(config2)
+                    .then(function (response) {
+                    console.log(JSON.stringify(response.data));
+                    })
+                    .catch(function (error) {
+                    console.log(error);
+                    });
+
+                    this.minutes = 0;
+                    this.seconds = 0;
+                    this.tiempoUsoApp = 0;
+                    this.isSubscribedTimeStarto = false;
+                }
             }
             else{
                 this.seconds = this.seconds - 1;
             }
+            
         }
     }
     async getData(){
