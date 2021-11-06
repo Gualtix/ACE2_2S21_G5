@@ -176,6 +176,28 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
 		}
     });
 
+    app.get('/getStatus', (req, res)=>{
+        res.header("Access-Control-Allow-Origin", "*");
+        coleccion.find().sort({$natural:-1}).limit(1).toArray()
+        .then(result =>
+        {
+            console.log("Obtener datos!!");
+            res.status(200).json((result));
+        })
+        .catch(error => console.error(error));
+    });
+
+    app.get('/LastoPeso', (req, res)=>{
+        res.header("Access-Control-Allow-Origin", "*");
+        coleccion.find({ en_silla: true}).sort({$natural:-1}).limit(1).toArray()
+        .then(result =>
+        {
+            console.log("Obtener datos!!");
+            res.status(200).json((result));
+        })
+        .catch(error => console.error(error));
+    });
+
     //TODA_DATA
     app.get('/getAll', async (req, res) => {
         res.header("Access-Control-Allow-Origin", "*");
