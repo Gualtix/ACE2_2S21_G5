@@ -98,15 +98,7 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
         }
     });
 
-    /*
-
-        parado: 1
-        sentado: 0
-
-
-
-    */
-
+  
     app.get('/usuario/informacion', async (req, res) => {
         res.header("Access-Control-Allow-Origin", "*");
         coleccion1.find().toArray()
@@ -191,6 +183,14 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
             res.status(200).json(results)
         })
         .catch(error => console.error(error))
+    });
+
+    app.get('/deleteAll', (req, res) => {
+        res.header("Access-Control-Allow-Origin", "*");
+        coleccion.drop().then(result => {
+            console.log("Eliminado!")
+            res.status(200).send("Eliminado!")
+        }).catch(err => console.error(err))
     });
 
     app.listen(port, () => {console.log(`Server corriendo en puerto ${port}!`) });
