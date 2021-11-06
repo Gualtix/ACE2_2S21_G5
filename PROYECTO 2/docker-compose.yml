@@ -28,14 +28,14 @@ services:
     volumes:
       - /proc/:/elements/procs/
 
-  frontend:
-    container_name: application-react
-    restart: always
-    build: ./Pomodoro/sillainteligente
-    ports:
-        - "80:80"
-    depends_on:
-      - server
+  # frontend:
+  #   container_name: application-react
+  #   restart: always
+  #   build: ./Pomodoro/sillainteligente
+  #   ports:
+  #       - "80:80"
+  #   depends_on:
+  #     - server
 
 networks:
   networkapi:
