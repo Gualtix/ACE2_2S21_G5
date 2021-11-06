@@ -130,6 +130,7 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
                 coleccion2.find().toArray()
                 .then(results => {
                     console.log("Obtener datos!");
+                    console.log(results);
                     
                     if(results.length > 0)
                     {
