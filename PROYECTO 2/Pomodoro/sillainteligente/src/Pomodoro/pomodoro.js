@@ -204,7 +204,8 @@ export default class Pomodoro extends React.Component{
           };
         axios(config2)
         .then(function (response) {
-        console.log(JSON.stringify(response.data));
+          console.log("tiempo uso");
+            console.log(JSON.stringify(response.data));
         })
         .catch(function (error) {
         console.log(error);

@@ -284,7 +284,7 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
 
     app.get('/tiemposUso', async (req, res) => {
         res.header("Access-Control-Allow-Origin", "*");
-        coleccion.find().toArray()
+        coleccion3.find().toArray()
         .then(results => {
             console.log("Obtener datos!");
             res.status(200).json(tiempos1(results))
