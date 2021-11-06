@@ -23,6 +23,9 @@ export default class Pomodoro extends React.Component{
         this.isSubscribedTime = false;
         this.isSubscribedTimeStarto = false;
         this.url = Environment.HOST + ":" + Environment.PORT + '/obtenerTiempo';
+        this.urlStatus = Environment.HOST + ":" + Environment.PORT + '/getStatus';
+        this.urlConf = Environment.HOST + ":" + Environment.PORT + '/configuracion';
+        this.urlConfdel = Environment.HOST + ":" + Environment.PORT + '/reiniciar/configuracion';
         this.getData = this.getData.bind(this);
         this.startoTime = this.startoTime.bind(this);
         this.Pomodoro = this.Pomodoro.bind(this);
@@ -31,6 +34,7 @@ export default class Pomodoro extends React.Component{
         this.Reiniciar = this.Reiniciar.bind(this);
         this.Iniciar = this.Iniciar.bind(this);
         this.postConfiguracion = this.postConfiguracion.bind(this);
+        this.isSentado = false;
     }
 
     async startoTime(){
@@ -60,20 +64,85 @@ export default class Pomodoro extends React.Component{
                     this.short = response.data.Short_Break;
                     this.large = response.data.Large_Break;
                 }).catch((error)=>{console.log(error)})
+
+                axios.get(this.urlStatus, {})
+                .then((response)=>{
+                    this.isSentado = (response.data[0].en_silla)
+                }).catch((error)=>{console.log(error)})
+
             }catch(error){}
         }  
     }
 
-    async postConfiguracion(tipo){
+    postConfiguracion(tipo){
+
         switch(tipo){
             case 1:
-                
+                let data = {
+                    "Tipo": "Pomodoro",
+                    "Tiempo": this.minutes 
+                }
+                let config = {
+                    method: 'post',
+                    url: this.urlConf,
+                    headers: { },
+                    data : data
+                  };
+                axios(config)
+                .then(function (response) {
+                console.log(JSON.stringify(response.data));
+                })
+                .catch(function (error) {
+                console.log(error);
+                });
                 break;
             case 2:
+                let data1 = {
+                    "Tipo": "Short",
+                    "Tiempo": this.minutes 
+                }
+                let config1 = {
+                    method: 'post',
+                    url: this.urlConf,
+                    headers: { },
+                    data : data1
+                  };
+                axios(config1)
+                .then(function (response) {
+                console.log(JSON.stringify(response.data));
+                })
+                .catch(function (error) {
+                console.log(error);
+                });
                 break;
             case 3:
+                let data2 = {
+                    "Tipo": "Short",
+                    "Tiempo": this.minutes 
+                }
+                let config2 = {
+                    method: 'post',
+                    url: this.urlConf,
+                    headers: { },
+                    data : data2
+                  };
+                axios(config2)
+                .then(function (response) {
+                console.log(JSON.stringify(response.data));
+                })
+                .catch(function (error) {
+                console.log(error);
+                });
                 break;
             default:
+                
+                axios.get(this.urlConfdel,{})
+                .then(function (response) {
+                console.log(JSON.stringify(response.data));
+                })
+                .catch(function (error) {
+                console.log(error);
+                });
                 break;
         }
     }
@@ -105,13 +174,15 @@ export default class Pomodoro extends React.Component{
         this.minutes = this.pomodoro;
         this.setState({ minutos: this.pomodoro})
         this.setState({ segundos: 0})
+        this.postConfiguracion(1);
     }
 
     Short()
     {
         this.minutes = this.short;
         this.setState({ minutos: this.short})
-        this.setState({ segundos: 0})
+        this.setState({ segundos: 0});
+        this.postConfiguracion(2);
     }
 
     Large()
@@ -119,6 +190,7 @@ export default class Pomodoro extends React.Component{
         this.minutes = this.large;
         this.setState({ minutos: this.large})
         this.setState({ segundos: 0})
+        this.postConfiguracion(3);
     }
 
     Reiniciar()
@@ -128,6 +200,7 @@ export default class Pomodoro extends React.Component{
         this.setState({ minutos: 0})
         this.setState({ segundos: 0})
         this.isSubscribedTimeStarto = false;
+        this.postConfiguracion(4);
     }
 
     Iniciar()
@@ -141,13 +214,16 @@ export default class Pomodoro extends React.Component{
             <div>
                 <br/>
                 <br/>
+                
+                <br/>
                 <center>
                     <Card bg = "danger" style={{ width: '70rem', height: '30rem'}}>
                         <Card.Body>
-                            <Button  onClick={this.Pomodoro} variant="light" style={{ width: '15rem', fontSize: '30px', fontWeight: 'bold', textDecoration: 'none', borderColor: '#ef5350', backgroundColor: '#ef5350', color: 'white'}} >Pomodoro</Button>&nbsp;
-                            <Button  onClick={this.Short} variant="light" style={{ width: '15rem', fontSize: '30px', fontWeight: 'bold', textDecoration: 'none', borderColor: '#ef5350', backgroundColor: '#ef5350', color: 'white'}} >Short Break</Button>&nbsp;
-                            <Button  onClick={this.Large} variant="light" style={{ width: '15rem', fontSize: '30px', fontWeight: 'bold', textDecoration: 'none', borderColor: '#ef5350', backgroundColor: '#ef5350', color: 'white'}} >Long Break</Button>&nbsp;
-                            <Button  onClick={this.Reiniciar} variant="light" style={{ width: '15rem', fontSize: '30px', fontWeight: 'bold', textDecoration: 'none', borderColor: '#ef5350', backgroundColor: '#ef5350', color: 'white'}} >Reiniciar</Button>&nbsp;
+                            <Button  onClick={this.Pomodoro} variant="light" style={{ width: '15rem', fontSize: '20px', fontWeight: 'bold', textDecoration: 'none', borderColor: '#ef5350', backgroundColor: '#ef5350', color: 'white'}} >Pomodoro</Button>&nbsp;
+                            <Button  onClick={this.Short} variant="light" style={{ width: '15rem', fontSize: '20px', fontWeight: 'bold', textDecoration: 'none', borderColor: '#ef5350', backgroundColor: '#ef5350', color: 'white'}} >Short Break</Button>&nbsp;
+                            <Button  onClick={this.Large} variant="light" style={{ width: '15rem', fontSize: '20px', fontWeight: 'bold', textDecoration: 'none', borderColor: '#ef5350', backgroundColor: '#ef5350', color: 'white'}} >Long Break</Button>&nbsp;
+                            <Button  onClick={this.Reiniciar} variant="light" style={{ width: '15rem', fontSize: '18px', fontWeight: 'bold', textDecoration: 'none', borderColor: '#ef5350', backgroundColor: '#ef5350', color: 'white'}} >Reiniciar</Button>&nbsp;
+                            { this.isSentado ? <span style={{ fontSize: '18px'}} className="badge badge-success text-dark"><strong>SENTADO</strong></span> : <span style={{ fontSize: '18px'}} className="badge badge-warning text-dark"><strong>PARADO</strong></span> }
                             <br/>
                             <br/>
                             <br/>

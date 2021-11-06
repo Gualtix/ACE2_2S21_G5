@@ -250,7 +250,33 @@ mongoClient.connect(urlMongo, { useUnifiedTopology: true })
         }).catch(err => console.error(err))
     });
 
+    app.get('/tiempos', async (req, res) => {
+        res.header("Access-Control-Allow-Origin", "*");
+        coleccion.find().toArray()
+        .then(results => {
+            console.log("Obtener datos!");
+            res.status(200).json(tiempos(results))
+        })
+        .catch(error => console.error(error))
+    });
+
     app.listen(port, () => {console.log(`Server corriendo en puerto ${port}!`) });
     
 })
 .catch(console.error);
+
+function tiempos(result)
+{
+    let parado = 0;
+    let sentado = 0;
+    result.forEach(element => {
+       if(element.en_silla) sentado = sentado + 1;
+       else parado = parado + 1;
+    });
+    const info = 
+    {
+        "Parado": parado,
+        "Sentado": sentado
+    }
+    return info;
+}
